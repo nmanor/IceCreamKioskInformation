@@ -16,6 +16,7 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
+        <local:SearchUserControl Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left" Height="245" Margin="0,95,0,0" VerticalAlignment="Top" Width="389"/>
 
     </Grid>
 </Window>
