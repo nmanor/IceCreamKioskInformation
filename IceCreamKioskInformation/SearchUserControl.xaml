@@ -5,53 +5,177 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              FlowDirection="RightToLeft"
+             xmlns:controls="using:Microsoft.Toolkit"
              xmlns:local="clr-namespace:IceCreamKioskInformation"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <TextBlock Text="איזה גלידה בא לך היום?" TextAlignment="Center" FontSize="35" Foreground="#FFEBECF0" FontWeight="Bold">
-            <TextBlock.Effect>
-                <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
-            </TextBlock.Effect>
-        </TextBlock>
+             mc:Ignorable="d" >
 
-        <Grid>
-            <materialDesign:ColorZone
-        Mode="Standard"
-        Padding="8 4 8 4"
-        CornerRadius="10"
-        Panel.ZIndex="1"
-        Margin="16 16 16 0"
-        materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel>
+            
+            <TextBlock Text="איזה גלידה בא לך היום?" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0">
+                <TextBlock.Effect>
+                    <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="1">
-                        <Button Grid.Row="0" Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
-                        </Button>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="חפש מוצר, טעם או חלק מחוות דעת על מוצר..." materialDesign:TextFieldAssist.DecorationVisibility="Hidden"  BorderThickness="0" MinWidth="200" VerticalAlignment="Center" />
-                    </StackPanel>
+            <Grid>
+                <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Expander Grid.Row="2" Header="חיפוש מתקדם" Background="{x:Null}">
-                        <StackPanel
-      Orientation="Vertical"
-      TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
-      Margin="24,8,24,16">
-                            <TextBlock
-        Text="Your Content" />
-                            <TextBlock
-        Opacity=".68"
-        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <Button Grid.Row="0" Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify"/>
+                            </Button>
+                            <TextBox  Foreground="Black" Grid.Row="0" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="חפש מוצר, טעם או חלק מחוות דעת על מוצר..." materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" FontSize="20"/>
                         </StackPanel>
-                    </Expander>
-                </Grid>
-            </materialDesign:ColorZone>
-        </Grid>
+
+                        <Expander Header="חיפוש מתקדם" Background="{x:Null}" Grid.Row="2" >
+                            <Expander.Resources>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                                    <Setter Property="Margin" Value="5"/>
+                                    <Setter Property="Background" Value="{x:Null}"/>
+                                </Style>
+                            </Expander.Resources>
+
+                            <ScrollViewer MaxHeight="500">
+                                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+
+                                    <!--Rating search-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Star" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="דירוג" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="דירוג מינימלי: " VerticalAlignment="Center"/>
+                                                <materialDesign:RatingBar Value="0"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="דירוג מקסימלי: " VerticalAlignment="Center"/>
+                                                <materialDesign:RatingBar Value="5"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                    </StackPanel>
+
+                                    <Separator Margin="0, 15" Opacity="0.5"/>
+
+                                    <!--Price search-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="CreditCard" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="מחיר" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מחיר מינימלי:   ₪" VerticalAlignment="Center"/>
+                                                <TextBox Width="105" HorizontalAlignment="Right" Text="0" MaxLength="3"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מחיר מקסימלי:   ₪" VerticalAlignment="Center"/>
+                                                <TextBox Width="105" HorizontalAlignment="Right" Text="200" MaxLength="3"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                    </StackPanel>
+
+                                    <Separator Margin="0, 15" Opacity="0.5"/>
+
+                                    <!--Nutritional values search-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="FoodForkDrink" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="ערכים תזונתיים" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מקסימום אנרגיה למנה: " VerticalAlignment="Center"/>
+                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מקסימום חלבון למנה: " VerticalAlignment="Center"/>
+                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מקסימום שומנים למנה: " VerticalAlignment="Center" Margin="35 0 0 0"/>
+                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                    </StackPanel>
+
+                                    <Separator Margin="0, 15" Opacity="0.5"/>
+
+                                    <!--Milk search-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Cow" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="חלב ויוגורט" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="חלב סויה" Margin="0 0 10 0"/>
+                                        <materialDesign:Chip Margin="0 0 10 0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="עד " VerticalAlignment="Center"/>
+                                                <TextBox Width="50" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2"/>
+                                                <TextBlock Text=" אחוזי שומן בחלב / יוגורט" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </materialDesign:Chip>
+                                    </StackPanel>
+
+                                    <Separator Margin="0, 15" Opacity="0.5"/>
+
+                                    <!--Milk search-->
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="MoreCircle" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="מאפיינים נוספים" FontSize="14"/>
+                                    </StackPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <materialDesign:Chip Content="מוצר טבעוני" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="מוצר ללא סוכר" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="מוצר ללא גלוטן" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="מוצר עם תוספות חינם" Margin="0 0 10 0 "/>
+                                    </WrapPanel>
+
+                                    <Separator Margin="0, 15" Opacity="0.5"/>
+
+                                    <WrapPanel>
+                                        <WrapPanel.Resources>
+                                            <Style TargetType="materialDesign:Chip">
+                                                <Setter Property="Background" Value="#FFBDBDBD"/>
+                                                <Setter Property="IsDeletable" Value="True"/>
+                                                <Setter Property="Margin" Value="0 2.5 10 2.5"/>
+                                            </Style>
+                                        </WrapPanel.Resources>
+
+                                        <materialDesign:Chip Content="מוצר טבעוני"/>
+                                        <materialDesign:Chip Content="חלב פרה"/>
+                                    </WrapPanel>
+
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Expander>
+                    </Grid>
+                </materialDesign:ColorZone>
+            </Grid>
+        </StackPanel>
+        
+        <Button Height="60" Width="60" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
+            <materialDesign:PackIcon Kind="Magnify" Height="30" Width="30"/>
+        </Button>
+        
     </StackPanel>
+    
 </UserControl>

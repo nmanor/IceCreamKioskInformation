@@ -66,6 +66,10 @@
     <Compile Include="SearchUserControl.xaml.cs">
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -101,6 +105,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Heebo-Black.ttf" />
+    <Resource Include="Fonts\Heebo-Bold.ttf" />
+    <Resource Include="Fonts\Heebo-ExtraBold.ttf" />
+    <Resource Include="Fonts\Heebo-Light.ttf" />
+    <Resource Include="Fonts\Heebo-Medium.ttf" />
+    <Resource Include="Fonts\Heebo-Regular.ttf" />
+    <Resource Include="Fonts\Heebo-Thin.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
