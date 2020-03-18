@@ -11,6 +11,7 @@
     <Window.Background>
         <ImageBrush ImageSource="Images/background.jpg" Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Bottom"/>
     </Window.Background>
+    <!--Test-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
