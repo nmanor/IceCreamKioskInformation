@@ -1,10 +1,9 @@
 ﻿using System;
-using Review;
-
+using System.Collections.Generic;
 
 namespace BE
 {
-    public class Product
+    public abstract class Product
     {
         // Fields
         private string _code;
@@ -77,8 +76,8 @@ namespace BE
             set
             {
                 _review_list.Clear();
-                foreach (review item in value)
-                    _review_list.Add(item);
+                foreach (Review review in value)
+                    _review_list.Add(review);
             }
         }
 
@@ -97,14 +96,11 @@ namespace BE
         {
         }
 
-        public bool Search(Dictionary<string, List<Object>> dictionary)
-        {
-            return true;
-        }
+        public abstract bool Search(Dictionary<string, List<Object>> dictionary);
 
         public void AddReview(Review review)
         {
-            NutritionalValues = NutritionalValues.add(review);
+            Review_list.Add(review);
         }
     }
 }

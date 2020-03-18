@@ -31,3 +31,4 @@ namespace BE
         /// <returns>Return the street, number and city in one string</returns>
         public override string ToString() { return Street + " " + Building_number + ", " + City; }
     }
+}
