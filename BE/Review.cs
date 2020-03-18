@@ -1,8 +1,10 @@
 ﻿using System;
-
-public class Review
+namespace BE
 {
-	public Review()
-	{
-	}
+    public class Review
+    {
+        public Review()
+        {
+        }
+    }
 }
