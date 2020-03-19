@@ -30,13 +30,15 @@ namespace IceCreamKioskInformation
         {
             tag.Visibility = Visibility.Collapsed;
             Filters.Children.Add(newTag);
-            this.DataContext = new SearchUserControlVM(this);
+            TagsDescription.Visibility = Visibility.Collapsed;
         }
 
         public void bringTagBack(Tag tag, Tag originalTag)
         {
             Filters.Children.Remove(tag);
             originalTag.Visibility = Visibility.Visible;
+            if(Filters.Children.Count == 1)
+                TagsDescription.Visibility = Visibility.Visible;
         }
     }
 }

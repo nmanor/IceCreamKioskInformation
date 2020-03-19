@@ -42,7 +42,7 @@
                                 </Style>
                             </Expander.Resources>
 
-                            <ScrollViewer MaxHeight="500">
+                            <ScrollViewer MaxHeight="500" Width="700">
                                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
 
                                     <!--Rating search-->
@@ -50,20 +50,20 @@
                                         <materialDesign:PackIcon Kind="Star" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                         <TextBlock Text="דירוג" FontSize="14"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <local:Tag Category="MinRating" Data="{Binding Value, ElementName=MinRating}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="דירוג מינימלי: " VerticalAlignment="Center"/>
-                                                <materialDesign:RatingBar Value="0"/>
+                                                <materialDesign:RatingBar x:Name="MinRating" Value="0"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                        </local:Tag>
+                                        <local:Tag Category="MaxRating" Data="{Binding Value, ElementName=MaxRating}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="דירוג מקסימלי: " VerticalAlignment="Center"/>
-                                                <materialDesign:RatingBar Value="5"/>
+                                                <materialDesign:RatingBar Value="5" x:Name="MaxRating"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                    </StackPanel>
+                                        </local:Tag>
+                                    </WrapPanel>
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
 
@@ -72,20 +72,20 @@
                                         <materialDesign:PackIcon Kind="CreditCard" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                         <TextBlock Text="מחיר" FontSize="14"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <local:Tag Category="MinPrice" Data="{Binding Text, ElementName=MinPrice}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מחיר מינימלי: עד ₪" VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="0" MaxLength="3"/>
+                                                <TextBlock Text="מחיר מינימלי: ₪" VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="0" MaxLength="3" x:Name="MinPrice"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                        </local:Tag>
+                                        <local:Tag Category="MaxPrice" Data="{Binding Text, ElementName=MaxPrice}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מחיר מקסימלי: עד ₪" VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="200" MaxLength="3"/>
+                                                <TextBlock Text="מחיר מקסימלי: ₪" VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="200" MaxLength="3" x:Name="MaxPrice"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                    </StackPanel>
+                                        </local:Tag>
+                                    </WrapPanel>
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
 
@@ -94,26 +94,27 @@
                                         <materialDesign:PackIcon Kind="FoodForkDrink" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                         <TextBlock Text="ערכים תזונתיים" FontSize="14"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <local:Tag Category="MaxEnergy" Data="{Binding Text, ElementName=MaxEnergy}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום אנרגיה למנה: " VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxEnergy"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                        </local:Tag>
+
+                                        <local:Tag Category="MaxProtein" Data="{Binding Text, ElementName=MaxProtein}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום חלבון למנה: " VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxProtein"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                        <materialDesign:Chip Margin="0 0 10 0">
+                                        </local:Tag>
+                                        <local:Tag Category="MaxFats" Data="{Binding Text, ElementName=MaxFats}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום שומנים למנה: " VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxFats"/>
                                             </StackPanel>
-                                        </materialDesign:Chip>
-                                    </StackPanel>
+                                        </local:Tag>
+                                    </WrapPanel>
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
 
@@ -122,25 +123,18 @@
                                         <materialDesign:PackIcon Kind="Cow" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                         <TextBlock Text="חלב ויוגורט" FontSize="14"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0"/>
-                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0 "/>
-                                        <materialDesign:Chip Content="חלב סויה" Margin="0 0 10 0"/>
-                                        <local:Tag Category="Test" Data="{Binding Text, ElementName=kk}" Margin="0 0 10 0" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <local:Tag Category="MilkType" Data="CowMilk" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="חלב פרה" Margin="0 0 10 0"/>
+                                        <local:Tag Category="MilkType" Data="GoatMilk" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="חלב עיזים" Margin="0 0 10 0"/>
+                                        <local:Tag Category="MilkType" Data="SoyMilk" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="חלב סויה" Margin="0 0 10 0"/>
+                                        <local:Tag Category="MilkFat" Data="{Binding Text, ElementName=MilkFat}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="עד " VerticalAlignment="Center"/>
-                                                <TextBox Width="40" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2" Name="kk"/>
+                                                <TextBox Width="40" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2" Name="MilkFat"/>
                                                 <TextBlock Text=" אחוזי שומן בחלב / יוגורט" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </local:Tag>
-                                        <materialDesign:Chip Margin="0 0 10 0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="עד " VerticalAlignment="Center"/>
-                                                <TextBox Width="40" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2"/>
-                                                <TextBlock Text=" אחוזי שומן בחלב / יוגורט" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </materialDesign:Chip>
-                                    </StackPanel>
+                                    </WrapPanel>
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
 
@@ -150,10 +144,10 @@
                                         <TextBlock Text="מאפיינים נוספים" FontSize="14"/>
                                     </StackPanel>
                                     <WrapPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Content="מוצר טבעוני" Margin="0 0 10 0 "/>
-                                        <materialDesign:Chip Content="מוצר ללא סוכר" Margin="0 0 10 0 "/>
-                                        <materialDesign:Chip Content="מוצר ללא גלוטן" Margin="0 0 10 0 "/>
-                                        <materialDesign:Chip Content="מוצר עם תוספות חינם" Margin="0 0 10 0 "/>
+                                        <local:Tag Category="Extras" Data="Vegan" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר טבעוני" Margin="0 0 10 0"/>
+                                        <local:Tag Category="Extras" Data="SugarFree" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא סוכר" Margin="0 0 10 0"/>
+                                        <local:Tag Category="Extras" Data="GlutenFree" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא גולטן" Margin="0 0 10 0"/>
+                                        <local:Tag Category="Extras" Data="FreeExtras" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר עם תוספות בחינם" Margin="0 0 10 0"/>
                                     </WrapPanel>
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
@@ -167,8 +161,7 @@
                                             </Style>
                                         </WrapPanel.Resources>
 
-                                        <materialDesign:Chip Content="מוצר טבעוני"/>
-                                        <materialDesign:Chip Content="חלב פרה"/>
+                                        <TextBlock Text="כשתסמן תגיות לסינון החיפוש הן יופיעו פה" Name="TagsDescription"/>
                                     </WrapPanel>
 
                                 </StackPanel>

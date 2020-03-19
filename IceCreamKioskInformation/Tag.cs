@@ -1,7 +1,11 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -47,20 +51,36 @@ namespace IceCreamKioskInformation
             tag.Category = Category;
             tag.Data = Data;
             tag.OriginalTag = this;
-            tag.Content = Content;
             tag.IsDeletable = true;
             tag.Background = Brushes.DarkGray;
+            tag.Margin = new Thickness(0, 0, 10, 10);
 
             Binding binding = new Binding();
             binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
             tag.SetBinding(CommandParameterProperty, binding);
             tag.SetBinding(CommandProperty, new Binding("AddFilter"));
 
+            string content = "";
             try
             {
-                ((StackPanel)tag.Content).IsEnabled = false;
+                UIElementCollection collection = ((StackPanel)Content).Children;
+                foreach (var item in collection)
+                {
+                    if (item is TextBlock)
+                        content += (item as TextBlock).Text + " ";
+                    else if (item is TextBox)
+                        content += (item as TextBox).Text + " ";
+                    else
+                        content += (item as RatingBar).Value + " ";
+                }
+                content = content.Remove(content.Length - 1);
             }
-            catch { }
+            catch
+            {
+                content = Content.ToString();
+            }
+            tag.Content = content;
+
 
             return tag;
         }
