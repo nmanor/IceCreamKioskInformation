@@ -23,6 +23,20 @@ namespace IceCreamKioskInformation
         public SearchUserControl()
         {
             InitializeComponent();
+            this.DataContext = new SearchUserControlVM(this);
+        }
+
+        public void moveTag(Tag tag, Tag newTag)
+        {
+            tag.Visibility = Visibility.Collapsed;
+            Filters.Children.Add(newTag);
+            this.DataContext = new SearchUserControlVM(this);
+        }
+
+        public void bringTagBack(Tag tag, Tag originalTag)
+        {
+            Filters.Children.Remove(tag);
+            originalTag.Visibility = Visibility.Visible;
         }
     }
 }
