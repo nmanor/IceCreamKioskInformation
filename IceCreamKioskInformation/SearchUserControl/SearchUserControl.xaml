@@ -75,14 +75,14 @@
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מחיר מינימלי:   ₪" VerticalAlignment="Center"/>
-                                                <TextBox Width="105" HorizontalAlignment="Right" Text="0" MaxLength="3"/>
+                                                <TextBlock Text="מחיר מינימלי: עד ₪" VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="0" MaxLength="3"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מחיר מקסימלי:   ₪" VerticalAlignment="Center"/>
-                                                <TextBox Width="105" HorizontalAlignment="Right" Text="200" MaxLength="3"/>
+                                                <TextBlock Text="מחיר מקסימלי: עד ₪" VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" Text="200" MaxLength="3"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
                                     </StackPanel>
@@ -98,19 +98,19 @@
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום אנרגיה למנה: " VerticalAlignment="Center"/>
-                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום חלבון למנה: " VerticalAlignment="Center"/>
-                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מקסימום שומנים למנה: " VerticalAlignment="Center" Margin="35 0 0 0"/>
-                                                <TextBox Width="40" HorizontalAlignment="Right" MaxLength="4"/>
+                                                <TextBlock Text="מקסימום שומנים למנה: " VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
                                     </StackPanel>
@@ -123,13 +123,20 @@
                                         <TextBlock Text="חלב ויוגורט" FontSize="14"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0 "/>
+                                        <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0"/>
                                         <materialDesign:Chip Content="חלב עיזים" Margin="0 0 10 0 "/>
                                         <materialDesign:Chip Content="חלב סויה" Margin="0 0 10 0"/>
+                                        <local:Tag Category="Test" Data="{Binding Text, ElementName=kk}" Margin="0 0 10 0" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="עד " VerticalAlignment="Center"/>
+                                                <TextBox Width="40" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2" Name="kk"/>
+                                                <TextBlock Text=" אחוזי שומן בחלב / יוגורט" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </local:Tag>
                                         <materialDesign:Chip Margin="0 0 10 0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="עד " VerticalAlignment="Center"/>
-                                                <TextBox Width="50" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2"/>
+                                                <TextBox Width="40" HorizontalAlignment="Center" Text="0" TextAlignment="Center" MaxLength="2"/>
                                                 <TextBlock Text=" אחוזי שומן בחלב / יוגורט" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </materialDesign:Chip>
@@ -151,7 +158,7 @@
 
                                     <Separator Margin="0, 15" Opacity="0.5"/>
 
-                                    <WrapPanel>
+                                    <WrapPanel Name="Filters">
                                         <WrapPanel.Resources>
                                             <Style TargetType="materialDesign:Chip">
                                                 <Setter Property="Background" Value="#FFBDBDBD"/>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    class BLTools
+    class Tools
     {
         /// <summary>
         /// The function compares 2 strings with up to 2 misspellings to one word

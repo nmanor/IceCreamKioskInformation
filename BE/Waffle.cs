@@ -16,9 +16,9 @@ namespace BE
             get { return _glutenFree; }
         }
 
-        public override bool Search(Dictionary<string, List<object>> dictionary)
+        public new bool Search(Dictionary<string, List<object>> dictionary)
         {
-            throw new NotImplementedException();
+            return base.Search(dictionary);
         }
     }
 }
