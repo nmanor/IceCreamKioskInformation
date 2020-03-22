@@ -3,20 +3,20 @@ namespace BE
 {
     public class Review
     {
-        private string _reviewerName;
+        public string ReviewerName { get; set; }
         private DateTime _reviwerBirthday;
         private string _review;
         private int _rating;
-        private string _imageURL;
+        public string ImageURL { get; set; }
         private DateTime _publishDate;
 
         public Review(string reviewerName, DateTime reviwerBirthday, string review, int rating, string imageURL, DateTime publishDate)
         {
-            _reviewerName = reviewerName;
+            ReviewerName = reviewerName;
             _reviwerBirthday = reviwerBirthday;
             _review = review;
             _rating = rating;
-            _imageURL = imageURL;
+            ImageURL = imageURL;
             _publishDate = publishDate;
         }
 
