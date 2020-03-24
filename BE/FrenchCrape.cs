@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    class FrenchCrape: Product
+    public class FrenchCrape: Product
     {
         private bool _freeExtras;
 
@@ -16,7 +16,7 @@ namespace BE
             get { return _freeExtras; }
         }
 
-        public override bool Search(Dictionary<string, List<object>> dictionary)
+        public bool Search(Dictionary<string, List<object>> dictionary)
         {
             throw new NotImplementedException();
         }

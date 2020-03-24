@@ -92,6 +92,10 @@ namespace BE
             set { _nutritionalValues = value; }
         }
 
+        public string FirstImage
+        {
+            get { return Review_list[0].ImageURL; }
+        }
 
         public Product()
         {

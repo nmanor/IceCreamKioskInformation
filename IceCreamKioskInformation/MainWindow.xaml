@@ -1,4 +1,4 @@
-﻿<Window x:Class="IceCreamKioskInformation.MainWindow"
+﻿<Window xmlns:SearchResultsList="clr-namespace:IceCreamKioskInformation.SearchResultsList"  xmlns:ProductDisplay="clr-namespace:IceCreamKioskInformation.ProductDisplay"  x:Class="IceCreamKioskInformation.MainWindow"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,10 +14,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1.6*" />
+            <ColumnDefinition Width="2.4*" />
         </Grid.ColumnDefinitions>
-        <local:SearchUserControl Margin="0 0 60 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1" />
+
+        <!--<local:SearchUserControl Margin="0 0 60 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1" />-->
+        <SearchResultsList:SearchResultsListUserControl Grid.Column="3" />
 
     </Grid>
 </Window>
