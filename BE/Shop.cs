@@ -5,7 +5,7 @@ namespace BE
 {
     public class Shop
     {
-        private string _name;
+        
         private Address _address;
         private string _phone;
         private string _website;
@@ -14,7 +14,7 @@ namespace BE
         private string _imageURL;
         private List<Product> _products;
 
-        public string Name { get => _name; set => _name = value; }
+        public string ShopID { get; set; }
         public Address Address { get => _address; set => _address = value; }
         public string Phone { get => _phone; set => _phone = value; }
         public string Website { get => _website; set => _website = value; }

@@ -6,65 +6,43 @@ namespace BE
 {
     public abstract class Product
     {
-        // Fields
-        private string _code;
-        /// <summary>
-        /// Code Property.
+   
         /// </summary>
-        public string Code
-        {
-            get { return _code; }
-            set { _code = value; }
-        }
+        public string ProductID{ get; set;}
 
-        private string _name;
-        /// <summary>
-        /// Name Property.
-        /// </summary>
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get;
+            set;
         }
 
-        private double _price;
-        /// <summary>
-        /// Code Property.
-        /// </summary>
+
+
         public double Price
         {
-            get { return _price; }
-            set { _price = value; }
+            get;
+            set;
         }
 
-        private bool _vegan;
-        /// <summary>
-        /// Code Property.
-        /// </summary>
+
         public bool Vegan
         {
-            get { return _vegan; }
-            set { _vegan = value; }
+            get;
+            set;
         }
 
-        private bool _sugarFree;
-        /// <summary>
-        /// Code Property.
-        /// </summary>
+
         public bool SugarFree
         {
-            get { return _sugarFree; }
-            set { _sugarFree = value; }
+            get;
+            set;
         }
 
-        private string _description;
-        /// <summary>
-        /// Code Property.
-        /// </summary>
+
         public string Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get;
+            set;
         }
 
         private List<Review> _review_list = new List<Review>();

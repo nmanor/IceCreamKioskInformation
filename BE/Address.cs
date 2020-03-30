@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public struct Address
+    public class Address
     {
         public string Street { get; set; }
         public int Building_number { get; set; }
