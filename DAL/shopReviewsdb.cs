@@ -6,7 +6,7 @@ namespace DAL
     class shopReviewsdb : DbContext
     {
 
-        public shopReviewsdb() : base("name=shopReveiwdb")
+        public shopReviewsdb() : base()
         {
 
         }
@@ -17,3 +17,5 @@ namespace DAL
         public DbSet<Address> Addresses { get; set; }
     }
 }
+
+

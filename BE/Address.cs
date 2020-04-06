@@ -8,6 +8,7 @@ namespace BE
 {
     public class Address
     {
+        public string AddressID { get; set; }
         public string Street { get; set; }
         public int Building_number { get; set; }
         public string City { get; set; }
@@ -18,8 +19,9 @@ namespace BE
         /// <param name="_street"></param>
         /// <param name="_building_number"></param>
         /// <param name="_city"></param>
-        public Address(string _street, int _building_number, string _city)
+        public Address(string addressID, string _street, int _building_number, string _city)
         {
+            AddressID = addressID;
             Street = _street;
             Building_number = _building_number;
             City = _city;
