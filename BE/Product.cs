@@ -45,19 +45,14 @@ namespace BE
             set;
         }
 
-        private List<Review> _review_list = new List<Review>();
+ 
         /// <summary>
         /// 
         /// </summary>
         public List<Review> Review_list
         {
-            get { return _review_list; }
-            set
-            {
-                _review_list.Clear();
-                foreach (Review review in value)
-                    _review_list.Add(review);
-            }
+            get;
+            set;
         }
 
         private string _nutritionalValues;
@@ -77,6 +72,21 @@ namespace BE
 
         public Product()
         {
+            
+        }
+
+        protected Product(string productID, string name, double price, bool vegan, bool sugarFree, string description, List<Review> review_list,  string nutritionalValues)
+        {
+            ProductID = productID;
+            Name = name;
+            Price = price;
+            Vegan = vegan;
+            SugarFree = sugarFree;
+            Description = description;
+            Review_list = review_list;
+          
+            NutritionalValues = nutritionalValues;
+        
         }
 
         /// <summary>
