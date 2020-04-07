@@ -126,8 +126,8 @@
     <Reference Include="Microsoft.Identity.Client, Version=3.0.8.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Identity.Client.3.0.8\lib\net45\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.0.2.669, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.2.0.2\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
@@ -205,7 +205,8 @@
     </Compile>
     <Compile Include="AddShop\AddShopUserControlM.cs" />
     <Compile Include="AddShop\AddShopUserControlVM.cs" />
-    <Compile Include="AddShop\ShowImageFromMail.cs" />
+    <Compile Include="AddShop\ShowImageFromMailCMD.cs" />
+    <Compile Include="AddShop\VerifyImageAsStoreCMD.cs" />
     <Compile Include="Convertors\Base64ToBitmapImageConvertor.cs" />
     <Compile Include="ProductDisplay\ProductDisplayUserControl.xaml.cs">
       <DependentUpon>ProductDisplayUserControl.xaml</DependentUpon>

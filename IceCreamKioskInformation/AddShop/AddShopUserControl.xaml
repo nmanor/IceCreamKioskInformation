@@ -40,22 +40,24 @@
                     </StackPanel>
 
                     <StackPanel Margin="0, 15" Grid.Column="1">
-                        <TextBlock Text="להעלאת תמונה של החנות סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
-                        <Border CornerRadius="17" Height="200" Width="200">
+                        <ProgressBar x:Name="FetchingImagePB" Visibility="Collapsed" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Width="45" Height="45" Margin="10"/>
+
+                        <TextBlock x:Name="SendImageDescirption" TextAlignment="Center" Text="להעלאת תמונה של החנות סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
+                        <Border x:Name="ShopImage" CornerRadius="17" Height="200" Width="200" Margin="10">
                             <Border.Background>
                                 <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Newshop.ImageURL, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
                             </Border.Background>
                         </Border>
+                                                
+                        <Button x:Name="FetchImage" Command="{Binding ShowImage}" Background="#FFDDDEE2" Width="100" Content="שלחתי" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="10" BorderBrush="{x:Null}" Foreground="#DD000000"/>
 
-                        <Button Command="{Binding ShowImage}" Background="#FFDDDEE2" Width="100" Content="שלחתי" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="15" BorderBrush="{x:Null}" Foreground="#DD000000"/>
-
-                        <StackPanel>
+                        <StackPanel x:Name="FetchAgianOptions" Margin="10" Visibility="Collapsed">
                             <TextBlock Text="האם זאת התמונה שלך?" TextWrapping="Wrap" Width="200" HorizontalAlignment="Center" TextAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFC3FFD3">
+                                <Button Command="{Binding VerifyImage}" Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFC3FFD3">
                                     כן
                                 </Button>
-                                <Button Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFFFC3C3">
+                                <Button Command="{Binding ShowImage}" Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFFFC3C3">
                                     לא
                                 </Button>
                             </StackPanel>

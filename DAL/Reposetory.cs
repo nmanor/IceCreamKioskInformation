@@ -26,7 +26,7 @@ namespace DAL
                     List<Review> reviews = new List<Review>() { new Review( "ass kissing", new DateTime(1999, 3, 5), "you should go taste the ass kicking waffle its the best", 5, "ass", new DateTime(2019, 3, 6), "123456") };
                     List<Product> products = new List<Product>() { new Waffle("1234","the waffle ass", 34.3,false,false,"the best ass tasting waflle in town",reviews,"none") };
                     var shop = new Shop("pets", new Address("123","ass", 3, "assface"), "123456789", "wwww.ass.co.il", "tuches", "ass", "pokito", products);
-                    context.shops.Add(shop);
+                    //context.shops.Add(shop);
                     context.SaveChanges();
 
              
