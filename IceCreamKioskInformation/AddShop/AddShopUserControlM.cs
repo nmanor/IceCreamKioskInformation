@@ -20,5 +20,10 @@ namespace IceCreamKioskInformation.AddShop
         {
             return await BlImp.getImageFrom(from, index);
         }
+
+        public bool VerifyImageAsStore(string image)
+        {
+            return BlImp.VerifyImageAsStore(image);
+        }
     }
 }

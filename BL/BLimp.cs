@@ -15,7 +15,6 @@ namespace BL
         /// </summary>
         /// <param name="from">The email from which the message should be sent</param>
         /// <param name="index">Optional, selecting another index which is not the last image</param>
-        /// <returns></returns>
         public async Task<string> getImageFrom(string from, int index = 0)
         {
             GetImageFromMail getImage = new GetImageFromMail();
@@ -23,10 +22,13 @@ namespace BL
             return image;
         }
 
-        public async Task<bool> ValidateAddress(string address)
+        /// <summary>
+        /// A function that checks whether an image is an ice cream shop image or not
+        /// </summary>
+        /// <param name="image">Picture of a store in Base64 coding</param>
+        public bool VerifyImageAsStore(string image)
         {
-            AddressValidation validation = new AddressValidation();
-            return await validation.ValidateAddress(address);
+            return new ImageVerification().IsShop(image);
         }
     }
 }

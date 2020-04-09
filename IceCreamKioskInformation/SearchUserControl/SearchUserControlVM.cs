@@ -18,19 +18,9 @@ namespace IceCreamKioskInformation
         /// <summary>
         /// Action of clicking one of the tags
         /// </summary>
-        private ICommand addFilter;
         public ICommand AddFilter
         {
-            get
-            {
-                if (addFilter == null)
-                    addFilter = new AddFilterCMD(this);
-                return addFilter;
-            }
-            set
-            {
-                addFilter = value;
-            }
+            get { return new AddFilterCMD(this); }
         }
 
         public SearchUserControl SearchUserControl { get; set; }

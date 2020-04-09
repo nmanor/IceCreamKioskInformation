@@ -1,6 +1,8 @@
 ﻿using BE;
+using BL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,29 +14,32 @@ namespace IceCreamKioskInformation.AddShop
     {
         public int ImageTrys { get; set; }
         public Shop Newshop { get; set; }
+        public bool ImageChekced { get; set; }
+        private AddShopUserControl View;
 
         /// <summary>
         /// Action of clicking the search image from mail button
         /// </summary>
-        private ICommand showImage;
-        public ICommand ShowImage
-        {
-            get
-            {
-                if (showImage == null)
-                    showImage = new ShowImageFromMail(this);
-                return showImage;
-            }
-            set
-            {
-                showImage = value;
-            }
-        }
+        public ICommand ShowImage { get { return new ShowImageFromMailCMD(this); } }
+
+        /// <summary>
+        /// Action of clicking the search image from mail button
+        /// </summary>
+        public ICommand VerifyImage { get { return new VerifyImageAsStoreCMD(this); } }
 
         public AddShopUserControlVM(AddShopUserControl userControl)
         {
+            View = userControl;
             ImageTrys = 0;
-            Newshop = new Shop(null, null, null, null, null, null, null, null);
+            Newshop = new Shop();
         }
+
+        public void LookingForImage() { View.LookingForImage(); }
+        public void ImageFound() { View.ImageFound(); }
+        public void ImageNotFound() { View.ImageNotFound(); }
+
+        public void VerifyingImage() { View.VerifyingImage(); }
+        public void ImageVerified() { View.ImageVerified(); }
+        public void ImageNotVerified() { View.ImageNotVerified(); }
     }
 }
