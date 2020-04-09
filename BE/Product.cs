@@ -55,14 +55,13 @@ namespace BE
             set;
         }
 
-        private string _nutritionalValues;
         /// <summary>
         /// Code Property.
         /// </summary>
         public string NutritionalValues
         {
-            get { return _nutritionalValues; }
-            set { _nutritionalValues = value; }
+            get;
+            set;
         }
 
         public string FirstImage
@@ -84,7 +83,6 @@ namespace BE
             SugarFree = sugarFree;
             Description = description;
             Review_list = review_list;
-          
             NutritionalValues = nutritionalValues;
         
         }

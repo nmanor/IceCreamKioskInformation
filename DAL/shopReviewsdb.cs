@@ -3,10 +3,10 @@ using System.Data.Entity;
 
 namespace DAL
 {
-    class shopReviewsdb : DbContext
+    class ShopReviewsdb : DbContext
     {
 
-        public shopReviewsdb() : base()
+        public ShopReviewsdb() : base()
         {
 
         }

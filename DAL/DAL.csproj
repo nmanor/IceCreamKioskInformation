@@ -188,7 +188,7 @@
     <Compile Include="AddressValidation.cs" />
     <Compile Include="GetImageFromMail.cs" />
     <Compile Include="Reposetory.cs" />
-    <Compile Include="shopReviewsdb.cs" />
+    <Compile Include="ShopReviewsdb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
