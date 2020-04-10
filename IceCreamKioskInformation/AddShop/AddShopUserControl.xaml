@@ -11,7 +11,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <convert:Base64ToBitmapImageConvertor x:Key="base64ToBitmapImageConvertor"/>
+        <convert:Base64ToBitmapImageConvertor x:Name="kk" x:Key="base64ToBitmapImageConvertor"/>
+        <local:StringToColorConvertor x:Key="StringToColorConvertor"/>
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
@@ -24,19 +25,30 @@
             </TextBlock>
 
 
-            <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0" MinWidth="700">
+            <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0" MinWidth="700">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <StackPanel Margin="0, 15" Grid.Column="0">
-                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת מלאה" FontSize="15"/>
-                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="מספר טלפון" FontSize="15"/>
-                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת אתר" FontSize="15"/>
-                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="פייסבוק" FontSize="15"/>
-                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="אינסטגרם" FontSize="15"/>
+
+                    <StackPanel Margin="0, 15" Grid.Column="0" MaxWidth="460">
+
+                        <TextBox x:Name="ShopName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="שם החנות" FontSize="15"/>
+                        <Grid Margin="20, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.4*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="Street" Grid.Column="0" Margin="0, 0, 5, 0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="רחוב" FontSize="15"/>
+                            <TextBox x:Name="BuildingNumber" Grid.Column="1" Margin="5, 0, 5, 0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="מספר" FontSize="15"/>
+                            <TextBox x:Name="City" Grid.Column="2" Margin="5, 0, 0, 0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="עיר" FontSize="15"/>
+                        </Grid>
+                        <TextBox x:Name="Phone" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="מספר טלפון" Text="{Binding NewShop.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Phone, Converter={StaticResource StringToColorConvertor}, ConverterParameter=phone}" FontSize="15"/>
+                        <TextBox x:Name="Website" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת אתר" Text="{Binding NewShop.Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Website, Converter={StaticResource StringToColorConvertor}, ConverterParameter=website}" FontSize="15"/>
+                        <TextBox x:Name="Facebook" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="פייסבוק (אופציונלי)" Text="{Binding NewShop.Facebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Facebook, Converter={StaticResource StringToColorConvertor}, ConverterParameter=facebook}" FontSize="15"/>
+                        <TextBox x:Name="Instagram" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="אינסטגרם (אופציונלי)" Text="{Binding NewShop.Instagram, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Instagram, Converter={StaticResource StringToColorConvertor}, ConverterParameter=instagram}" FontSize="15"/>
                     </StackPanel>
 
                     <StackPanel Margin="0, 15" Grid.Column="1">
@@ -45,34 +57,61 @@
                         <TextBlock x:Name="SendImageDescirption" TextAlignment="Center" Text="להעלאת תמונה של החנות סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
                         <Border x:Name="ShopImage" CornerRadius="17" Height="200" Width="200" Margin="10">
                             <Border.Background>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Newshop.ImageURL, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
+                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding NewShop.ImageURL, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
                             </Border.Background>
                         </Border>
-                                                
+
                         <Button x:Name="FetchImage" Command="{Binding ShowImage}" Background="#FFDDDEE2" Width="100" Content="שלחתי" Style="{StaticResource MaterialDesignRaisedDarkButton}" materialDesign:ButtonAssist.CornerRadius="15" Margin="10" BorderBrush="{x:Null}" Foreground="#DD000000"/>
 
                         <StackPanel x:Name="FetchAgianOptions" Margin="10" Visibility="Collapsed">
                             <TextBlock Text="האם זאת התמונה שלך?" TextWrapping="Wrap" Width="200" HorizontalAlignment="Center" TextAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Command="{Binding VerifyImage}" Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFC3FFD3">
-                                    כן
-                                </Button>
                                 <Button Command="{Binding ShowImage}" Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFFFC3C3">
-                                    לא
+                                    <materialDesign:PackIcon Kind="WindowClose" />
+                                </Button>
+                                <Button Command="{Binding VerifyImage}" Margin="5" Height="30" Width="30" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth2" BorderBrush="{x:Null}" Foreground="#DD000000" Background="#FFC3FFD3">
+                                    <materialDesign:PackIcon Kind="Check" />
                                 </Button>
                             </StackPanel>
                         </StackPanel>
-                        
+
                     </StackPanel>
-                    
+
                 </Grid>
             </materialDesign:ColorZone>
         </StackPanel>
 
-        <Button IsEnabled="False" Height="60" Width="60" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
-            <materialDesign:PackIcon Kind="CheckBold" Height="30" Width="30"/>
+        <materialDesign:Card x:Name="CheckingDataPB" Visibility="Collapsed" Height="60" Width="60"  VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" UniformCornerRadius="50">
+            <ProgressBar Foreground="Black" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="30" Width="30"/>
+        </materialDesign:Card>
+
+        <Button Command="{Binding SaveShop}" x:Name="Save" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
+            <materialDesign:PackIcon Kind="ArrowLeft" Height="40" Width="40"/>
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                    <Setter Property="IsEnabled" Value="False" />
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ImageVerify}" Value="True" />
+                                <Condition Binding="{Binding ElementName=ShopName, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=Street, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=BuildingNumber, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=City, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=Phone, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=Website, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding Foreground.Color, ElementName=Phone}" Value="Black"  />
+                                <Condition Binding="{Binding Foreground.Color, ElementName=Website}" Value="Black"  />
+                                <Condition Binding="{Binding Foreground.Color, ElementName=Facebook}" Value="Black"  />
+                                <Condition Binding="{Binding Foreground.Color, ElementName=Instagram}" Value="Black"  />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
         </Button>
 
     </StackPanel>
-
 </UserControl>

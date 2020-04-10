@@ -1,4 +1,6 @@
-﻿using BL;
+﻿using BE;
+using BL;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,6 +104,14 @@ namespace IceCreamKioskInformation.AddShop
             FetchImage.Visibility = Visibility.Collapsed;
             FetchingImagePB.Visibility = Visibility.Collapsed;
             FetchAgianOptions.Visibility = Visibility.Collapsed;
+        }
+
+        public void CheckingData()
+        {
+            DataView.IsEnabled = false;
+            DataView.Opacity = 0.7;
+            CheckingDataPB.Visibility = Visibility.Visible;
+            Save.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -190,7 +190,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressValidation.cs" />
+    <Compile Include="AddressVerification.cs" />
     <Compile Include="GetImageFromMail.cs" />
     <Compile Include="ImageVerification.cs" />
     <Compile Include="Reposetory.cs" />

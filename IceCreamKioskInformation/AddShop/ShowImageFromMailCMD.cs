@@ -45,7 +45,7 @@ namespace IceCreamKioskInformation.AddShop
             AddShopUserControlM M = new AddShopUserControlM();
             try
             {
-                VM.Newshop.ImageURL = await M.getImageFrom("natanmanor@gmail.com", VM.ImageTrys++);
+                VM.NewShop.ImageURL = await M.getImageFrom("natanmanor@gmail.com", VM.ImageTrys++);
                 e.Result = true;
             }
             catch (Exception)
