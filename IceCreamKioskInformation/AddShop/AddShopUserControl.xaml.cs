@@ -106,12 +106,42 @@ namespace IceCreamKioskInformation.AddShop
             FetchAgianOptions.Visibility = Visibility.Collapsed;
         }
 
-        public void CheckingData()
+        /// <summary>
+        /// Change view when verifying data
+        /// </summary>
+        public void VerifyingData()
         {
             DataView.IsEnabled = false;
-            DataView.Opacity = 0.7;
+            ShopImage.Opacity = 0.4;
             CheckingDataPB.Visibility = Visibility.Visible;
             Save.Visibility = Visibility.Collapsed;
+            StatusDescirption.Visibility = Visibility.Visible;
+            StatusDescirption.Text = "רק מוודאים שהכל תקין...";
+            StatusDescirption.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        /// <summary>
+        /// Changes the display if the data not saved
+        /// </summary>
+        public void DataNotVerified(string error)
+        {
+            DataView.IsEnabled = true;
+            ShopImage.Opacity = 1;
+            CheckingDataPB.Visibility = Visibility.Collapsed;
+            Save.Visibility = Visibility.Visible;
+            StatusDescirption.Visibility = Visibility.Visible;
+            StatusDescirption.Text = error;
+            StatusDescirption.Foreground = new SolidColorBrush(Colors.IndianRed);
+        }
+
+        /// <summary>
+        /// Changes the display if the data saved
+        /// </summary>
+        public void DataVerified()
+        {
+            EditData.Visibility = Visibility.Hidden;
+            SuccessfullySavedMessage.Visibility = Visibility.Visible;
+            CheckingDataPB.Visibility = Visibility.Hidden;
         }
     }
 }

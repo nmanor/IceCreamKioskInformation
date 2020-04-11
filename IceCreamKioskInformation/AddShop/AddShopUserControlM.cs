@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using BE;
 using BL;
 
 namespace IceCreamKioskInformation.AddShop
@@ -36,6 +37,30 @@ namespace IceCreamKioskInformation.AddShop
                 ["phone"] = new Regex(@"^(\+972|972|0)(5\d|\d)\d{7}$")
             };
             return websites[type].IsMatch(uri);
+        }
+
+        public void SaveShop(Shop shop)
+        {
+            if(shop.Address.BuildingNumber == 0)
+                throw new Exception("מספר הבית לא יכול להיות 0");
+
+            if (shop.ShopName.Length < 6)
+                throw new Exception("שם החנות חייב להכיל לפחות 5 תווים");
+
+            if (!VerifyStringAs("phone", shop.Phone))
+                throw new Exception("מספר טלפון לא תקין");
+
+            if (!VerifyStringAs("website", shop.Website))
+                throw new Exception("כתובת אתר לא תקינה");
+
+            if (!VerifyStringAs("facebook", shop.Facebook))
+                throw new Exception("כתובת פייסבוק לא תקינה");
+
+            if (!VerifyStringAs("instagram", shop.Instagram))
+                throw new Exception("כתובת אינסטגרם לא תקינה");
+
+            if (!new BLimp().VerifyAddress(shop.Address))
+                throw new Exception("הכתובת שהזנת לא קיימת");
         }
     }
 }

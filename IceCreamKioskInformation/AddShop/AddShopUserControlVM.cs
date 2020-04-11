@@ -36,7 +36,7 @@ namespace IceCreamKioskInformation.AddShop
         {
             View = userControl;
             ImageTrys = 0;
-            NewShop = new Shop();
+            NewShop = new Shop() { Address = new Address() };
         }
 
         /// <summary>
@@ -62,6 +62,8 @@ namespace IceCreamKioskInformation.AddShop
         public void ImageVerified() { View.ImageVerified(); }
         public void ImageNotVerified() { View.ImageNotVerified(); }
 
-        public void CheckingData() { View.CheckingData(); }
+        public void CheckingData() { View.VerifyingData(); }
+        public void DataVerified() { View.DataVerified(); }
+        public void DataNotVerified(string error) { View.DataNotVerified(error); }
     }
 }

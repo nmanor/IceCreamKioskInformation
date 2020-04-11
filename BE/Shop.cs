@@ -9,6 +9,7 @@ namespace BE
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string _shopID;
+        private string _shopName;
         private Address _address;
         private string _phone;
         private string _website;
@@ -25,6 +26,17 @@ namespace BE
                 OnPropertyChanged("ShopID");
             }
         }
+
+        public string ShopName 
+        {
+            get { return _shopName; }
+            set
+            {
+                _shopName = value;
+                OnPropertyChanged("ShopName");
+            }
+        }
+
         public Address Address
         {
             get { return _address; }
