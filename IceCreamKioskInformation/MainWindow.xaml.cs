@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BL;
+using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
 
 namespace IceCreamKioskInformation
@@ -47,7 +48,8 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             new Tools().tryrepos();
             DataContext = new MainWindowVM(this);
-            LoadSearch();
+            //LoadSearch();
+            LoadAddReview();
         }
 
         /// <summary>
@@ -68,6 +70,16 @@ namespace IceCreamKioskInformation
             MessageArea.IsOpen = false;
             AddShopUserControl search = new AddShopUserControl();
             search.GoBack += (sender, e) => { MessageArea.IsOpen = true; };
+            CurrnetUserConrol = search;
+        }
+
+        /// <summary>
+        /// Loading the UserControl of the add review to the main screen and logging its events
+        /// </summary>
+        internal void LoadAddReview()
+        {
+            MessageArea.IsOpen = false;
+            AddReviewUserControl search = new AddReviewUserControl();
             CurrnetUserConrol = search;
         }
     }
