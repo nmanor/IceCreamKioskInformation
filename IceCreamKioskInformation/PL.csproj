@@ -200,16 +200,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddReview\AddReviewUserControl.xaml.cs">
+      <DependentUpon>AddReviewUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddReview\AddReviewUserControlVM.cs" />
     <Compile Include="AddShop\AddShopUserControl.xaml.cs">
       <DependentUpon>AddShopUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddShop\AddShopUserControlM.cs" />
     <Compile Include="AddShop\AddShopUserControlVM.cs" />
+    <Compile Include="AddShop\GoBackCMD.cs" />
     <Compile Include="AddShop\SaveShopCMD.cs" />
     <Compile Include="AddShop\ShowImageFromMailCMD.cs" />
     <Compile Include="AddShop\StringToColorConvertor.cs" />
     <Compile Include="AddShop\VerifyImageAsStoreCMD.cs" />
     <Compile Include="Convertors\Base64ToBitmapImageConvertor.cs" />
+    <Compile Include="MainWindowMVVM\GoBackCMD.cs" />
+    <Compile Include="MainWindowMVVM\LoadAddNewShopCMD.cs" />
+    <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
     <Compile Include="ProductDisplay\ProductDisplayUserControl.xaml.cs">
       <DependentUpon>ProductDisplayUserControl.xaml</DependentUpon>
     </Compile>
@@ -217,11 +225,16 @@
       <DependentUpon>SearchResultsListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchUserControl\AddFilterCMD.cs" />
+    <Compile Include="SearchUserControl\SearchUserControlM.cs" />
     <Compile Include="SearchUserControl\SearchUserControlVM.cs" />
     <Compile Include="SearchUserControl\SearchUserControl.xaml.cs">
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchUserControl\Tag.cs" />
+    <Page Include="AddReview\AddReviewUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddShop\AddShopUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

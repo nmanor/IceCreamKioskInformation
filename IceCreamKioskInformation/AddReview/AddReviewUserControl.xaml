@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="IceCreamKioskInformation.AddShop.AddShopUserControl"
+﻿<UserControl x:Class="IceCreamKioskInformation.AddReview.AddReviewUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,7 +28,7 @@
                 <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <TextBlock Text="הוספת חנות חדשה" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
+                <TextBlock Text="הוספת ביקורת חדשה" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
                 <StackPanel.Effect>
                     <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
                 </StackPanel.Effect>

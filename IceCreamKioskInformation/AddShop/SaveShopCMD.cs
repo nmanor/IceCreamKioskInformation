@@ -45,7 +45,7 @@ namespace IceCreamKioskInformation.AddShop
                 new AddShopUserControlM().SaveShop(VM.NewShop);
                 e.Result = "";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 e.Result = ex.Message;
             }
