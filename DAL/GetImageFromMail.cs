@@ -1,8 +1,6 @@
-﻿using System;
-using AE.Net.Mail;
-using System.Collections.Generic;
+﻿using AE.Net.Mail;
+using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL

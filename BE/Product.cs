@@ -1,14 +1,13 @@
-﻿using System;
+﻿using BL;
 using System.Collections.Generic;
-using BL;
 
 namespace BE
 {
     public abstract class Product
     {
-   
+
         /// </summary>
-        public string ProductID{ get; set;}
+        public string ProductID { get; set; }
 
         public string Name
         {
@@ -45,7 +44,7 @@ namespace BE
             set;
         }
 
- 
+
         /// <summary>
         /// 
         /// </summary>
@@ -71,10 +70,10 @@ namespace BE
 
         public Product()
         {
-            
+
         }
 
-        protected Product(string productID, string name, double price, bool vegan, bool sugarFree, string description, List<Review> review_list,  string nutritionalValues)
+        protected Product(string productID, string name, double price, bool vegan, bool sugarFree, string description, List<Review> review_list, string nutritionalValues)
         {
             ProductID = productID;
             Name = name;
@@ -84,7 +83,7 @@ namespace BE
             Description = description;
             Review_list = review_list;
             NutritionalValues = nutritionalValues;
-        
+
         }
 
         /// <summary>
@@ -140,7 +139,7 @@ namespace BE
             }
 
             // Check if the product meets the required nutritional components
-            if(dictionary.ContainsKey("NutritionalValues"))
+            if (dictionary.ContainsKey("NutritionalValues"))
             {
                 foreach (KeyValuePair<string, double> values in dictionary["NutritionalValues"])
                 {

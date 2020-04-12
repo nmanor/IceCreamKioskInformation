@@ -1,10 +1,5 @@
 ﻿using BE;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -18,7 +13,7 @@ namespace DAL
 
         public Reposetory()
         {
-          
+
         }
 
         public void add_Shop(Shop shop)
@@ -34,7 +29,7 @@ namespace DAL
         {
             using (var context = new ShopReviewsdb())
             {
-               context.Products.Add(product);
+                context.Products.Add(product);
                 context.SaveChanges();
             }
         }

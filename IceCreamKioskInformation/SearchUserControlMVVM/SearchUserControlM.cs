@@ -1,0 +1,6 @@
+﻿namespace IceCreamKioskInformation
+{
+    class SearchUserControlM
+    {
+    }
+}

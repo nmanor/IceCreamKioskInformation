@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
@@ -26,6 +22,8 @@ namespace IceCreamKioskInformation
         public SearchUserControl SearchUserControl { get; set; }
 
         private Dictionary<string, List<object>> Dictionary;
+        private SearchUserControl searchUserControl;
+
         /// <summary>
         /// A function that adds values to the search dictionary
         /// </summary>

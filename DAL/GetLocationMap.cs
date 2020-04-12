@@ -1,15 +1,6 @@
-﻿using BE;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Geocoding.MapQuest;
-using Geocoding;
-using System.Net;
+﻿using System.Drawing;
 using System.IO;
-using System.Xml;
-using System.Drawing;
+using System.Net;
 
 namespace DAL
 {
@@ -22,7 +13,7 @@ namespace DAL
             //IGeocoder geocoder = new MapQuestGeocoder(key);
             //IEnumerable<Geocoding.Address> addresses = await geocoder.GeocodeAsync(address.ToString());
             //string latlng = addresses.First().Coordinates.Latitude + "," + addresses.First().Coordinates.Longitude;
-            
+
 
 
             // location url 
@@ -49,7 +40,7 @@ namespace DAL
             }
             //return image as bitmap
             return bitmap;
-            
+
 
 
         }

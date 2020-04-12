@@ -11,7 +11,7 @@ namespace BE
         public string ImageURL { get; set; }
         private DateTime _publishDate;
 
-        public Review( string reviewerName, DateTime reviwerBirthday, string review, int rating, string imageURL, DateTime publishDate, string reviewID = null)
+        public Review(string reviewerName, DateTime reviwerBirthday, string review, int rating, string imageURL, DateTime publishDate, string reviewID = null)
         {
             ReviewID = reviewID;
             ReviewerName = reviewerName;

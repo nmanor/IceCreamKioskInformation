@@ -224,13 +224,13 @@
     <Compile Include="SearchResultsList\SearchResultsListUserControl.xaml.cs">
       <DependentUpon>SearchResultsListUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchUserControl\AddFilterCMD.cs" />
-    <Compile Include="SearchUserControl\SearchUserControlM.cs" />
-    <Compile Include="SearchUserControl\SearchUserControlVM.cs" />
-    <Compile Include="SearchUserControl\SearchUserControl.xaml.cs">
+    <Compile Include="SearchUserControlMVVM\AddFilterCMD.cs" />
+    <Compile Include="SearchUserControlMVVM\SearchUserControlM.cs" />
+    <Compile Include="SearchUserControlMVVM\SearchUserControlVM.cs" />
+    <Compile Include="SearchUserControlMVVM\SearchUserControl.xaml.cs">
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SearchUserControl\Tag.cs" />
+    <Compile Include="SearchUserControlMVVM\Tag.cs" />
     <Page Include="AddReview\AddReviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -263,7 +263,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchUserControl\SearchUserControl.xaml">
+    <Page Include="SearchUserControlMVVM\SearchUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

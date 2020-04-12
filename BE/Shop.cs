@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace BE
@@ -27,7 +26,7 @@ namespace BE
             }
         }
 
-        public string ShopName 
+        public string ShopName
         {
             get { return _shopName; }
             set

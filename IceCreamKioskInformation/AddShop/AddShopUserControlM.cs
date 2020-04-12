@@ -1,11 +1,9 @@
-﻿using System;
+﻿using BE;
+using BL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using BE;
-using BL;
 
 namespace IceCreamKioskInformation.AddShop
 {
@@ -41,7 +39,7 @@ namespace IceCreamKioskInformation.AddShop
 
         public void SaveShop(Shop shop)
         {
-            if(shop.Address.BuildingNumber == 0)
+            if (shop.Address.BuildingNumber == 0)
                 throw new Exception("מספר הבית לא יכול להיות 0");
 
             if (shop.ShopName.Length < 6)

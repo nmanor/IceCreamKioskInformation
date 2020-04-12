@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace BE
 {
-    public class Address: INotifyPropertyChanged
+    public class Address : INotifyPropertyChanged
     {
         private string _street;
         private int _buildingNumber;
         private string _city;
 
         public string AddressID { get; set; }
-        public string Street 
+        public string Street
         {
             get { return _street; }
             set
