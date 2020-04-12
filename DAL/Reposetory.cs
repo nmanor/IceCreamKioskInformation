@@ -18,7 +18,40 @@ namespace DAL
 
         public Reposetory()
         {
-          
+            get_all_Adrress();
+            get_all_Products();
+            get_all_Reviews();
+            get_all_Shops();
+        }
+
+        private void get_all_Shops()
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                shops = context.shops.ToList<Shop>();
+            }
+        }
+
+        private void get_all_Reviews()
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                reviews = context.Reviews.ToList<Review>();
+            }
+        }
+        private void get_all_Adrress()
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                Addresses = context.Addresses.ToList<Address>();
+            }
+        }
+        private void get_all_Products()
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                products = context.Products.ToList<Product>();
+            }
         }
 
         public void add_Shop(Shop shop)
