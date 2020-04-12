@@ -32,7 +32,7 @@ namespace DAL
              @"&size=500,500@2x";
 
             //daonload static map as Image to filname loction
-            string fileName = Directory.GetCurrentDirectory() + @"\images\img.jpeg";
+            string fileName = Directory.GetCurrentDirectory() + @"\img.jpeg";
             using (WebClient wc = new WebClient())
             {
                 wc.DownloadFile(url, fileName);
