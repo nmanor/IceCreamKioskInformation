@@ -65,7 +65,7 @@ namespace BE
 
         public string FirstImage
         {
-            get { return Review_list[0].ImageURL; }
+            get { return Review_list[0].Image; }
         }
 
         public Product()

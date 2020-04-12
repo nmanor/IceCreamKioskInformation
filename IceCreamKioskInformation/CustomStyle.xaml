@@ -5,5 +5,9 @@
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="/IceCreamKioskInformation;component/Fonts/#Heebo"/>
     </Style>
+    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}"/>
+    <Style TargetType="{x:Type ScrollViewer}">
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+    </Style>
 
 </ResourceDictionary>

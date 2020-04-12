@@ -42,32 +42,122 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Margin="0, 15" Grid.Column="0" MaxWidth="460">
+                        <ScrollViewer FlowDirection="LeftToRight" MaxHeight="500" materialDesign:RippleAssist.RippleSizeMultiplier="12">
+                            <StackPanel FlowDirection="RightToLeft" Margin="0, 15" Grid.Column="0" MaxWidth="460">
+                                <TextBlock TextWrapping="Wrap" FontSize="17" Margin="20, 5">
+                                <Run FontWeight="Black">כתיבת ביקורת על: </Run>
+                                <Run Text="{Binding Product.Name}"/>
+                                </TextBlock>
 
-                            <TextBox x:Name="ShopName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="שם החנות" Text="{Binding NewShop.ShopName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
-                            <Grid Margin="20, 5">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="1.4*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="Street" Grid.Column="0" Margin="0, 0, 5, 0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="רחוב" Text="{Binding NewShop.Address.Street, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
-                                <TextBox x:Name="BuildingNumber" Grid.Column="1" Margin="5, 0, 5, 0" Style="{StaticResource RedForegroundOnErrorStyle}" materialDesign:HintAssist.Hint="מספר" Text="{Binding NewShop.Address.BuildingNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}" FontSize="15"/>
-                                <TextBox x:Name="City" Grid.Column="2" Margin="5, 0, 0, 0" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="עיר" Text="{Binding NewShop.Address.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
-                            </Grid>
-                            <TextBox x:Name="Phone" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="מספר טלפון" Text="{Binding NewShop.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Phone, Converter={StaticResource StringToColorConvertor}, ConverterParameter=phone}" FontSize="15"/>
-                            <TextBox x:Name="Website" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת אתר" Text="{Binding NewShop.Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Website, Converter={StaticResource StringToColorConvertor}, ConverterParameter=website}" FontSize="15"/>
-                            <TextBox x:Name="Facebook" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="פייסבוק (אופציונלי)" Text="{Binding NewShop.Facebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Facebook, Converter={StaticResource StringToColorConvertor}, ConverterParameter=facebook}" FontSize="15"/>
-                            <TextBox x:Name="Instagram" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="אינסטגרם (אופציונלי)" Text="{Binding NewShop.Instagram, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Instagram, Converter={StaticResource StringToColorConvertor}, ConverterParameter=instagram}" FontSize="15"/>
-                        </StackPanel>
+                                <Separator Height="0" Margin="20, 10"/>
+
+                                <TextBox x:Name="ReviewerName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="השם שלך" Text="{Binding Review.ReviewerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                                <DatePicker x:Name="ReviwerBirthday" Margin="20, 5" materialDesign:HintAssist.Hint="תאריך הלידה שלך" Style="{StaticResource MaterialDesignFilledDatePicker}" SelectedDate="{Binding Review.ReviwerBirthday, Mode=TwoWay}" FontSize="15"/>
+                                <TextBox x:Name="ReviwerEmail" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת המייל שלך" Text="{Binding Review.ReviwerEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Phone, Converter={StaticResource StringToColorConvertor}, ConverterParameter=phone}" FontSize="15"/>
+
+                                <Separator Height="0" Margin="20, 10"/>
+
+                                <TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" x:Name="ReviewContent" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="מה דעתך על המוצר?" Text="{Binding Review.ReviewContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                                <Border x:Name="StarsBorder" Margin="20 5 20 5" MinHeight="{Binding ElementName=ReviwerEmail, Path=ActualHeight}" CornerRadius="5 5 0 0" Background="#dddee2" VerticalAlignment="Center">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#dddee2"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=StarsBorder, Path=IsMouseOver}" Value="True">
+                                                    <Setter Property="Background" Value="#d9d9dd"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="כמה כוכבים היית נותן למוצר?" Foreground="#FF898989" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="FontSize" Value="15"/>
+                                                    <Setter Property="Margin" Value="15 15 15 15"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=StarsBorder, Path=IsMouseOver}" Value="True">
+                                                            <Setter Property="FontSize" Value="11"/>
+                                                            <Setter Property="Margin" Value="15 15 15 7"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ElementName=Rating, Path=Value, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                            <Setter Property="FontSize" Value="11"/>
+                                                            <Setter Property="Margin" Value="15 15 15 7"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <materialDesign:RatingBar x:Name="Rating" Value="{Binding Review.Rating, Mode=TwoWay}">
+                                            <materialDesign:RatingBar.Style>
+                                                <Style TargetType="materialDesign:RatingBar">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                    <Setter Property="Margin" Value="15 0 15 10"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=StarsBorder, Path=IsMouseOver}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ElementName=Rating, Path=Value, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </materialDesign:RatingBar.Style>
+                                        </materialDesign:RatingBar>
+                                        <Separator Height="5" Margin="0 0 0 -3">
+                                            <Separator.Style>
+                                                <Style TargetType="Separator">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=StarsBorder, Path=IsMouseOver}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Separator.Style>
+                                        </Separator>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </ScrollViewer>
 
                         <DockPanel Margin="0, 15" Grid.Column="1" VerticalAlignment="Stretch" LastChildFill="true">
+                            <TextBlock DockPanel.Dock="Top" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר עליך למלא קודם את כתובת המייל שלך" TextWrapping="Wrap" Width="200">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=ReviwerEmail, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                             <StackPanel DockPanel.Dock="Top" >
+
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=ReviwerEmail, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                
                                 <ProgressBar x:Name="FetchingImagePB" Visibility="Collapsed" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Width="45" Height="45" Margin="10"/>
-                                <TextBlock x:Name="SendImageDescirption" VerticalAlignment="Bottom" TextAlignment="Center" Text="להעלאת תמונה של החנות סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
+                                <TextBlock x:Name="SendImageDescirption" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
                                 <Border x:Name="ShopImage" CornerRadius="17" Height="200" Width="200" Margin="10" FlowDirection="LeftToRight">
                                     <Border.Background>
-                                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding NewShop.ImageURL, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
+                                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Review.Image, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
                                     </Border.Background>
                                 </Border>
 
@@ -91,8 +181,9 @@
 
                     </Grid>
                     <StackPanel Visibility="Collapsed" x:Name="SuccessfullySavedMessage" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <materialDesign:PackIcon Kind="Storefront" Height="120" Width="120" HorizontalAlignment="Center"/>
-                        <TextBlock Text="החנות נשמרה בהצלחה!" FontSize="40" FontWeight="Black"/>
+                        <materialDesign:PackIcon Kind="AutoAwesome" Height="120" Width="120" HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="30" FontWeight="Black" Text="תודה לך," HorizontalAlignment="Center"/>
+                        <TextBlock Margin="-15" FontSize="40" FontWeight="Black" Text="הביקרות שלך נשמרה!"/>
                     </StackPanel>
                 </Grid>
             </materialDesign:ColorZone>
@@ -111,12 +202,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding ImageVerify}" Value="True" />
-                                <Condition Binding="{Binding ElementName=ShopName, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
-                                <Condition Binding="{Binding ElementName=Street, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
-                                <Condition Binding="{Binding ElementName=BuildingNumber, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
-                                <Condition Binding="{Binding ElementName=City, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
-                                <Condition Binding="{Binding ElementName=Phone, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
-                                <Condition Binding="{Binding ElementName=Website, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
+                                <Condition Binding="{Binding ElementName=ReviewerName, Path=Text.Length, Converter={StaticResource NotZeroConverter}}" Value="True"  />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True" />
                         </MultiDataTrigger>

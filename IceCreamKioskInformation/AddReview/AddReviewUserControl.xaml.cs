@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using BE;
 
 namespace IceCreamKioskInformation.AddReview
 {
@@ -10,6 +11,7 @@ namespace IceCreamKioskInformation.AddReview
         public AddReviewUserControl()
         {
             InitializeComponent();
+            DataContext = new AddReviewUserControlVM(this, new BE.IceCream());
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IceCreamKioskInformation.Properties
+namespace IceCream.Properties
 {
 
 
