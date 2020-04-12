@@ -24,13 +24,15 @@
 
     <StackPanel Orientation="Horizontal">
         <StackPanel>
-
-            <TextBlock Text="הוספת חנות חדשה" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0">
-                <TextBlock.Effect>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+                <TextBlock Text="הוספת חנות חדשה" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
+                <StackPanel.Effect>
                     <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
-                </TextBlock.Effect>
-            </TextBlock>
-
+                </StackPanel.Effect>
+            </StackPanel>
 
             <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0" MinWidth="700">
                 <Grid>

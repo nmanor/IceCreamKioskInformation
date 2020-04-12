@@ -54,6 +54,11 @@ namespace IceCreamKioskInformation.AddShop
         /// </summary>
         public ICommand SaveShop { get { return new SaveShopCMD(this); } }
 
+        /// <summary>
+        /// Action for triggering the backward event
+        /// </summary>
+        public ICommand GoBack { get { return new GoBackCMD(this); } }
+
         public void LookingForImage() { View.LookingForImage(); }
         public void ImageFound() { View.ImageFound(); }
         public void ImageNotFound() { View.ImageNotFound(); }
@@ -65,5 +70,7 @@ namespace IceCreamKioskInformation.AddShop
         public void CheckingData() { View.VerifyingData(); }
         public void DataVerified() { View.DataVerified(); }
         public void DataNotVerified(string error) { View.DataNotVerified(error); }
+
+        public void OnGoBackClicked() { View.OnGoBackClicked(); }
     }
 }

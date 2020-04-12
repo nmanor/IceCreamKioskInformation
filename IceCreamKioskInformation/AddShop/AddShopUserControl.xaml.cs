@@ -29,6 +29,8 @@ namespace IceCreamKioskInformation.AddShop
             this.DataContext = new AddShopUserControlVM(this);
         }
 
+        public event EventHandler GoBack;
+
         /// <summary>
         /// Changes the view while bringing the image from the email
         /// </summary>
@@ -142,6 +144,14 @@ namespace IceCreamKioskInformation.AddShop
             EditData.Visibility = Visibility.Hidden;
             SuccessfullySavedMessage.Visibility = Visibility.Visible;
             CheckingDataPB.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// A function that triggers the event of a backward move
+        /// </summary>
+        public void OnGoBackClicked()
+        {
+            GoBack.Invoke(this, null);
         }
     }
 }
