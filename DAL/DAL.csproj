@@ -319,6 +319,7 @@
   <ItemGroup>
     <Compile Include="AddressVerification.cs" />
     <Compile Include="GetImageFromMail.cs" />
+    <Compile Include="GetLocationMap.cs" />
     <Compile Include="ImageVerification.cs" />
     <Compile Include="Reposetory.cs" />
     <Compile Include="ShopReviewsdb.cs" />
