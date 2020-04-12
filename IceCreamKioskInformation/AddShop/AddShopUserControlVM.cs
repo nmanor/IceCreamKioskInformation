@@ -10,12 +10,34 @@ using System.Windows.Input;
 
 namespace IceCreamKioskInformation.AddShop
 {
-    class AddShopUserControlVM
+    class AddShopUserControlVM : INotifyPropertyChanged
     {
+        // Fields and Properties
         public int ImageTrys { get; set; }
-        public Shop Newshop { get; set; }
-        public bool ImageChekced { get; set; }
+        public Shop NewShop { get; set; }
         private AddShopUserControl View;
+
+        private bool _imageVerify;
+        public bool ImageVerify
+        {
+            get { return _imageVerify; }
+            set
+            {
+                _imageVerify = value;
+                OnPropertyChanged("ImageVerify");
+            }
+        }
+
+        // INotifyPropertyChanged implementaion
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+
+        public AddShopUserControlVM(AddShopUserControl userControl)
+        {
+            View = userControl;
+            ImageTrys = 0;
+            NewShop = new Shop() { Address = new Address() };
+        }
 
         /// <summary>
         /// Action of clicking the search image from mail button
@@ -27,12 +49,10 @@ namespace IceCreamKioskInformation.AddShop
         /// </summary>
         public ICommand VerifyImage { get { return new VerifyImageAsStoreCMD(this); } }
 
-        public AddShopUserControlVM(AddShopUserControl userControl)
-        {
-            View = userControl;
-            ImageTrys = 0;
-            Newshop = new Shop();
-        }
+        /// <summary>
+        /// Save the new shop into the DB
+        /// </summary>
+        public ICommand SaveShop { get { return new SaveShopCMD(this); } }
 
         public void LookingForImage() { View.LookingForImage(); }
         public void ImageFound() { View.ImageFound(); }
@@ -41,5 +61,9 @@ namespace IceCreamKioskInformation.AddShop
         public void VerifyingImage() { View.VerifyingImage(); }
         public void ImageVerified() { View.ImageVerified(); }
         public void ImageNotVerified() { View.ImageNotVerified(); }
+
+        public void CheckingData() { View.VerifyingData(); }
+        public void DataVerified() { View.DataVerified(); }
+        public void DataNotVerified(string error) { View.DataNotVerified(error); }
     }
 }

@@ -1,4 +1,6 @@
-﻿using BL;
+﻿using BE;
+using BL;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -102,6 +104,44 @@ namespace IceCreamKioskInformation.AddShop
             FetchImage.Visibility = Visibility.Collapsed;
             FetchingImagePB.Visibility = Visibility.Collapsed;
             FetchAgianOptions.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Change view when verifying data
+        /// </summary>
+        public void VerifyingData()
+        {
+            DataView.IsEnabled = false;
+            ShopImage.Opacity = 0.4;
+            CheckingDataPB.Visibility = Visibility.Visible;
+            Save.Visibility = Visibility.Collapsed;
+            StatusDescirption.Visibility = Visibility.Visible;
+            StatusDescirption.Text = "רק מוודאים שהכל תקין...";
+            StatusDescirption.Foreground = new SolidColorBrush(Colors.Black);
+        }
+
+        /// <summary>
+        /// Changes the display if the data not saved
+        /// </summary>
+        public void DataNotVerified(string error)
+        {
+            DataView.IsEnabled = true;
+            ShopImage.Opacity = 1;
+            CheckingDataPB.Visibility = Visibility.Collapsed;
+            Save.Visibility = Visibility.Visible;
+            StatusDescirption.Visibility = Visibility.Visible;
+            StatusDescirption.Text = error;
+            StatusDescirption.Foreground = new SolidColorBrush(Colors.IndianRed);
+        }
+
+        /// <summary>
+        /// Changes the display if the data saved
+        /// </summary>
+        public void DataVerified()
+        {
+            EditData.Visibility = Visibility.Hidden;
+            SuccessfullySavedMessage.Visibility = Visibility.Visible;
+            CheckingDataPB.Visibility = Visibility.Hidden;
         }
     }
 }

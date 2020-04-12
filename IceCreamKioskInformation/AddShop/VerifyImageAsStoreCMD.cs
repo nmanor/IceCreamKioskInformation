@@ -26,7 +26,7 @@ namespace IceCreamKioskInformation.AddShop
 
         public bool CanExecute(object parameter)
         {
-            return VM.Newshop.ImageURL != "";
+            return VM.NewShop.ImageURL != "";
         }
 
         public void Execute(object parameter)
@@ -42,20 +42,21 @@ namespace IceCreamKioskInformation.AddShop
         private void VerifyImage(object sender, DoWorkEventArgs e)
         {
             AddShopUserControlM M = new AddShopUserControlM();
+            VM.ImageVerify = false;
             try
             {
-                e.Result = M.VerifyImageAsStore(VM.Newshop.ImageURL);
+                VM.ImageVerify = M.VerifyImageAsStore(VM.NewShop.ImageURL);
             }
             catch (Exception)
             {
                 VerifyImageBW.CancelAsync();
-                e.Result = false;
+                VM.ImageVerify = false;
             }
         }
 
         private void ImageVerified(object sender, RunWorkerCompletedEventArgs e)
         {
-            if ((bool)e.Result)
+            if ((bool)VM.ImageVerify)
                 VM.ImageVerified();
             else
                 VM.ImageNotVerified();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BE;
 using DAL;
 
 
@@ -29,6 +30,15 @@ namespace BL
         public bool VerifyImageAsStore(string image)
         {
             return new ImageVerification().IsShop(image);
+        }
+
+        /// <summary>
+        /// Receives an address and returns whether the address really exists
+        /// </summary>
+        /// <param name="address">The address to check</param>
+        public bool VerifyAddress(Address address)
+        {
+            return new AddressVerification().IsRealAdrress(address);
         }
     }
 }

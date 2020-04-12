@@ -205,7 +205,9 @@
     </Compile>
     <Compile Include="AddShop\AddShopUserControlM.cs" />
     <Compile Include="AddShop\AddShopUserControlVM.cs" />
+    <Compile Include="AddShop\SaveShopCMD.cs" />
     <Compile Include="AddShop\ShowImageFromMailCMD.cs" />
+    <Compile Include="AddShop\StringToColorConvertor.cs" />
     <Compile Include="AddShop\VerifyImageAsStoreCMD.cs" />
     <Compile Include="Convertors\Base64ToBitmapImageConvertor.cs" />
     <Compile Include="ProductDisplay\ProductDisplayUserControl.xaml.cs">

@@ -1,17 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BE
 {
-    public class Address
+    public class Address: INotifyPropertyChanged
     {
+        private string _street;
+        private int _buildingNumber;
+        private string _city;
+
         public string AddressID { get; set; }
-        public string Street { get; set; }
-        public int Building_number { get; set; }
-        public string City { get; set; }
+        public string Street 
+        {
+            get { return _street; }
+            set
+            {
+                _street = value;
+                OnPropertyChanged("Street");
+            }
+        }
+        public int BuildingNumber
+        {
+            get { return _buildingNumber; }
+            set
+            {
+                _buildingNumber = value;
+                OnPropertyChanged("BuildingNumber");
+            }
+        }
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged("City");
+            }
+        }
 
         /// <summary>
         /// Simple constractor
@@ -23,14 +52,25 @@ namespace BE
         {
             AddressID = addressID;
             Street = _street;
-            Building_number = _building_number;
+            BuildingNumber = _building_number;
             City = _city;
+        }
+
+        /// <summary>
+        /// Empty constractor
+        /// </summary>
+        public Address() { }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
         /// To String function 
         /// </summary>
         /// <returns>Return the street, number and city in one string</returns>
-        public override string ToString() { return Street + " " + Building_number + ", " + City; }
+        public override string ToString() { return Street + " " + BuildingNumber + ", " + City; }
     }
 }
