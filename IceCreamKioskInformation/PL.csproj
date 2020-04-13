@@ -203,7 +203,12 @@
     <Compile Include="AddReview\AddReviewUserControl.xaml.cs">
       <DependentUpon>AddReviewUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddReview\AddReviewUserControlM.cs" />
     <Compile Include="AddReview\AddReviewUserControlVM.cs" />
+    <Compile Include="AddReview\GoBackCMD.cs" />
+    <Compile Include="AddReview\SaveReviewCMD.cs" />
+    <Compile Include="AddReview\ShowImageFromMailCMD.cs" />
+    <Compile Include="AddReview\VerifyImageAsFoodCMD.cs" />
     <Compile Include="AddShop\AddShopUserControl.xaml.cs">
       <DependentUpon>AddShopUserControl.xaml</DependentUpon>
     </Compile>

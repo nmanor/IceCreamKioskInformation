@@ -70,7 +70,7 @@ namespace BE
 
         public Product()
         {
-
+            Review_list = new List<Review>();
         }
 
         protected Product(string productID, string name, double price, bool vegan, bool sugarFree, string description, List<Review> review_list, string nutritionalValues)

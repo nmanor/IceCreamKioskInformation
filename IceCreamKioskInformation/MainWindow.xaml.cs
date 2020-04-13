@@ -1,4 +1,5 @@
-﻿using BL;
+﻿using BE;
+using BL;
 using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
 using System.Windows;
@@ -36,8 +37,7 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             new Tools().tryrepos();
             DataContext = new MainWindowVM(this);
-            //LoadSearch();
-            LoadAddReview();
+            LoadSearch();
         }
 
         /// <summary>
@@ -57,7 +57,17 @@ namespace IceCreamKioskInformation
         {
             MessageArea.IsOpen = false;
             AddShopUserControl search = new AddShopUserControl();
-            search.GoBack += (sender, e) => { MessageArea.IsOpen = true; };
+            search.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };
             CurrnetUserConrol = search;
         }
 
@@ -67,8 +77,19 @@ namespace IceCreamKioskInformation
         internal void LoadAddReview()
         {
             MessageArea.IsOpen = false;
-            AddReviewUserControl search = new AddReviewUserControl();
-            CurrnetUserConrol = search;
+            AddReviewUserControl addReview = new AddReviewUserControl(new Waffle() { Name = "וופל בלגי TO GO: וופל בלגי עם קצפת + 3 כדורי גלידה" });
+            addReview.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };
+            CurrnetUserConrol = addReview;
         }
     }
 }

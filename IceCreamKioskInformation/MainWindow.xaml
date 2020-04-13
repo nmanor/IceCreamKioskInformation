@@ -20,7 +20,7 @@
         <materialDesign:DialogHost Grid.ColumnSpan="3" x:Name="MessageArea" CloseOnClickAway="True" FlowDirection="RightToLeft">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <TextBlock Text="האם אתה בטוח שאתה רוצה לחזור?&#x0a;אם היית באמצע לבצע פעולה המידע שלך עלול ללכת לאיבוד" FontSize="15"/>
+                    <TextBlock x:Name="MessageAreaText" Text="האם אתה בטוח שאתה רוצה לחזור?&#x0a;אם היית באמצע לבצע פעולה המידע שלך עלול ללכת לאיבוד" FontSize="15"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Command="{Binding WaitForGoBackPermission}">
                             חזור בכל זאת

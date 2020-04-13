@@ -12,7 +12,7 @@ namespace BL
         /// </summary>
         /// <param name="from">The email from which the message should be sent</param>
         /// <param name="index">Optional, selecting another index which is not the last image</param>
-        public async Task<string> getImageFrom(string from, int index = 0)
+        public async Task<string> GetImageFrom(string from, int index = 0)
         {
             GetImageFromMail getImage = new GetImageFromMail();
             string image = await getImage.getImageFrom(from, index);
@@ -26,6 +26,15 @@ namespace BL
         public bool VerifyImageAsStore(string image)
         {
             return new ImageVerification().IsShop(image);
+        }
+
+        /// <summary>
+        /// A function that checks whether an image is an food image or not
+        /// </summary>
+        /// <param name="image">Picture of a store in Base64 coding</param>
+        public bool VerifyImageAsFood(string image)
+        {
+            return new ImageVerification().IsFood(image);
         }
 
         /// <summary>

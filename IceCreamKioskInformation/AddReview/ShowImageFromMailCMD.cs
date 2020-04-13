@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace IceCreamKioskInformation.AddShop
+namespace IceCreamKioskInformation.AddReview
 {
-    class ShowImageFromMailCMD : ICommand
+    class ShowImageFromMailCMD: ICommand
     {
-        private AddShopUserControlVM VM;
+        private AddReviewUserControlVM VM;
         private BackgroundWorker FetchImageBW;
 
-        public ShowImageFromMailCMD(AddShopUserControlVM VM)
+        public ShowImageFromMailCMD(AddReviewUserControlVM VM)
         {
             this.VM = VM;
         }
@@ -22,7 +26,7 @@ namespace IceCreamKioskInformation.AddShop
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return VM.Review.ReviwerEmail != "";
         }
 
         public void Execute(object parameter)
@@ -37,10 +41,10 @@ namespace IceCreamKioskInformation.AddShop
 
         private async void FetchImage(object sender, DoWorkEventArgs e)
         {
-            AddShopUserControlM M = new AddShopUserControlM();
+            AddReviewUserControlM M = new AddReviewUserControlM();
             try
             {
-                VM.NewShop.ImageURL = await M.getImageFrom(VM.ImageTrys++);
+                VM.Review.Image = await M.getImageFrom(VM.Review.ReviwerEmail, VM.ImageTrys++);
                 e.Result = true;
             }
             catch (Exception)

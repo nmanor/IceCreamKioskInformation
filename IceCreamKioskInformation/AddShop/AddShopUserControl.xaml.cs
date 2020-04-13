@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BE;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,8 +15,10 @@ namespace IceCreamKioskInformation.AddShop
         {
             InitializeComponent();
             this.DataContext = new AddShopUserControlVM(this);
+            IsWorkDone = false;
         }
 
+        public bool IsWorkDone { get; set; }
         public event EventHandler GoBack;
 
         /// <summary>
@@ -131,6 +134,7 @@ namespace IceCreamKioskInformation.AddShop
             EditData.Visibility = Visibility.Hidden;
             SuccessfullySavedMessage.Visibility = Visibility.Visible;
             CheckingDataPB.Visibility = Visibility.Hidden;
+            IsWorkDone = true;
         }
 
         /// <summary>
@@ -138,7 +142,12 @@ namespace IceCreamKioskInformation.AddShop
         /// </summary>
         public void OnGoBackClicked()
         {
-            GoBack.Invoke(this, null);
+            GoBackEventArgs args;
+            string message = null;
+            if (!IsWorkDone)
+                message = "האם אתה בטוח שאתה רוצה לחזור?\nהנתונים שמילאת על החנות ילכו לאיבוד אם תחזור עכשיו";
+            args = new GoBackEventArgs() { IsWorkDone = this.IsWorkDone, Message = message };
+            GoBack.Invoke(this, args);
         }
     }
 }

@@ -27,6 +27,21 @@ namespace DAL
         }
 
         /// <summary>
+        /// A function that checks whether an image is an food image or not
+        /// </summary>
+        /// <param name="image">Picture of a food in Base64 coding</param>
+        public bool IsFood(string image)
+        {
+            // Check if the image matches one of the tags
+            List<string> possibleTags = new List<string> { "dinner", "glass", "healthy", "juice", "cheese", "sweet", "lunch", "cocktail", "plate", "milk", "pastry", "bakery", "frozen dessert", "edible fruit", "gourmet", "ice", "ice cream", "refreshment", "dessert", "meal", "snack", "drink", "confectionery", "beverage", "food", "cream", "dairy product", "yogurt", "cake", "fruit", "breakfast", "cold" };
+            foreach (string tag in GetVisualAnalysis(image))
+                if (possibleTags.Contains(tag))
+                    return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// A function that receives an image and returns the tags obtained by image analysis
         /// </summary>
         /// <param name="image">Picture of a store in Base64 coding</param>

@@ -96,7 +96,7 @@ namespace BE
 
         public Review()
         {
-            
+            ReviewID = DateTime.Now.Ticks.ToString("X");
         }
 
         public bool Search(string str)

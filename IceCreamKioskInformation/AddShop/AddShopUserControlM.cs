@@ -13,7 +13,7 @@ namespace IceCreamKioskInformation.AddShop
 
         public AddShopUserControlM() { BlImp = new BLimp(); }
 
-        public async Task<string> getImageFrom(string from, int index = 0) { return await BlImp.getImageFrom(from, index); }
+        public async Task<string> getImageFrom(int index = 0) { return await BlImp.GetImageFrom("natanmanor@gmail.com", index); }
 
         public bool VerifyImageAsStore(string image) { return BlImp.VerifyImageAsStore(image); }
 
