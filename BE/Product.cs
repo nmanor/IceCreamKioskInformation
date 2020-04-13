@@ -94,7 +94,7 @@ namespace BE
         /// describes the type of search parameter, and the value is a list of several possible results for 
         /// that search parameter</param>
         /// <returns>Boolean variable: Whether the product stands in the search conditions or not</returns>
-        public bool Search(Dictionary<string, List<object>> dictionary)
+        public virtual bool Search(Dictionary<string, List<object>> dictionary)
         {
             // Checking for no properties in the search
             if (dictionary.Count == 0)

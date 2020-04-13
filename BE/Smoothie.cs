@@ -5,9 +5,10 @@ namespace BE
 {
     public class Smoothie : FlavoredProduct
     {
-        public bool Search(Dictionary<string, List<Object>> dic)
+        public bool Search(Dictionary<string, List<Object>> dictionary)
         {
-            return true;
+          
+            return base.Search(dictionary) ;
         }
 
     }

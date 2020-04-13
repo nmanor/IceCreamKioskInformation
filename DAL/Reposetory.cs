@@ -18,6 +18,7 @@ namespace DAL
 
         public Reposetory()
         {
+            //add_Address(new BE.Address("123", "יפו", 12, "ירושלים"));
             get_all_Adrress();
             get_all_Products();
             get_all_Reviews();
