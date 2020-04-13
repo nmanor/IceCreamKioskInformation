@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace BE
 {
-    public class Shop : INotifyPropertyChanged
+    public class Shop : ObservableCollection<Product>
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private string _shopID;
         private string _shopName;
         private Address _address;
@@ -90,24 +89,24 @@ namespace BE
                 OnPropertyChanged("ImageURL");
             }
         }
-        public List<Product> Products { get; set; }
 
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            base.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
-
-        public Shop(string shopID, Address address, string phone, string website, string facebook, string instagram, string imageURL, List<Product> products)
+        /// <summary>
+        /// Add a new product to the shop
+        /// </summary>
+        /// <param name="product">The product you want to add to the store</param>
+        public new void Add(Product product)
         {
-            Address = address;
-            Phone = phone;
-            Website = website;
-            Facebook = facebook;
-            Instagram = instagram;
-            ImageURL = imageURL;
-            Products = products;
+            if (product.Shop != null)
+                product.Shop.Remove(product);
+            product.Shop = this;
+            base.Add(product);
         }
+
         public Shop() { }
     }
 }

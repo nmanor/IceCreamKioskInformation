@@ -63,6 +63,8 @@ namespace BE
             set;
         }
 
+        public Shop Shop { get; set; }
+
         public string FirstImage
         {
             get { return Review_list[0].Image; }

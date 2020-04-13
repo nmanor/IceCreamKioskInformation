@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BE
 {
-    public class GoBackEventArgs: EventArgs
+    public class GoBackEventArgs : EventArgs
     {
         public bool IsWorkDone { get; set; }
         public string Message { get; set; }
