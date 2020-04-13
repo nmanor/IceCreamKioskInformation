@@ -20,7 +20,7 @@ namespace DAL
         {
             //add_Address(new BE.Address("123", "יפו", 12, "ירושלים"));
             get_all_Adrress();
-            get_all_Products();
+            products = get_all_Products();
             get_all_Reviews();
             get_all_Shops();
         }
@@ -47,12 +47,14 @@ namespace DAL
                 Addresses = context.Addresses.ToList<Address>();
             }
         }
-        private void get_all_Products()
+        public List<Product> get_all_Products()
         {
+            List<Product> result = new List<Product>();
             using (var context = new ShopReviewsdb())
             {
-                products = context.Products.ToList<Product>();
+                result = context.Products.ToList<Product>();
             }
+            return result;
         }
 
         public void add_Shop(Shop shop)
@@ -88,6 +90,11 @@ namespace DAL
                 context.Addresses.Add(address);
                 context.SaveChanges();
             }
+        }
+
+        public void getProductsWithSearch(Dictionary<string, List<object>> Dictionary)
+        {
+
         }
 
 

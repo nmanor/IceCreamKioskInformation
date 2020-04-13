@@ -311,6 +311,10 @@
       <Project>{4e1cca6d-cf8a-4e5a-a844-be66865bdd04}</Project>
       <Name>BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{271E973D-F697-4C5A-B20C-009F2E3BD208}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
