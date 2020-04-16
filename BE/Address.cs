@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace BE
 {
@@ -43,9 +44,9 @@ namespace BE
         /// <param name="_street"></param>
         /// <param name="_building_number"></param>
         /// <param name="_city"></param>
-        public Address(string addressID, string _street, int _building_number, string _city)
+        public Address( string _street, int _building_number, string _city)
         {
-            AddressID = addressID;
+            AddressID =  DateTime.Now.Ticks.ToString("X");
             Street = _street;
             BuildingNumber = _building_number;
             City = _city;
@@ -54,7 +55,10 @@ namespace BE
         /// <summary>
         /// Empty constractor
         /// </summary>
-        public Address() { }
+        public Address()
+        {
+            AddressID = DateTime.Now.Ticks.ToString("X");
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)

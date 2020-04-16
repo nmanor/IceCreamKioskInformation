@@ -5,6 +5,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -18,41 +19,53 @@ namespace DAL
 
         public Reposetory()
         {
-            //add_Address(new BE.Address("123", "יפו", 12, "ירושלים"));
-            get_all_Adrress();
+            //Shop shop = new Shop( "dogs", new Address("יפו", 43, "תל אביב"), "0543672343", "www.dogs.co.il", "tada", "@tada", "www.touchme.co.il");
+            //Product product = new Waffle("waffleass", 12.3, true, false, "good waffle", "456");
+            //Review review = new Review("dd", new DateTime(1799, 2, 1), "1234", "1234", 3, "2", new DateTime(1799, 2, 1));
+            //product.AddReview(review);
+            //shop.AddProduct(product);
+            //add_Shop(shop);
+            Addresses = get_all_Adrress();
             products = get_all_Products();
-            get_all_Reviews();
-            get_all_Shops();
+            reviews = get_all_Reviews();
+            shops = get_all_Shops();
         }
 
-        private void get_all_Shops()
+        public List<Shop> get_all_Shops()
         {
+            List<Shop> result = new List<Shop>();
             using (var context = new ShopReviewsdb())
             {
-                shops = context.shops.ToList<Shop>();
+                result = context.shops.Include(a => a.Address).Include(p => p.Products).Include(l => l.Products.Select(r => r.Reviews)).ToList<Shop>();
             }
+            return result;
         }
 
-        private void get_all_Reviews()
+        public List<Review> get_all_Reviews()
         {
+            List<Review> result = new List<Review>();
             using (var context = new ShopReviewsdb())
             {
-                reviews = context.Reviews.ToList<Review>();
+                result = context.Reviews.ToList<Review>();
             }
+            return result;
         }
-        private void get_all_Adrress()
+        public List<Address> get_all_Adrress()
         {
+            List<Address> result = new List<Address>();
             using (var context = new ShopReviewsdb())
             {
-                Addresses = context.Addresses.ToList<Address>();
+                result = context.Addresses.ToList<Address>();
             }
+            return result;
         }
         public List<Product> get_all_Products()
         {
             List<Product> result = new List<Product>();
             using (var context = new ShopReviewsdb())
             {
-                result = context.Products.ToList<Product>();
+                result = context.Products.Include(s => s.Shop).Include(r => r.Reviews).ToList<Product>();
+                  
             }
             return result;
         }

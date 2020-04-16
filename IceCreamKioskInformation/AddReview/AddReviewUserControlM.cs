@@ -34,7 +34,7 @@ namespace IceCreamKioskInformation.AddReview
                 throw new Exception("תוכן הביקורת חייב להיות באורך של לפחות 10 תווים");
 
             review.PublishDate = DateTime.Now;
-            product.Review_list.Add(review);
+            product.AddReview(review);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using BL;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace BE
 {
@@ -47,11 +49,12 @@ namespace BE
 
         /// <summary>
         /// 
-        /// </summary>
-        public List<Review> Review_list
+        /// </summary
+        private ObservableCollection<Review> _reviews;
+        public virtual ObservableCollection<Review> Reviews
         {
-            get;
-            set;
+            get { return _reviews; }
+            private set { _reviews = value; }
         }
 
         /// <summary>
@@ -63,27 +66,29 @@ namespace BE
             set;
         }
 
-        public Shop Shop { get; set; }
 
         public string FirstImage
         {
-            get { return Review_list[0].Image; }
+            get { return Reviews[0].Image; }
         }
-
+        
+        public string ShopID { get; set; }
+        public virtual Shop Shop { get; set; }
         public Product()
         {
-            Review_list = new List<Review>();
+            ProductID = DateTime.Now.Ticks.ToString("X");
+            Reviews = new ObservableCollection<Review>();
         }
 
-        protected Product(string productID, string name, double price, bool vegan, bool sugarFree, string description, List<Review> review_list, string nutritionalValues)
+        protected Product( string name, double price, bool vegan, bool sugarFree, string description, string nutritionalValues)
         {
-            ProductID = productID;
+            ProductID  = DateTime.Now.Ticks.ToString("X");
             Name = name;
             Price = price;
             Vegan = vegan;
             SugarFree = sugarFree;
             Description = description;
-            Review_list = review_list;
+            Reviews = new ObservableCollection<Review>();
             NutritionalValues = nutritionalValues;
 
         }
@@ -155,7 +160,10 @@ namespace BE
 
         public void AddReview(Review review)
         {
-            Review_list.Add(review);
+            if (review.Product != null)
+                _reviews.Remove(review);
+            review.Product = this;
+            _reviews.Add(review);
         }
     }
 }

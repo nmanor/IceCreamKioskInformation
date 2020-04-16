@@ -87,12 +87,26 @@ namespace BE
             }
         }
 
+        public string ProductID { get; set; }
+        public virtual Product Product { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public Review( string reviewerName, DateTime reviwerBirthday, string reviwerEmail, string reviewContent, int rating, string image, DateTime publishDate)
+        {
+            ReviewID = DateTime.Now.Ticks.ToString("X");
+            ReviewerName = reviewerName;
+            ReviwerBirthday = reviwerBirthday;
+            ReviwerEmail = reviwerEmail;
+            ReviewContent = reviewContent;
+            Rating = rating;
+            Image = image;
+            PublishDate = publishDate;
+        }
 
         public Review()
         {
