@@ -12,7 +12,6 @@
 
     <UserControl.Resources>
         <convert:Base64ToBitmapImageConvertor x:Key="base64ToBitmapImageConvertor"/>
-        <local:StringToColorConvertor x:Key="StringToColorConvertor"/>
         <Style x:Key="RedForegroundOnErrorStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFilledTextFieldTextBox}">
             <Style.Triggers>
                 <Trigger Property="Validation.HasError" Value="True">
@@ -53,7 +52,7 @@
 
                                 <TextBox x:Name="ReviewerName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="השם שלך" Text="{Binding Review.ReviewerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
                                 <DatePicker x:Name="ReviwerBirthday" Margin="20, 5" materialDesign:HintAssist.Hint="תאריך הלידה שלך" Style="{StaticResource MaterialDesignFilledDatePicker}" SelectedDate="{Binding Review.ReviwerBirthday, Mode=TwoWay}" FontSize="15"/>
-                                <TextBox x:Name="ReviwerEmail" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת האימייל שלך" Text="{Binding Review.ReviwerEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding NewShop.Phone, Converter={StaticResource StringToColorConvertor}, ConverterParameter=phone}" FontSize="15"/>
+                                <TextBox x:Name="ReviwerEmail" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="כתובת האימייל שלך" Text="{Binding Review.ReviwerEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
 
                                 <Separator Height="0" Margin="20, 10"/>
 

@@ -6,7 +6,15 @@ namespace BE
     public abstract class FlavoredProduct : Product
     {
         private string _flaver;
-        public string Flaver { get; set; }
+        public string Flaver
+        {
+            get { return _flaver; }
+            set
+            {
+                _flaver = value;
+                OnPropertyChanged("Flaver");
+            }
+        }
 
         public bool Search(Dictionary<string, List<object>> dictionary)
         {

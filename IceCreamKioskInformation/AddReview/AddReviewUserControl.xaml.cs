@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace IceCreamKioskInformation.AddReview
@@ -20,6 +21,7 @@ namespace IceCreamKioskInformation.AddReview
 
         public bool IsWorkDone { get; set; }
         public event EventHandler GoBack;
+        public event EventHandler ReviewCreated;
 
         /// <summary>
         /// Changes the view while bringing the image from the email
@@ -135,12 +137,13 @@ namespace IceCreamKioskInformation.AddReview
         /// <summary>
         /// Changes the display if the data saved
         /// </summary>
-        public void DataVerified()
+        public void DataVerified(Review review)
         {
             EditData.Visibility = Visibility.Hidden;
             SuccessfullySavedMessage.Visibility = Visibility.Visible;
             CheckingDataPB.Visibility = Visibility.Hidden;
             IsWorkDone = true;
+            ReviewCreated?.Invoke(this, null);
         }
 
         /// <summary>
@@ -153,7 +156,7 @@ namespace IceCreamKioskInformation.AddReview
             if (!IsWorkDone)
                 message = "האם אתה בטוח שאתה רוצה לחזור?\nלא שמרת את הביקורת שלך, כל מה שכתבת ילך לאיבוד";
             args = new GoBackEventArgs() { IsWorkDone = this.IsWorkDone, Message = message };
-            GoBack.Invoke(this, args);
+            GoBack?.Invoke(this, args);
         }
     }
 }

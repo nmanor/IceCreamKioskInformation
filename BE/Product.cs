@@ -2,78 +2,118 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace BE
 {
-    public abstract class Product
+    public abstract class Product: INotifyPropertyChanged
     {
+        private string _productID;
+        public string ProductID
+        {
+            get { return _productID; }
+            set
+            {
+                _productID = value;
+                OnPropertyChanged("ProductID");
+            }
+        }
 
-        /// </summary>
-        public string ProductID { get; set; }
-
+        private string _name;
         public string Name
         {
-            get;
-            set;
+            get { return _name; }
+            set
+            {
+                _name = value;
+                OnPropertyChanged("Name");
+            }
         }
 
-
-
+        private double _price;
         public double Price
         {
-            get;
-            set;
+            get { return _price; }
+            set
+            {
+                _price = value;
+                OnPropertyChanged("Price");
+            }
         }
 
-
+        private bool _vegan;
         public bool Vegan
         {
-            get;
-            set;
+            get { return _vegan; }
+            set
+            {
+                _vegan = value;
+                OnPropertyChanged("Vegan");
+            }
         }
 
-
+        private bool _sugarFree;
         public bool SugarFree
         {
-            get;
-            set;
+            get { return _sugarFree; }
+            set
+            {
+                _sugarFree = value;
+                OnPropertyChanged("SugarFree");
+            }
         }
 
-
+        private string _description;
         public string Description
         {
-            get;
-            set;
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged("Description");
+            }
         }
 
+        private string _nutritionalValues;
+        public string NutritionalValues
+        {
+            get { return _nutritionalValues; }
+            set
+            {
+                _nutritionalValues = value;
+                OnPropertyChanged("NutritionalValues");
+            }
+        }
 
         /// <summary>
         /// 
         /// </summary
         private ObservableCollection<Review> _reviews;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public virtual ObservableCollection<Review> Reviews
         {
             get { return _reviews; }
             private set { _reviews = value; }
         }
 
-        /// <summary>
-        /// Code Property.
-        /// </summary>
-        public string NutritionalValues
-        {
-            get;
-            set;
-        }
-
-
         public string FirstImage
         {
-            get { return Reviews[0].Image; }
+            get
+            {
+                try { return Reviews[0].Image; }
+                catch (Exception) { return ""; }
+            }
         }
         
         public string ShopID { get; set; }
         public virtual Shop Shop { get; set; }
+
         public Product()
         {
             ProductID = DateTime.Now.Ticks.ToString("X");

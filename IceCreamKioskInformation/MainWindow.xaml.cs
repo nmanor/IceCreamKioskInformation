@@ -1,5 +1,6 @@
 ﻿using BE;
 using BL;
+using IceCreamKioskInformation.AddProduct;
 using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
 using System.Windows;
@@ -37,7 +38,8 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             new Tools().tryrepos();
             DataContext = new MainWindowVM(this);
-            LoadSearch();
+            //LoadSearch();
+            LoadAddProduct();
         }
 
         /// <summary>
@@ -90,6 +92,27 @@ namespace IceCreamKioskInformation
                     LoadSearch();
             };
             CurrnetUserConrol = addReview;
+        }
+
+        /// <summary>
+        /// Loading the UserControl of the add review to the main screen and logging its events
+        /// </summary>
+        internal void LoadAddProduct()
+        {
+            MessageArea.IsOpen = false;
+            AddProductUserControl addProduct = new AddProductUserControl();
+            /*addReview.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };*/
+            CurrnetUserConrol = addProduct;
         }
     }
 }

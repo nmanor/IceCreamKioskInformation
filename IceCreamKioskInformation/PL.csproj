@@ -200,6 +200,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddProduct\AddProductUserControl.xaml.cs">
+      <DependentUpon>AddProductUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddProduct\AddProductUserControlVM.cs" />
+    <Compile Include="AddProduct\AddReviewCMD.cs" />
+    <Compile Include="AddProduct\ProductToBoolConvertor.cs" />
+    <Compile Include="AddProduct\PropertyToBoolConverter.cs" />
     <Compile Include="AddReview\AddReviewUserControl.xaml.cs">
       <DependentUpon>AddReviewUserControl.xaml</DependentUpon>
     </Compile>
@@ -236,6 +243,10 @@
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchUserControlMVVM\Tag.cs" />
+    <Page Include="AddProduct\AddProductUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddReview\AddReviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

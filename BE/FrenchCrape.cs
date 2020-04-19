@@ -6,11 +6,14 @@ namespace BE
     public class FrenchCrape : Product
     {
         private bool _freeExtras;
-
         public bool FreeExtras
         {
-            set { _freeExtras = value; }
             get { return _freeExtras; }
+            set
+            {
+                _freeExtras = value;
+                OnPropertyChanged("FreeExtras");
+            }
         }
 
         public bool Search(Dictionary<string, List<object>> dictionary)

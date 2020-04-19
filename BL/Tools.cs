@@ -7,7 +7,7 @@ namespace BL
         public void tryrepos()
         {
             // new GetLocationMap().DownloadMap(new BE.Address("123", "יפו", 12, "ירושלים"));
-             Reposetory reposetory = new Reposetory();
+            // Reposetory reposetory = new Reposetory();
             
         }
     }

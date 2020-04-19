@@ -45,5 +45,15 @@ namespace BL
         {
             return new AddressVerification().IsRealAdrress(address);
         }
+
+        /// <summary>
+        /// A function that receives text in Hebrew and translates it into English
+        /// </summary>
+        /// <param name="text">The Hebrew content should be translated</param>
+        /// <returns>String, translation of the content into English</returns>
+        public string TranslateHEtoEN(string text)
+        {
+            return new TranslateText().TranslateHEtoEN(text);
+        }
     }
 }
