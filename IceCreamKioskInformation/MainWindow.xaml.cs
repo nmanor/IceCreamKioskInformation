@@ -38,8 +38,7 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             new Tools().tryrepos();
             DataContext = new MainWindowVM(this);
-            //LoadSearch();
-            LoadAddProduct();
+            LoadSearch();
         }
 
         /// <summary>
@@ -101,7 +100,7 @@ namespace IceCreamKioskInformation
         {
             MessageArea.IsOpen = false;
             AddProductUserControl addProduct = new AddProductUserControl();
-            /*addReview.GoBack += (sender, e) =>
+            addProduct.GoBack += (sender, e) =>
             {
                 GoBackEventArgs args = e as GoBackEventArgs;
                 if (!args.IsWorkDone)
@@ -111,7 +110,7 @@ namespace IceCreamKioskInformation
                 }
                 else
                     LoadSearch();
-            };*/
+            };
             CurrnetUserConrol = addProduct;
         }
     }

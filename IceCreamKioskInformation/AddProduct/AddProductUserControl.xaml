@@ -26,7 +26,7 @@
     <StackPanel Orientation="Horizontal">
         <StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                <Button Command="{Binding GoBackCMD}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock Text="הוספת מוצר חדש" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
@@ -35,21 +35,13 @@
                 </StackPanel.Effect>
             </StackPanel>
             <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0" Width="700" Height="500">
-                <StackPanel Orientation="Horizontal" MaxWidth="700">
+                <Grid>
+                    <StackPanel Visibility="Hidden" x:Name="SuccessfullySavedMessage" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="FoodForkDrink" Height="120" Width="120" HorizontalAlignment="Center"/>
+                        <TextBlock Text="המוצר נשמר בהצלחה!" FontSize="40" FontWeight="Black"/>
+                    </StackPanel>
+                <StackPanel x:Name="Expenders" Orientation="Horizontal" MaxWidth="700" Visibility="Visible">
                     <Expander x:Name="Expander1" ExpandDirection="Right" Background="#00FFFFFF">
-                        <Expander.Style>
-                            <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
-                                <Setter Property="IsExpanded" Value="True"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=Expander2, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding ElementName=Expander3, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Expander.Style>
                         <Expander.Header>
                             <StackPanel>
                                 <TextBlock Text="1" HorizontalAlignment="Center" FontWeight="Black" FontSize="17" Margin="0, 0, 0, 15">
@@ -94,19 +86,6 @@
                         </StackPanel>
                     </Expander>
                     <Expander x:Name="Expander2" ExpandDirection="Right" Background="#00FFFFFF">
-                        <Expander.Style>
-                            <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
-                                <Setter Property="IsExpanded" Value="True"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=Expander1, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding ElementName=Expander3, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Expander.Style>
                         <Expander.Header>
                             <StackPanel>
                                 <TextBlock Text="2" HorizontalAlignment="Center" FontWeight="Black" FontSize="17" Margin="0, 0, 0, 15">
@@ -137,19 +116,6 @@
                         </StackPanel>
                     </Expander>
                     <Expander x:Name="Expander3" ExpandDirection="Right" Background="#00FFFFFF">
-                        <Expander.Style>
-                            <Style TargetType="Expander" BasedOn="{StaticResource MaterialDesignExpander}">
-                                <Setter Property="IsExpanded" Value="True"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=Expander1, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding ElementName=Expander2, Path=IsExpanded}" Value="True">
-                                        <Setter Property="IsExpanded" Value="False"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Expander.Style>
                         <Expander.Header>
                             <StackPanel>
                                 <TextBlock Text="3" HorizontalAlignment="Center" FontWeight="Black" FontSize="17" Margin="0, 0, 0, 15">
@@ -175,7 +141,7 @@
 
                                     <TextBox x:Name="ProductName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="שם המוצר" Text="{Binding SelectedProduct.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
                                     <TextBox Margin="20, 5" Style="{StaticResource RedForegroundOnErrorStyle}" materialDesign:HintAssist.Hint="מחיר משוער בשקלים" Text="{Binding SelectedProduct.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" Validation.ErrorTemplate="{x:Null}" />
-                                    <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="תיאור המוצר" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                                        <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="תיאור המוצר" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"/>
 
                                     <Border x:Name="VeganBorder" Margin="20 5 20 5" CornerRadius="5 5 0 0" Background="#dddee2" VerticalAlignment="Center">
                                         <Border.Style>
@@ -579,9 +545,72 @@
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>
-                        
+                    </Expander>
+                    <Expander x:Name="Expander4" ExpandDirection="Right" Background="#00FFFFFF" IsExpanded="False">
+                        <Expander.Header>
+                            <StackPanel>
+                                <TextBlock Text="4" HorizontalAlignment="Center" FontWeight="Black" FontSize="17" Margin="0, 0, 0, 15">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="90" />
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                                <TextBlock RenderTransformOrigin=".5,.5" FontSize="15">
+                                <Run Text="הוספת ביקורת ראשונה"/>
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="90" />
+                                    </TextBlock.LayoutTransform>
+                                </TextBlock>
+                            </StackPanel>
+                        </Expander.Header>
+                        <StackPanel Orientation="Vertical" Margin="30, 20" >
+                            <TextBlock Text="4. הוספת ביקורת ראשונה" FontSize="15" FontWeight="Bold"/>
+                            <TextBlock FontSize="15" Text="הוסף ביקורת ראשונה למוצר, אותה יוכלו לראות המשתמשים"/>
+                            <TextBlock FontSize="13" Text="לא ניתן להוסיף ביקורת לפני שברחת את סוג המוצר ומילאת את שמו" Foreground="IndianRed" HorizontalAlignment="Center" FontWeight="DemiBold" Margin="0, 10">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="/IceCreamKioskInformation;component/Fonts/#Heebo"/>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedProduct.Name.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <Button Command="{Binding AddReviewCMD}" Background="#FFDDDEE2" HorizontalAlignment="Center" Content="הוסף ביקורת" materialDesign:ButtonAssist.CornerRadius="15" Margin="0, 10" BorderBrush="{x:Null}" Foreground="#DD000000">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+                                        <Setter Property="FontFamily" Value="/IceCreamKioskInformation;component/Fonts/#Heebo"/>
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedProduct.Name.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SelectedProduct.Reviews.Count, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <TextBlock FontSize="13" Text="למוצר זה יש ביקורת ראשונה" HorizontalAlignment="Center" FontWeight="DemiBold" Margin="0, 10">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="/IceCreamKioskInformation;component/Fonts/#Heebo"/>
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedProduct.Reviews.Count, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </StackPanel>
                     </Expander>
                 </StackPanel>
+                </Grid>
             </materialDesign:ColorZone>
         </StackPanel>
 
@@ -589,16 +618,17 @@
             <ProgressBar Foreground="Black" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="30" Width="30"/>
         </materialDesign:Card>
 
-        <Button Command="{Binding AddReviewCMD}" x:Name="GetReview" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" ToolTip="הבא">
-            <materialDesign:PackIcon Kind="ArrowLeft" Height="40" Width="40"/>
+        <Button Command="{Binding SaveProductCMD}" x:Name="Save" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" ToolTip="הבא">
+            <materialDesign:PackIcon Kind="ContentSave" Height="40" Width="40"/>
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
-                    <Setter Property="IsEnabled" Value="True" />
+                    <Setter Property="IsEnabled" Value="False" />
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding SelectedProduct, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ProductToBoolConvertor}}" Value="True"/>
                                 <Condition Binding="{Binding SelectedItems.Count, Converter={StaticResource NotZeroConverter}, ElementName=lstProducts, Mode=OneWay}" Value="True"/>
+                                <Condition Binding="{Binding SelectedProduct.Reviews.Count, Converter={StaticResource NotZeroConverter}}" Value="True"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="IsEnabled" Value="True" />
                         </MultiDataTrigger>
@@ -606,10 +636,5 @@
                 </Style>
             </Button.Style>
         </Button>
-
-        <Button Visibility="Collapsed" x:Name="Save" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" ToolTip="הבא">
-            <materialDesign:PackIcon Kind="Abc" Height="40" Width="40"/>
-        </Button>
-
     </StackPanel>
 </UserControl>

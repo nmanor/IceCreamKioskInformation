@@ -28,6 +28,7 @@ namespace IceCreamKioskInformation.AddProduct
         {
             InitializeComponent();
             this.DataContext = new AddProductUserControlVM(this);
+            IsWorkDone = false;
         }
 
         /// <summary>
@@ -53,22 +54,76 @@ namespace IceCreamKioskInformation.AddProduct
             AddReviewUserControl.GoBack += (object sender, EventArgs e) =>
             {
                 AddReviewUserControl.Visibility = Visibility.Collapsed;
-                this.Visibility = Visibility.Visible;
+                Visibility = Visibility.Visible;
             };
 
             AddReviewUserControl.ReviewCreated += (object sender, EventArgs e) =>
             {
-                GetReview.Visibility = Visibility.Collapsed;
-                Save.Visibility = Visibility.Visible;
                 AddReviewUserControl.Visibility = Visibility.Collapsed;
                 Visibility = Visibility.Visible;
             };
         }
 
-        public void SaveProduct()
+        public bool IsWorkDone { get; set; }
+        public event EventHandler GoBack;
+
+        /// <summary>
+        /// Changes the display while trying to save the product
+        /// </summary>
+        public void CheckingProductData()
         {
-            Save.Visibility = Visibility.Collapsed;
             CheckingDataPB.Visibility = Visibility.Visible;
+            Save.Visibility = Visibility.Collapsed;
+            Expenders.IsEnabled = false;
+            Expenders.Opacity = 0.7;
+            CloseAllExpanders();
+        }
+
+        /// <summary>
+        /// Changes the display if the product saved
+        /// </summary>
+        public void ProductSaved()
+        {
+            Expenders.Visibility = Visibility.Hidden;
+            SuccessfullySavedMessage.Visibility = Visibility.Visible;
+            IsWorkDone = true;
+        }
+
+        /// <summary>
+        /// Changes the display if the product not saved
+        /// </summary>
+        public void ProductNotSaved(string error)
+        {
+            CheckingDataPB.Visibility = Visibility.Collapsed;
+            Save.Visibility = Visibility.Visible;
+            Expenders.IsEnabled = true;
+            Expenders.Opacity = 1;
+            CloseAllExpanders();
+            IsWorkDone = false;
+        }
+
+        /// <summary>
+        /// Function that close all the expanders
+        /// </summary>
+        private void CloseAllExpanders()
+        {
+            Expander1.IsExpanded = false;
+            Expander2.IsExpanded = false;
+            Expander3.IsExpanded = false;
+            Expander4.IsExpanded = false;
+        }
+
+        /// <summary>
+        /// A function that triggers the event of a backward move
+        /// </summary>
+        public void OnGoBackClicked()
+        {
+            GoBackEventArgs args;
+            string message = null;
+            if (!IsWorkDone)
+                message = "לא שמרת את המוצר עדיין\nהאם את רוצה לחזור בכל זאת?";
+            args = new GoBackEventArgs() { IsWorkDone = this.IsWorkDone, Message = message };
+            GoBack?.Invoke(this, args);
         }
     }
 }

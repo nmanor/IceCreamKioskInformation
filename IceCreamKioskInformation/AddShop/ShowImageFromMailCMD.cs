@@ -45,7 +45,6 @@ namespace IceCreamKioskInformation.AddShop
             }
             catch (Exception)
             {
-                FetchImageBW.CancelAsync();
                 e.Result = false;
             }
         }

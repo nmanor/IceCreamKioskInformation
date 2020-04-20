@@ -56,6 +56,7 @@ namespace IceCreamKioskInformation.AddProduct
             }
         }
         public Dictionary<string, Product> ProductsOptions { get; set; }
+
         public Review Review { get; set; }
 
         /// <summary>
@@ -89,9 +90,19 @@ namespace IceCreamKioskInformation.AddProduct
         }
 
         /// <summary>
-        /// Save the new shop into the DB
+        /// Add review to SelectedProduct
         /// </summary>
         public ICommand AddReviewCMD { get { return new AddReviewCMD(this); } }
+
+        /// <summary>
+        /// Save the product to the DB
+        /// </summary>
+        public ICommand SaveProductCMD { get { return new SaveProductCMD(this); } }
+
+        /// <summary>
+        /// Action for triggering the backward event
+        /// </summary>
+        public ICommand GoBackCMD { get { return new GoBackCMD(this); } }
 
         /// <summary>
         /// Function for searching a store within the list
@@ -106,6 +117,12 @@ namespace IceCreamKioskInformation.AddProduct
         }
 
         public void AddReview() { View.AddReview(SelectedProduct); }
+
+        public void CheckingProductData() { View.CheckingProductData(); }
+        internal void ProductSaved() { View.ProductSaved(); }
+        internal void ProductNotSaved(string error) { View.ProductNotSaved(error); }
+
+        public void OnGoBackClicked() { View.OnGoBackClicked(); }
 
         // INotifyPropertyChanged implementaion
         public event PropertyChangedEventHandler PropertyChanged;

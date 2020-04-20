@@ -50,9 +50,9 @@
                         <materialDesign:PackIcon Kind="Storefront" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="מוצר חדש">
+                <MenuItem Header="מוצר חדש" Command="{Binding AddProduct}">
                     <MenuItem.Icon>
-                        <materialDesign:PackIcon Kind="IceCream" />
+                        <materialDesign:PackIcon Kind="FoodForkDrink" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
