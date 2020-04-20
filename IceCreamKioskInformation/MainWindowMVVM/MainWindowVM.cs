@@ -13,6 +13,8 @@ namespace IceCreamKioskInformation
             View = mainWindow;
         }
 
+        public string EnterdPassword { get; set; }
+
         /// <summary>
         /// An command that activates the functions for displaying a new store screen
         /// </summary>
@@ -29,8 +31,13 @@ namespace IceCreamKioskInformation
         public ICommand WaitForGoBackPermission { get { return new GoBackCMD(this); } }
 
         public void LoadSearch() { View.LoadSearch(); }
-
-        internal void LoadAddProduct() { View.LoadAddProduct(); }
+        public void LoadAddProduct() { View.LoadAddProduct(); }
         public void LoadAddShop() { View.LoadAddShop(); }
+
+        public void BindLoadCommand(ICommand command) { View.BindLoadCommand(command); }
+        public void OpenLogInArea() { View.OpenLogInArea(); }
+        public void CloseLogInArea() { View.CloseLogInArea(); }
+        public void DisplayWorngPassword() { View.DisplayWorngPassword(); }
+        public void DisplayRightPassword() { View.DisplayRightPassword(); }
     }
 }

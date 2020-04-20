@@ -233,6 +233,7 @@
     <Compile Include="MainWindowMVVM\GoBackCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewProductCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewShopCMD.cs" />
+    <Compile Include="MainWindowMVVM\MainWindowM.cs" />
     <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
     <Compile Include="ProductDisplay\ProductDisplayUserControl.xaml.cs">
       <DependentUpon>ProductDisplayUserControl.xaml</DependentUpon>

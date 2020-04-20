@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation.MainWindowMVVM
@@ -29,7 +30,27 @@ namespace IceCreamKioskInformation.MainWindowMVVM
 
         public void Execute(object parameter)
         {
-            VM.LoadAddProduct();
+            if (parameter == null)
+            {
+                VM.BindLoadCommand(VM.AddProduct);
+                VM.OpenLogInArea();
+            }
+            else
+            {
+                PasswordBox passwordBox = parameter as PasswordBox;
+                if(new MainWindowM().AdminPasswordVerification(passwordBox.Password))
+                {
+                    passwordBox.Password = "";
+                    VM.DisplayRightPassword();
+                    VM.BindLoadCommand(null);
+                    VM.CloseLogInArea();
+                    VM.LoadAddProduct();
+                }
+                else
+                {
+                    VM.DisplayWorngPassword();
+                }
+            }
         }
     }
 }

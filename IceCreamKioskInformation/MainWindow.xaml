@@ -33,6 +33,24 @@
             </materialDesign:DialogHost.DialogContent>
         </materialDesign:DialogHost>
 
+        <materialDesign:DialogHost Grid.ColumnSpan="3" x:Name="LogInAsAdmin" CloseOnClickAway="True" FlowDirection="RightToLeft">
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <materialDesign:PackIcon x:Name="LockLogo" Kind="Lock" Width="50" Height="50" Margin="10" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="PasswordDescription" Text="פעולה זו דורשת התחברות כמנהל מערכת&#x0a;אנא הכנס סיסמת מנהל ולאחר מכן לחץ על המשך" FontSize="15" HorizontalAlignment="Center"/>
+                    <PasswordBox x:Name="Password" materialDesign:HintAssist.Hint="סיסמה" Margin="20"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="CheckPassowrd" Style="{StaticResource MaterialDesignFlatButton}" IsDefault="True" Margin="0 8 8 0" Command="{Binding AddShop}" CommandParameter="{Binding ElementName=Password}">
+                            המשך
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 8 8 0" Command="materialDesign:DialogHost.CloseDialogCommand">
+                            ביטול
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
         <Menu Grid.ColumnSpan="3" IsMainMenu="True" FlowDirection="RightToLeft" VerticalAlignment="Top" Background="#FFebecf0">
             <Menu.Style>
                 <Style TargetType="{x:Type Menu}">

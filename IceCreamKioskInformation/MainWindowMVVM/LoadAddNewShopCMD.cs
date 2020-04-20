@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IceCreamKioskInformation.MainWindowMVVM;
+using System;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
@@ -25,7 +27,27 @@ namespace IceCreamKioskInformation
 
         public void Execute(object parameter)
         {
-            VM.LoadAddShop();
+            if (parameter == null)
+            {
+                VM.BindLoadCommand(VM.AddShop);
+                VM.OpenLogInArea();
+            }
+            else
+            {
+                PasswordBox passwordBox = parameter as PasswordBox;
+                if (new MainWindowM().AdminPasswordVerification(passwordBox.Password))
+                {
+                    passwordBox.Password = "";
+                    VM.DisplayRightPassword();
+                    VM.BindLoadCommand(null);
+                    VM.CloseLogInArea();
+                    VM.LoadAddShop();
+                }
+                else
+                {
+                    VM.DisplayWorngPassword();
+                }
+            }
         }
     }
 }
