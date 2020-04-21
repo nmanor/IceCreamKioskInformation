@@ -200,6 +200,7 @@
   <ItemGroup>
     <Compile Include="BLimp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reposetory.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup>

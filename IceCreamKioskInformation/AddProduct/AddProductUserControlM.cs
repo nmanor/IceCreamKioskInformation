@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BL;
 
 namespace IceCreamKioskInformation.AddProduct
 {
@@ -12,7 +13,14 @@ namespace IceCreamKioskInformation.AddProduct
     {
         public void SaveProduct(Product product)
         {
-            Thread.Sleep(4000);
+            string text = product.Name;
+            text = new BLimp().TranslateHEtoEN(text);
+            if(product.SugarFree)
+                text += ", sugar free";
+            if (product.Vegan)
+                text += ", vegan";
+            product.NutritionalValues = new BLimp().getProductIdNutrition(text);
+            new Reposetory().add_Product(product);
         }
     }
 }

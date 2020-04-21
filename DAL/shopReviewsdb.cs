@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace DAL
 {
-    class ShopReviewsdb : DbContext
+    public class ShopReviewsdb : DbContext
     {
 
         public ShopReviewsdb() : base()

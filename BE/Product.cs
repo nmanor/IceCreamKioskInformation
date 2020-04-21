@@ -120,7 +120,7 @@ namespace BE
             Reviews = new ObservableCollection<Review>();
         }
 
-        protected Product( string name, double price, bool vegan, bool sugarFree, string description, string nutritionalValues)
+        protected Product( string name, double price, bool vegan, bool sugarFree, string description)
         {
             ProductID  = DateTime.Now.Ticks.ToString("X");
             Name = name;
@@ -129,7 +129,6 @@ namespace BE
             SugarFree = sugarFree;
             Description = description;
             Reviews = new ObservableCollection<Review>();
-            NutritionalValues = nutritionalValues;
 
         }
 

@@ -1,5 +1,6 @@
 ﻿using BE;
 using DAL;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -54,6 +55,16 @@ namespace BL
         public string TranslateHEtoEN(string text)
         {
             return new TranslateText().TranslateHEtoEN(text);
+        }
+
+        public string getProductIdNutrition(string text)
+        {
+            return new GetNutritions().GetProductID(text);
+        }
+
+        public Dictionary<string, double> getProductNutritionByID(string id)
+        {
+            return new GetNutritions().GetProductNutritions(id);
         }
     }
 }

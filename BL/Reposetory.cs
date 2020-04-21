@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using DAL;
 
-namespace DAL
+namespace BL
 {
     public class Reposetory
     {
