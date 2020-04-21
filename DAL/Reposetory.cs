@@ -25,10 +25,15 @@ namespace DAL
             //product.AddReview(review);
             //shop.AddProduct(product);
             //add_Shop(shop);
+
+            
+
             Addresses = get_all_Adrress();
             products = get_all_Products();
             reviews = get_all_Reviews();
             shops = get_all_Shops();
+
+           
         }
 
         public List<Shop> get_all_Shops()
@@ -83,6 +88,7 @@ namespace DAL
         {
             using (var context = new ShopReviewsdb())
             {
+                product.Shop = null;
                context.Products.Add(product);
                 context.SaveChanges();
             }
@@ -105,10 +111,9 @@ namespace DAL
             }
         }
 
-        public void getProductsWithSearch(Dictionary<string, List<object>> Dictionary)
-        {
+       
 
-        }
+        
 
 
     }

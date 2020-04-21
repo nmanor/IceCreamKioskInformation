@@ -128,6 +128,7 @@ namespace BE
             if (product.Shop != null)
                 _products.Remove(product);
             product.Shop = this;
+            product.ShopID = ShopID;
             _products.Add(product);
         }
 
@@ -135,6 +136,19 @@ namespace BE
         {
             ShopID = DateTime.Now.Ticks.ToString("X");
             Products = new ObservableCollection<Product>();
+        }
+
+        public void equale(Shop shop)
+        {
+            ShopID = shop.ShopID;
+            ShopName = shop.ShopName;
+            Address = shop.Address;
+            Products = shop.Products;
+            Phone = shop.Phone;
+            Website = shop.Website;
+            Facebook = shop.Facebook;
+            Instagram = shop.Instagram;
+            ImageURL = shop.ImageURL;
         }
     }
 }
