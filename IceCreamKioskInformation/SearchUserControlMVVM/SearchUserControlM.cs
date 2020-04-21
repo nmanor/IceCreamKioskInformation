@@ -1,4 +1,5 @@
 ﻿using BE;
+using BL;
 using DAL;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ namespace IceCreamKioskInformation
 {
     class SearchUserControlM
     {
-        public List<Product> searchProducts(Dictionary<string, List<object>> Dictionary) 
+        public List<Product> SearchProducts(Dictionary<string, List<object>> Dictionary) 
         {
             List<Product> result = new List<Product>();
             Reposetory reposetory = new Reposetory();

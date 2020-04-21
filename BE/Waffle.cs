@@ -17,10 +17,6 @@ namespace BE
         }
 
         public Waffle() { }
-        public Waffle( string name, double price, bool vegan, bool sugarFree, string description, string nutritionalValues) : base( name, price, vegan, sugarFree, description, nutritionalValues)
-        {
-
-        }
 
         public new bool Search(Dictionary<string, List<object>> dictionary)
         {

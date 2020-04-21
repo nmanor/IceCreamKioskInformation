@@ -7,8 +7,7 @@
              xmlns:local="clr-namespace:IceCreamKioskInformation.AddShop"
              xmlns:convert="clr-namespace:IceCreamKioskInformation.Convertors"
              mc:Ignorable="d" 
-             FlowDirection="RightToLeft"
-             d:DesignHeight="450" d:DesignWidth="800">
+             FlowDirection="RightToLeft">
 
     <UserControl.Resources>
         <convert:Base64ToBitmapImageConvertor x:Key="base64ToBitmapImageConvertor"/>
@@ -21,19 +20,24 @@
         </Style>
     </UserControl.Resources>
 
-    <StackPanel Orientation="Horizontal">
-        <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <TextBlock Text="הוספת ביקורת חדשה" FontWeight="Black" TextAlignment="Center" FontSize="60" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
+                <TextBlock Text="הוספת ביקורת חדשה" FontWeight="Black" TextAlignment="Center" FontSize="50" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
                 <StackPanel.Effect>
                     <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
                 </StackPanel.Effect>
             </StackPanel>
 
-            <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0" MinWidth="700">
+            <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0">
                 <Grid>
                     <Grid x:Name="EditData">
                         <Grid.ColumnDefinitions>
@@ -120,8 +124,8 @@
                             </StackPanel>
                         </ScrollViewer>
 
-                        <DockPanel Margin="0, 15" Grid.Column="1" VerticalAlignment="Stretch" LastChildFill="true">
-                            <TextBlock DockPanel.Dock="Top" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר עליך למלא קודם את כתובת המייל שלך" TextWrapping="Wrap" Width="200">
+                        <DockPanel Margin="10, 15" Grid.Column="1" VerticalAlignment="Stretch" LastChildFill="true">
+                            <TextBlock DockPanel.Dock="Top" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר עליך למלא קודם את כתובת המייל שלך" TextWrapping="Wrap" MaxWidth="200">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Visible" />
@@ -152,8 +156,8 @@
                                 </StackPanel.Style>
                                 
                                 <ProgressBar x:Name="FetchingImagePB" Visibility="Collapsed" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Width="45" Height="45" Margin="10"/>
-                                <TextBlock x:Name="SendImageDescirption" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" Width="200"/>
-                                <Border x:Name="ShopImage" CornerRadius="17" Height="200" Width="200" Margin="10" FlowDirection="LeftToRight">
+                                <TextBlock x:Name="SendImageDescirption" VerticalAlignment="Bottom" TextAlignment="Center" Text="על מנת להעלות תמונה של המוצר סרוק את הקוד או שלח מייל לכתובת:  icecreamkiosk2020@gmail.com ולאחר מכן לחץ על הכפתור" TextWrapping="Wrap" MaxWidth="200"/>
+                                <Border x:Name="ShopImage" CornerRadius="17" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" MaxWidth="200" HorizontalAlignment="Stretch" Margin="10" FlowDirection="LeftToRight">
                                     <Border.Background>
                                         <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Review.Image, Converter={StaticResource base64ToBitmapImageConvertor}}"/>
                                     </Border.Background>
@@ -174,7 +178,7 @@
                                 </StackPanel>
 
                             </StackPanel>
-                            <TextBlock VerticalAlignment="Bottom" Visibility="Collapsed" DockPanel.Dock="Bottom" x:Name="StatusDescirption" TextAlignment="Center" Text="רק מוודאים שהכל תקין..." FontSize="15" FontWeight="DemiBold" TextWrapping="Wrap" Width="200"/>
+                            <TextBlock VerticalAlignment="Bottom" Visibility="Collapsed" DockPanel.Dock="Bottom" x:Name="StatusDescirption" TextAlignment="Center" Text="רק מוודאים שהכל תקין..." FontSize="15" FontWeight="DemiBold" TextWrapping="Wrap" MaxWidth="200"/>
                         </DockPanel>
 
                     </Grid>
@@ -187,11 +191,11 @@
             </materialDesign:ColorZone>
         </StackPanel>
 
-        <materialDesign:Card x:Name="CheckingDataPB" Visibility="Collapsed" Height="60" Width="60"  VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" UniformCornerRadius="50">
+        <materialDesign:Card Grid.Column="1" x:Name="CheckingDataPB" Visibility="Collapsed" Height="60" Width="60"  VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" UniformCornerRadius="50">
             <ProgressBar Foreground="Black" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="30" Width="30"/>
         </materialDesign:Card>
 
-        <Button Command="{Binding SaveReview}" x:Name="Save" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
+        <Button Grid.Column="1"  Command="{Binding SaveReview}" x:Name="Save" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
             <materialDesign:PackIcon Kind="Add" Height="40" Width="40"/>
             <Button.Style>
                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
@@ -213,5 +217,5 @@
 
         </Button>
 
-    </StackPanel>
+    </Grid>
 </UserControl>

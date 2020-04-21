@@ -57,12 +57,12 @@ namespace BL
             return new TranslateText().TranslateHEtoEN(text);
         }
 
-        public string getProductIdNutrition(string text)
+        public string GetProductIdNutrition(string text)
         {
             return new GetNutritions().GetProductID(text);
         }
 
-        public Dictionary<string, double> getProductNutritionByID(string id)
+        public Dictionary<string, double> GetProductNutritionByID(string id)
         {
             return new GetNutritions().GetProductNutritions(id);
         }
