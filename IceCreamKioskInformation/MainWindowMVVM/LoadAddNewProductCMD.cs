@@ -1,15 +1,18 @@
-﻿using IceCreamKioskInformation.MainWindowMVVM;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace IceCreamKioskInformation
+namespace IceCreamKioskInformation.MainWindowMVVM
 {
-    class LoadAddNewShopCMD : ICommand
+    class LoadAddNewProductCMD : ICommand
     {
         private MainWindowVM VM;
 
-        public LoadAddNewShopCMD(MainWindowVM VM)
+        public LoadAddNewProductCMD(MainWindowVM VM)
         {
             this.VM = VM;
         }
@@ -29,19 +32,19 @@ namespace IceCreamKioskInformation
         {
             if (parameter == null)
             {
-                VM.BindLoadCommand(VM.AddShop);
+                VM.BindLoadCommand(VM.AddProduct);
                 VM.OpenLogInArea();
             }
             else
             {
                 PasswordBox passwordBox = parameter as PasswordBox;
-                if (new MainWindowM().AdminPasswordVerification(passwordBox.Password))
+                if(new MainWindowM().AdminPasswordVerification(passwordBox.Password))
                 {
                     passwordBox.Password = "";
                     VM.DisplayRightPassword();
                     VM.BindLoadCommand(null);
                     VM.CloseLogInArea();
-                    VM.LoadAddShop();
+                    VM.LoadAddProduct();
                 }
                 else
                 {

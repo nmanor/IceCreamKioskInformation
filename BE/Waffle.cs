@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace BE
 {
     public class Waffle : Product
     {
         private bool _glutenFree;
-
         public bool GlutenFree
         {
-            set { _glutenFree = value; }
             get { return _glutenFree; }
+            set
+            {
+                _glutenFree = value;
+                OnPropertyChanged("GlutenFree");
+            }
         }
 
         public Waffle() { }

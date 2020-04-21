@@ -64,7 +64,7 @@ namespace IceCreamKioskInformation.AddReview
         public void ImageNotVerified() { View.ImageNotVerified(); }
 
         public void CheckingData() { View.VerifyingData(); }
-        public void DataVerified() { View.DataVerified(); }
+        public void DataVerified() { View.DataVerified(Review); }
         public void DataNotVerified(string error) { View.DataNotVerified(error); }
 
         public void OnGoBackClicked() { View.OnGoBackClicked(); }

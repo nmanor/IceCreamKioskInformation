@@ -1,9 +1,12 @@
 ﻿using BE;
 using BL;
+using IceCreamKioskInformation.AddProduct;
 using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace IceCreamKioskInformation
 {
@@ -90,6 +93,75 @@ namespace IceCreamKioskInformation
                     LoadSearch();
             };
             CurrnetUserConrol = addReview;
+        }
+
+        /// <summary>
+        /// Loading the UserControl of the add review to the main screen and logging its events
+        /// </summary>
+        internal void LoadAddProduct()
+        {
+            MessageArea.IsOpen = false;
+            AddProductUserControl addProduct = new AddProductUserControl();
+            addProduct.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };
+            CurrnetUserConrol = addProduct;
+        }
+
+        /// <summary>
+        /// A function that binds to commands on the admin password confirmation button
+        /// </summary>
+        /// <param name="command">The command she needs to bind</param>
+        public void BindLoadCommand(ICommand command)
+        {
+            CheckPassowrd.Command = command;
+        }
+
+        /// <summary>
+        /// Open the area of the log in as admin
+        /// </summary>
+        public void OpenLogInArea()
+        {
+            PasswordDescription.Text = "פעולה זו דורשת התחברות כמנהל מערכת\nאנא הכנס סיסמת מנהל ולאחר מכן לחץ על המשך";
+            PasswordDescription.Foreground = Brushes.Black;
+            LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.Lock;
+            LogInAsAdmin.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Close the area of the log in as admin
+        /// </summary>
+        public void CloseLogInArea()
+        {
+            LogInAsAdmin.IsOpen = false;
+        }
+
+        /// <summary>
+        /// Cahnge the view to show that the password is worng
+        /// </summary>
+        public void DisplayWorngPassword()
+        {
+            PasswordDescription.Text = "סיסמה שגויה\nאנא נסה שוב";
+            PasswordDescription.Foreground = Brushes.Red;
+            Password.Foreground = Brushes.Red;
+            LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.Lock;
+        }
+
+        /// <summary>
+        /// Cahnge the view to show that the password is right
+        /// </summary>
+        public void DisplayRightPassword()
+        {
+            Password.Foreground = Brushes.Black;
+            LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.LockOpenVariant;
         }
     }
 }

@@ -6,9 +6,26 @@ namespace BE
     public class FrozenYogurt : Product
     {
         private double _fat;
+        public double Fat
+        {
+            get { return _fat; }
+            set
+            {
+                _fat = value;
+                OnPropertyChanged("Fat");
+            }
+        }
+
         private MILKTYPE _milkType;
-        public double Fat{ get; set; }
-        public MILKTYPE MILKTYPE { get; set; }
+        public MILKTYPE MilkType
+        {
+            get { return _milkType; }
+            set
+            {
+                _milkType = value;
+                OnPropertyChanged("MilkType");
+            }
+        }
 
 
         public bool Search(Dictionary<string, List<object>> dictionary)
@@ -31,7 +48,7 @@ namespace BE
             if (dictionary.ContainsKey("MilkType"))
             {
                 MILKTYPE milk = (MILKTYPE)dictionary["MilkType"][0];
-                result = result && milk == MILKTYPE;
+                result = result && milk == MilkType;
             }
 
             return base.Search(dictionary) && result;

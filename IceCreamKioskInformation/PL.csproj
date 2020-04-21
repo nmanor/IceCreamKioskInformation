@@ -200,6 +200,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddProduct\AddProductUserControl.xaml.cs">
+      <DependentUpon>AddProductUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddProduct\AddProductUserControlM.cs" />
+    <Compile Include="AddProduct\AddProductUserControlVM.cs" />
+    <Compile Include="AddProduct\AddReviewCMD.cs" />
+    <Compile Include="AddProduct\GoBackCMD.cs" />
+    <Compile Include="AddProduct\ProductToBoolConvertor.cs" />
+    <Compile Include="AddProduct\PropertyToBoolConverter.cs" />
+    <Compile Include="AddProduct\SaveProductCMD.cs" />
     <Compile Include="AddReview\AddReviewUserControl.xaml.cs">
       <DependentUpon>AddReviewUserControl.xaml</DependentUpon>
     </Compile>
@@ -221,7 +231,9 @@
     <Compile Include="AddShop\VerifyImageAsStoreCMD.cs" />
     <Compile Include="Convertors\Base64ToBitmapImageConvertor.cs" />
     <Compile Include="MainWindowMVVM\GoBackCMD.cs" />
+    <Compile Include="MainWindowMVVM\LoadAddNewProductCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewShopCMD.cs" />
+    <Compile Include="MainWindowMVVM\MainWindowM.cs" />
     <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
     <Compile Include="ProductDisplay\ProductDisplayUserControl.xaml.cs">
       <DependentUpon>ProductDisplayUserControl.xaml</DependentUpon>
@@ -236,6 +248,10 @@
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchUserControlMVVM\Tag.cs" />
+    <Page Include="AddProduct\AddProductUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddReview\AddReviewUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
