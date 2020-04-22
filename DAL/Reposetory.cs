@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using DAL;
 
-namespace BL
+
+namespace DAL
 {
-    public class Reposetory
+    public class Reposetory: IRepostory
     {
 
         private List<Product> products;
@@ -29,15 +29,15 @@ namespace BL
 
             
 
-            Addresses = get_all_Adrress();
-            products = get_all_Products();
-            reviews = get_all_Reviews();
-            shops = get_all_Shops();
+            Addresses = Get_all_Adrress();
+            products = Get_all_Products();
+            reviews = Get_all_Reviews();
+            shops = Get_all_Shops();
 
            
         }
 
-        public List<Shop> get_all_Shops()
+        public List<Shop> Get_all_Shops()
         {
             List<Shop> result = new List<Shop>();
             using (var context = new ShopReviewsdb())
@@ -47,7 +47,7 @@ namespace BL
             return result;
         }
 
-        public List<Review> get_all_Reviews()
+        public List<Review> Get_all_Reviews()
         {
             List<Review> result = new List<Review>();
             using (var context = new ShopReviewsdb())
@@ -56,7 +56,7 @@ namespace BL
             }
             return result;
         }
-        public List<Address> get_all_Adrress()
+        public List<Address> Get_all_Adrress()
         {
             List<Address> result = new List<Address>();
             using (var context = new ShopReviewsdb())
@@ -65,7 +65,7 @@ namespace BL
             }
             return result;
         }
-        public List<Product> get_all_Products()
+        public List<Product> Get_all_Products()
         {
             List<Product> result = new List<Product>();
             using (var context = new ShopReviewsdb())

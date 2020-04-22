@@ -20,7 +20,8 @@ namespace IceCreamKioskInformation.AddProduct
             if (product.Vegan)
                 text += ", vegan";
             product.NutritionalValues = new BLimp().GetProductIdNutrition(text);
-            new Reposetory().add_Product(product);
+            
+            new BLimp().add_Product(product);
         }
     }
 }

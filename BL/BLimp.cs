@@ -66,5 +66,49 @@ namespace BL
         {
             return new GetNutritions().GetProductNutritions(id);
         }
+
+
+        public List<Shop> Get_all_Shops()
+        {
+            return new Reposetory().Get_all_Shops();
+        }
+
+        public List<Review> Get_all_Reviews()
+        {
+            return new Reposetory().Get_all_Reviews();
+        }
+        public List<Address> Get_all_Adrress()
+        {
+            return new Reposetory().Get_all_Adrress();
+        }
+        public List<Product> Get_all_Products()
+        {
+            return new Reposetory().Get_all_Products();
+        }
+
+        public void add_Shop(Shop shop)
+        {
+            new Reposetory().add_Shop(shop);
+        }
+
+        public void add_Product(Product product)
+        {
+
+            new Reposetory().add_Product(product);
+
+        }
+
+        public void add_Review(Review review)
+        {
+
+                new Reposetory().add_Review(review);
+
+        }
+        public void add_Address(Address address)
+        {
+                new Reposetory().add_Address(address);
+        
+        }
+
     }
 }

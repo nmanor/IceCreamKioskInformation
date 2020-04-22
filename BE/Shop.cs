@@ -51,7 +51,10 @@ namespace BE
         public virtual ObservableCollection<Product> Products
         {
             get { return _products; }
-            private set { _products = value; } 
+            private set 
+            { foreach (Product p in value)
+                    this.AddProduct(p);
+            } 
         }
         public string Phone
         {

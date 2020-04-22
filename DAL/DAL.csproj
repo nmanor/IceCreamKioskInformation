@@ -325,6 +325,8 @@
     <Compile Include="GetLocationMap.cs" />
     <Compile Include="GetNutritions.cs" />
     <Compile Include="ImageVerification.cs" />
+    <Compile Include="IRepostory.cs" />
+    <Compile Include="Reposetory.cs" />
     <Compile Include="ShopReviewsdb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslateText.cs" />

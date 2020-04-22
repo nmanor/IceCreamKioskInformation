@@ -10,9 +10,9 @@ namespace IceCreamKioskInformation
         public List<Product> SearchProducts(Dictionary<string, List<object>> Dictionary) 
         {
             List<Product> result = new List<Product>();
-            Reposetory reposetory = new Reposetory();
+            BLimp bLimp = new BLimp();
 
-            foreach( Product product in reposetory.get_all_Products())
+            foreach( Product product in bLimp.Get_all_Products())
             {
                 if (product.Search(Dictionary))
                     result.Add(product);

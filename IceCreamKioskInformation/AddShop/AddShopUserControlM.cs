@@ -59,6 +59,10 @@ namespace IceCreamKioskInformation.AddShop
 
             if (!new BLimp().VerifyAddress(shop.Address))
                 throw new Exception("הכתובת שהזנת לא קיימת");
+
+
+
+            new BLimp().add_Shop(shop);
         }
     }
 }

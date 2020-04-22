@@ -67,12 +67,12 @@ namespace IceCreamKioskInformation.AddProduct
             this.View = addProductUserControl;
 
             //////////////////////////////////////////////
-            AllShopes = new List<Shop>();
-            for (int i = 0; i < 30; i++)
-            {
-                Address address = new Address("רחוב " + i * 2, i + 5, "עיר " + i % 3);
-                AllShopes.Add(new Shop() { ShopID = "" + i, ShopName = "חנות מספר " + i, Address = address });
-            }
+            AllShopes = new BL.BLimp().Get_all_Shops(); //new List<Shop>();
+            //for (int i = 0; i < 30; i++)
+            //{
+            //    Address address = new Address("רחוב " + i * 2, i + 5, "עיר " + i % 3);
+            //    AllShopes.Add(new Shop() { ShopID = "" + i, ShopName = "חנות מספר " + i, Address = address });
+            //}
             //////////////////////////////////////////////
 
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(AllShopes);
@@ -97,7 +97,13 @@ namespace IceCreamKioskInformation.AddProduct
         /// <summary>
         /// Save the product to the DB
         /// </summary>
-        public ICommand SaveProductCMD { get { return new SaveProductCMD(this); } }
+        public ICommand SaveProductCMD { 
+            get
+            {
+
+                return new SaveProductCMD(this); 
+            } 
+        }
 
         /// <summary>
         /// Action for triggering the backward event

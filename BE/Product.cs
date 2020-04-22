@@ -90,17 +90,25 @@ namespace BE
         /// </summary
         private ObservableCollection<Review> _reviews;
 
+        public virtual ObservableCollection<Review> Reviews
+        {
+            get { return _reviews; }
+            private set 
+            {
+                if(_reviews == null)
+                    _reviews =  new ObservableCollection<Review>();
+                foreach (Review r in value)
+                    this.AddReview(r);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public virtual ObservableCollection<Review> Reviews
-        {
-            get { return _reviews; }
-            private set { _reviews = value; }
-        }
+
 
         public string FirstImage
         {
@@ -112,7 +120,21 @@ namespace BE
         }
         
         public string ShopID { get; set; }
-        public virtual Shop Shop { get; set; }
+
+        private Shop _shop;
+        public Shop Shop
+        {
+            get
+            {
+                return _shop;
+            }
+            set
+            {
+                _shop = value;
+                ShopID = _shop.ShopID;
+                OnPropertyChanged("Shop");
+            }
+        }
 
         public Product()
         {
