@@ -119,7 +119,7 @@ namespace BE
             Facebook = facebook;
             Instagram = instagram;
             ImageURL = imageURL;
-            Products = new ObservableCollection<Product>();
+            _products = new ObservableCollection<Product>();
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace BE
         public Shop()
         {
             ShopID = DateTime.Now.Ticks.ToString("X");
-            Products = new ObservableCollection<Product>();
+            _products = new ObservableCollection<Product>();
         }
 
         public void equale(Shop shop)

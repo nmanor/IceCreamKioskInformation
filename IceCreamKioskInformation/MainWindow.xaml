@@ -13,8 +13,8 @@
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="1.6*" />
             <ColumnDefinition Width="2.4*" />
+            <ColumnDefinition Width="1.6*" />
         </Grid.ColumnDefinitions>
 
         <materialDesign:DialogHost Grid.ColumnSpan="3" x:Name="MessageArea" CloseOnClickAway="True" FlowDirection="RightToLeft">

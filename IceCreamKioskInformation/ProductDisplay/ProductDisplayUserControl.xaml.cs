@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using BE;
+using BL;
+using System.Windows.Controls;
 
 namespace IceCreamKioskInformation.ProductDisplay
 {

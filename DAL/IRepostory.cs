@@ -18,6 +18,5 @@ namespace DAL
         void add_Product(Product product);
         void add_Review(Review review);
         void add_Address(Address address);
-   
     }
 }

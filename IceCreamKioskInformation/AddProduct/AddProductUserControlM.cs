@@ -11,16 +11,12 @@ namespace IceCreamKioskInformation.AddProduct
 {
     public class AddProductUserControlM
     {
-        public void SaveProduct(Product product)
-        {
-            string text = product.Name;
-            text = new BLimp().TranslateHEtoEN(text);
-            if(product.SugarFree)
-                text += ", sugar free";
-            if (product.Vegan)
-                text += ", vegan";
-            product.NutritionalValues = new BLimp().GetProductIdNutrition(text);
-            
+        public void SaveProduct(Product product, Shop shop)
+        { 
+            string parms = new BLimp().TranslateHEtoEN(product.GetParms());
+            product.NutritionalValues = new BLimp().GetProductIdNutrition(parms);
+
+            shop.AddProduct(product);
             new BLimp().add_Product(product);
         }
     }

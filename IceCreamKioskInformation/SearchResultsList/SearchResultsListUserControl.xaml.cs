@@ -13,6 +13,7 @@ namespace IceCreamKioskInformation.SearchResultsList
         public SearchResultsListUserControl()
         {
             InitializeComponent();
+            this.DataContext = new SearchResultsListUserControlVM(this);
         }
     }
 }

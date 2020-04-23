@@ -6,26 +6,53 @@
              xmlns:local="clr-namespace:IceCreamKioskInformation.SearchResultsList"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             FlowDirection="RightToLeft"
-             d:DesignHeight="450" d:DesignWidth="800">
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             FlowDirection="RightToLeft">
 
-        <materialDesign:Card Grid.Row="0" x:Name="MainCard" Width="500" Height="100" Margin="0, 10, 0, 20" UniformCornerRadius="25" materialDesign:ShadowAssist.ShadowDepth="Depth2">
-            <TextBlock Text="תוצאות החיפוש שלך עבור: " TextWrapping="Wrap" LineStackingStrategy="BlockLineHeight" LineHeight="14" FontWeight="Black" FontSize="20" TextAlignment="Center"/>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <materialDesign:Card UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+                <StackPanel Background="#FFCACACA" HorizontalAlignment="Stretch">
+                    <TextBlock Text="הנה מה שמצאנו בשבילך:" FontSize="17" FontWeight="Bold" TextWrapping="Wrap" Margin="20 20 20 0"/>
+                    <TextBlock FontSize="15" FontWeight="Bold" TextWrapping="Wrap" Margin="20 -5 20 20">
+                        <Run Text="בסה&quot;כ נמצאו"/>
+                        <Run Text="{Binding Products.Count, Mode=OneWay}"/>
+                        <Run Text="תוצאות"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <ListBox ItemsSource="{Binding Products}" Grid.Row="1" HorizontalContentAlignment="Stretch" x:Name="ProductsList" AlternationCount="20">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel HorizontalAlignment="Stretch">
+                                <StackPanel DockPanel.Dock="Left">
+                                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold"/>
+                                    <TextBlock Text="{Binding Shop.ShopName}"/>
+                                </StackPanel>
+                                <materialDesign:PackIcon x:Name="test" Kind="KeyboardArrowLeft" DockPanel.Dock="Right" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                    <materialDesign:PackIcon.Style>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Setter Property="Visibility" Value="Hidden"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}" Value="True">
+                                                    <Setter Property="Button.Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem }}}" Value="True">
+                                                    <Setter Property="Button.Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:PackIcon.Style>
+                                </materialDesign:PackIcon>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </materialDesign:Card>
-
-        <ListBox ScrollViewer.VerticalScrollBarVisibility="Disabled" ItemsSource="{Binding}" HorizontalAlignment="Center" Grid.Row="1">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <ProductDisplay:ProductDisplayUserControl />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
     </Grid>
 </UserControl>

@@ -12,30 +12,7 @@ namespace DAL
 {
     public class Reposetory: IRepostory
     {
-
-        private List<Product> products;
-        private List<Shop> shops;
-        private List<Review> reviews;
-        private List<Address> Addresses;
-
-        public Reposetory()
-        {
-            //Shop shop = new Shop( "dogs", new Address("יפו", 43, "תל אביב"), "0543672343", "www.dogs.co.il", "tada", "@tada", "www.touchme.co.il");
-            //Product product = new Waffle("waffleass", 12.3, true, false, "good waffle", "456");
-            //Review review = new Review("dd", new DateTime(1799, 2, 1), "1234", "1234", 3, "2", new DateTime(1799, 2, 1));
-            //product.AddReview(review);
-            //shop.AddProduct(product);
-            //add_Shop(shop);
-
-            
-
-            Addresses = Get_all_Adrress();
-            products = Get_all_Products();
-            reviews = Get_all_Reviews();
-            shops = Get_all_Shops();
-
-           
-        }
+        public Reposetory() { }
 
         public List<Shop> Get_all_Shops()
         {
@@ -90,7 +67,7 @@ namespace DAL
             using (var context = new ShopReviewsdb())
             {
                 product.Shop = null;
-               context.Products.Add(product);
+                context.Products.Add(product);
                 context.SaveChanges();
             }
         }
@@ -111,11 +88,5 @@ namespace DAL
                 context.SaveChanges();
             }
         }
-
-       
-
-        
-
-
     }
 }

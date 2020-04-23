@@ -44,7 +44,7 @@ namespace IceCreamKioskInformation.AddProduct
             AddProductUserControlM M = new AddProductUserControlM();
             try
             {
-                M.SaveProduct(VM.SelectedProduct); 
+                M.SaveProduct(VM.SelectedProduct, VM.SelectedShop); 
                 e.Result = "";
             }
             catch (Exception ex)

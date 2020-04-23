@@ -131,7 +131,8 @@ namespace BE
             set
             {
                 _shop = value;
-                ShopID = _shop.ShopID;
+                if(value != null)
+                    ShopID = _shop.ShopID;
                 OnPropertyChanged("Shop");
             }
         }
@@ -225,6 +226,16 @@ namespace BE
                 _reviews.Remove(review);
             review.Product = this;
             _reviews.Add(review);
+        }
+
+        public virtual string GetParms()
+        {
+            string text = "";
+            if (SugarFree)
+                text += "ללא סוכר, ";
+            if (Vegan)
+                text += "טבעוני, ";
+            return text;
         }
     }
 }

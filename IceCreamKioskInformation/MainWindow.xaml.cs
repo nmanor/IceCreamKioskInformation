@@ -3,8 +3,13 @@ using BL;
 using IceCreamKioskInformation.AddProduct;
 using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
+using IceCreamKioskInformation.MapDisplay;
+using IceCreamKioskInformation.ProductDisplay;
+using IceCreamKioskInformation.SearchResultsList;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -38,9 +43,9 @@ namespace IceCreamKioskInformation
         public MainWindow()
         {
             InitializeComponent();
-            new Tools().tryrepos();
             DataContext = new MainWindowVM(this);
             LoadSearch();
+            //LoadSearchResult();
         }
 
         /// <summary>
@@ -98,7 +103,7 @@ namespace IceCreamKioskInformation
         /// <summary>
         /// Loading the UserControl of the add review to the main screen and logging its events
         /// </summary>
-        internal void LoadAddProduct()
+        public void LoadAddProduct()
         {
             MessageArea.IsOpen = false;
             AddProductUserControl addProduct = new AddProductUserControl();
@@ -114,6 +119,34 @@ namespace IceCreamKioskInformation
                     LoadSearch();
             };
             CurrnetUserConrol = addProduct;
+        }
+
+        public void LoadSearchResult()
+        {
+            MessageArea.IsOpen = false;
+            
+            MainGrid.Children.Remove(CurrnetUserConrol);
+
+            SearchResultsListUserControl searchResults = new SearchResultsListUserControl();
+            searchResults.Margin = new Thickness(20);
+            searchResults.HorizontalAlignment = HorizontalAlignment.Stretch;
+            searchResults.VerticalAlignment = VerticalAlignment.Stretch;
+            Grid.SetColumn(searchResults, 2);
+            MainGrid.Children.Insert(0, searchResults);
+
+            ProductDisplayUserControl productDisplay = new ProductDisplayUserControl();
+            productDisplay.Margin = new Thickness(0, 20, 0, 20);
+            productDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
+            productDisplay.VerticalAlignment = VerticalAlignment.Stretch;
+            Grid.SetColumn(productDisplay, 1);
+            MainGrid.Children.Insert(0, productDisplay);
+
+            MapDisplayUserControl mapDisplay = new MapDisplayUserControl();
+            mapDisplay.Margin = new Thickness(20);
+            mapDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
+            mapDisplay.VerticalAlignment = VerticalAlignment.Stretch;
+            Grid.SetColumn(mapDisplay, 0);
+            MainGrid.Children.Insert(0, mapDisplay);
         }
 
         /// <summary>
