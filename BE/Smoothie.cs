@@ -11,5 +11,12 @@ namespace BE
             return base.Search(dictionary) ;
         }
 
+        public string GetParms()
+        {
+            string text = "שייק, " + base.GetParms();
+
+            return text;
+        }
+
     }
 }

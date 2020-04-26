@@ -35,6 +35,13 @@ namespace BE
 
             return base.Search(dictionary) && result;
         }
+        public string GetParms()
+        {
+            string text = "וופל בלגי, " + base.GetParms();
+            if (GlutenFree)
+                text += ", ללא גלוטן";
+            return text;
+        }
     }
 }
 

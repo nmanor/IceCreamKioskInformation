@@ -34,5 +34,14 @@ namespace BE
             return base.Search(dictionary) && result;
         }
 
+        public string GetParms()
+        {
+            string text = base.GetParms();
+            text += ", " + _flaver;
+
+            return text;
+            
+        }
+
     }
 }

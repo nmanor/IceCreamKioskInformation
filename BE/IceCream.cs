@@ -9,5 +9,12 @@ namespace BE
         {  
             return base.Search(dictionary);
         }
+
+        public string GetParms()
+        {
+            string text = "גלידה, " + base.GetParms();
+
+            return text;
+        }
     }
 }

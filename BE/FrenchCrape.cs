@@ -33,5 +33,13 @@ namespace BE
 
             return base.Search(dictionary) && result;
         }
+
+        public string GetParms()
+        {
+            string text ="קרפ צרפתי, "+ base.GetParms();
+            if (FreeExtras)
+                text += ", תוספות";
+            return text;
+        }
     }
 }

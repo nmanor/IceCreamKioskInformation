@@ -53,5 +53,18 @@ namespace BE
 
             return base.Search(dictionary) && result;
         }
+
+        public string GetParms()
+        {
+            string text = "פרוזן יוגורט, "+ base.GetParms();
+            if (MilkType == MILKTYPE.CowMilk)
+                text += ", חלב פרה";
+            if (MilkType == MILKTYPE.GoatMilk)
+                text += ", חלב עיזים";
+            if (MilkType == MILKTYPE.SoyMilk)
+                text += ", חלב סויה";
+            text += ", " + Fat + " אחוז שומן";
+            return text;
+        }
     }
 }
