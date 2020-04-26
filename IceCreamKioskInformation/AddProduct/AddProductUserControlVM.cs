@@ -97,13 +97,7 @@ namespace IceCreamKioskInformation.AddProduct
         /// <summary>
         /// Save the product to the DB
         /// </summary>
-        public ICommand SaveProductCMD { 
-            get
-            {
-
-                return new SaveProductCMD(this); 
-            } 
-        }
+        public ICommand SaveProductCMD { get { return new SaveProductCMD(this); } }
 
         /// <summary>
         /// Action for triggering the backward event

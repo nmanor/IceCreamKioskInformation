@@ -10,10 +10,10 @@ namespace IceCreamKioskInformation.SearchResultsList
     /// </summary>
     public partial class SearchResultsListUserControl : UserControl
     {
-        public SearchResultsListUserControl()
+        public SearchResultsListUserControl(List<Product> results)
         {
             InitializeComponent();
-            this.DataContext = new SearchResultsListUserControlVM(this);
+            this.DataContext = new SearchResultsListUserControlVM(this, results);
         }
     }
 }

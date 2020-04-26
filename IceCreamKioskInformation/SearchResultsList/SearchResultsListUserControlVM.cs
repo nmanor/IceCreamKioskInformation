@@ -10,20 +10,12 @@ namespace IceCreamKioskInformation.SearchResultsList
     class SearchResultsListUserControlVM
     {
         private SearchResultsListUserControl View;
+        public List<Product> Products { get; set; }
 
-        public SearchResultsListUserControlVM(SearchResultsListUserControl searchResultsListUserControl)
+        public SearchResultsListUserControlVM(SearchResultsListUserControl searchResultsListUserControl, List<Product> results)
         {
             this.View = searchResultsListUserControl;
-
-            Products = new List<Product>();
-            for (int i = 0; i < 50; i++)
-            {
-                Shop shop = new Shop() { ShopName = "חנות מספר " + i };
-                Product product = new BE.IceCream() { Name = "גלידה מספר " + i, Shop = shop };
-                Products.Add(product);
-            }
+            this.Products = results;
         }
-
-        public List<Product> Products { get; set; }
     }
 }

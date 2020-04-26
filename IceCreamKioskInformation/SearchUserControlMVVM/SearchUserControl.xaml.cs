@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using BE;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace IceCreamKioskInformation
@@ -8,6 +11,8 @@ namespace IceCreamKioskInformation
     /// </summary>
     public partial class SearchUserControl : UserControl
     {
+        public event EventHandler SerachDone;
+
         public SearchUserControl()
         {
             InitializeComponent();
@@ -27,6 +32,11 @@ namespace IceCreamKioskInformation
             originalTag.Visibility = Visibility.Visible;
             if (Filters.Children.Count == 1)
                 TagsDescription.Visibility = Visibility.Visible;
+        }
+
+        public void InvokeSerachDone(List<Product> results)
+        {
+            SerachDone?.Invoke(this, new SearchResultEventArgs { SearchResult = results });
         }
     }
 }
