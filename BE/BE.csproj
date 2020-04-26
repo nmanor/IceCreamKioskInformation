@@ -187,6 +187,7 @@
     <Compile Include="GoBackEventArgs.cs" />
     <Compile Include="IceCream.cs" />
     <Compile Include="MILKTYPE.cs" />
+    <Compile Include="SearchResultEventArgs.cs" />
     <Compile Include="Smoothie.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Waffle.cs" />

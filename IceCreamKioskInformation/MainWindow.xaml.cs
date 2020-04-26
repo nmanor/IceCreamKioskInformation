@@ -6,12 +6,15 @@ using IceCreamKioskInformation.AddShop;
 using IceCreamKioskInformation.MapDisplay;
 using IceCreamKioskInformation.ProductDisplay;
 using IceCreamKioskInformation.SearchResultsList;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 namespace IceCreamKioskInformation
 {
@@ -45,7 +48,7 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             DataContext = new MainWindowVM(this);
             LoadSearch();
-            //LoadSearchResult();
+            //LoadSearchResult(new List<Product>());
         }
 
         /// <summary>
@@ -55,6 +58,11 @@ namespace IceCreamKioskInformation
         {
             MessageArea.IsOpen = false;
             SearchUserControl search = new SearchUserControl();
+            search.SerachDone += (sender, e) =>
+            {
+                SearchResultEventArgs args = e as SearchResultEventArgs;
+                LoadSearchResult(args.SearchResult);
+            };
             CurrnetUserConrol = search;
         }
 
@@ -121,13 +129,13 @@ namespace IceCreamKioskInformation
             CurrnetUserConrol = addProduct;
         }
 
-        public void LoadSearchResult()
+        public void LoadSearchResult(List<Product> results)
         {
             MessageArea.IsOpen = false;
             
             MainGrid.Children.Remove(CurrnetUserConrol);
 
-            SearchResultsListUserControl searchResults = new SearchResultsListUserControl();
+            SearchResultsListUserControl searchResults = new SearchResultsListUserControl(results);
             searchResults.Margin = new Thickness(20);
             searchResults.HorizontalAlignment = HorizontalAlignment.Stretch;
             searchResults.VerticalAlignment = VerticalAlignment.Stretch;
@@ -147,6 +155,8 @@ namespace IceCreamKioskInformation
             mapDisplay.VerticalAlignment = VerticalAlignment.Stretch;
             Grid.SetColumn(mapDisplay, 0);
             MainGrid.Children.Insert(0, mapDisplay);
+
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/background2.jpg")));
         }
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace IceCreamKioskInformation
 {
     class SearchUserControlM
     {
-        public List<Product> SearchProducts(Dictionary<string, List<object>> Dictionary) 
+        public List<Product> PerformSearch(Dictionary<string, List<object>> Dictionary) 
         {
             List<Product> result = new List<Product>();
             BLimp bLimp = new BLimp();

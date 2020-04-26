@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BE;
+using IceCreamKioskInformation.SearchUserControlMVVM;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
@@ -7,22 +9,23 @@ namespace IceCreamKioskInformation
     {
         public SearchUserControlVM(SearchUserControl searchUserControl)
         {
-            this.SearchUserControl = searchUserControl;
+            this.View = searchUserControl;
             Dictionary = new Dictionary<string, List<object>>();
         }
 
         /// <summary>
         /// Action of clicking one of the tags
         /// </summary>
-        public ICommand AddFilter
-        {
-            get { return new AddFilterCMD(this); }
-        }
+        public ICommand AddFilter { get { return new AddFilterCMD(this); } }
 
-        public SearchUserControl SearchUserControl { get; set; }
+        /// <summary>
+        /// Start the search operation
+        /// </summary>
+        public ICommand PerformSearch { get { return new PerformSearchCMD(this); } }
 
-        private Dictionary<string, List<object>> Dictionary;
-        private SearchUserControl searchUserControl;
+        public SearchUserControl View { get; set; }
+
+        public Dictionary<string, List<object>> Dictionary { get; set; }
 
         /// <summary>
         /// A function that adds values to the search dictionary
@@ -49,14 +52,9 @@ namespace IceCreamKioskInformation
             catch { }
         }
 
-        public void moveTag(Tag tag, Tag newTag)
-        {
-            SearchUserControl.moveTag(tag, newTag);
-        }
+        public void moveTag(Tag tag, Tag newTag) { View.moveTag(tag, newTag); }
+        public void bringTagBack(Tag tag, Tag originalTag) { View.bringTagBack(tag, originalTag); }
 
-        public void bringTagBack(Tag tag, Tag originalTag)
-        {
-            SearchUserControl.bringTagBack(tag, originalTag);
-        }
+        public void InvokeSerachDone(List<Product> results) { View.InvokeSerachDone(results); }
     }
 }
