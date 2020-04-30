@@ -47,7 +47,7 @@ namespace DAL
             List<Product> result = new List<Product>();
             using (var context = new ShopReviewsdb())
             {
-                result = context.Products.Include(s => s.Shop).Include(r => r.Reviews).ToList<Product>();
+                result = context.Products.Include(s => s.Shop).Include(r => r.Reviews).Include(a => a.Shop.Address).ToList<Product>();
                   
             }
             return result;
