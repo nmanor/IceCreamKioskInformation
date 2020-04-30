@@ -1,4 +1,5 @@
 ﻿using BE;
+using BL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace IceCreamKioskInformation.MapDisplay
     {
         public double[] GetLatLongFromAddress(Address adderss)
         {
-            return new double[] { 31.7854732, 35.1896382 };
+            try { return new BLimp().GetLatLongFromAddress(adderss); }
+            catch (Exception) { return new double[] { 31.7648563, 35.192225 }; }
         }
     }
 }

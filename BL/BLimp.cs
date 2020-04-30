@@ -57,6 +57,16 @@ namespace BL
             return new TranslateText().TranslateHEtoEN(text);
         }
 
+        /// <summary>
+        /// A function that receives an address and returns the latitude and longitude of the address
+        /// </summary>
+        /// <param name="address">The address from which you need to get the information</param>
+        /// <returns>A set of Double containing the longitude and altitude</returns>
+        public double[] GetLatLongFromAddress(Address address)
+        {
+            return new AddressVerification().GetLatLongFromAddress(address);
+        }
+
         public string GetProductIdNutrition(string text)
         {
             return new GetNutritions().GetProductID(text);

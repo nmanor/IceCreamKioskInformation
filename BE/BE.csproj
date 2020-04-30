@@ -209,6 +209,7 @@
     <Compile Include="MILKTYPE.cs" />
     <Compile Include="SearchResultEventArgs.cs" />
     <Compile Include="Smoothie.cs" />
+    <Compile Include="SwitchProductEventArgs.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Waffle.cs" />
     <Compile Include="Product.cs" />

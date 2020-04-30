@@ -14,6 +14,22 @@ namespace DAL
         /// <param name="address">The address to check</param>
         public bool IsRealAdrress(Address address)
         {
+            JObject contentAsJSON = GetAdderssJson(address);
+            string street = contentAsJSON["results"][0]["locations"][0]["street"].ToString();
+
+            return street.Contains(address.Street);
+        }
+
+        public double[] GetLatLongFromAddress(Address address)
+        {
+            JObject contentAsJSON = GetAdderssJson(address);
+            double latitude = double.Parse(contentAsJSON["results"][0]["locations"][0]["latLng"]["lat"].ToString());
+            double longitude = double.Parse(contentAsJSON["results"][0]["locations"][0]["latLng"]["lng"].ToString());
+            return new double[] { latitude, longitude };
+        }
+
+        private JObject GetAdderssJson(Address address)
+        {
             string location = address.ToString() + ", ישראל";
             string KEY = @"5rRMSAOyU11mGgkbAlWk3C1y1y0nT2Gv";
 
@@ -31,10 +47,7 @@ namespace DAL
             Console.WriteLine(response.Content);
 
             object deserializeContent = JsonConvert.DeserializeObject<object>(response.Content);
-            JObject contentAsJSON = JObject.Parse(deserializeContent.ToString());
-            string street = contentAsJSON["results"][0]["locations"][0]["street"].ToString();
-
-            return street.Contains(address.Street);
+            return JObject.Parse(deserializeContent.ToString());
         }
     }
 }

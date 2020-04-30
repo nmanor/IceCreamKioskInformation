@@ -28,9 +28,7 @@ namespace IceCreamKioskInformation.ProductDisplay
                 OnPropertyChanged("ProductParms");
             }
         }
-        public string ProductParms { get {
-                string x = Product.GetParms();
-                return Product.GetParms(); } }
+        public string ProductParms { get { return Product?.GetParms(); } }
         private Review _currentReview;
         public Review CurrentReview 
         {
@@ -45,6 +43,7 @@ namespace IceCreamKioskInformation.ProductDisplay
         public float RatingAverage { get; set; }
         public SeriesCollection PopularityValues { get; set; }
         public string[] PopularityMonthLabels { get; set; }
+        public bool NothingToShow { get; set; }
 
         /// <summary>
         /// Open URL link
@@ -67,7 +66,7 @@ namespace IceCreamKioskInformation.ProductDisplay
 
         public ProductDisplayUserControlVM(Product product, ProductDisplayUserControl view)
         {
-            product.AddReview(new Review()
+            /*product.AddReview(new Review()
             {
                 Rating = 5,
                 PublishDate = new DateTime(2020, 2, 3),
@@ -78,7 +77,7 @@ namespace IceCreamKioskInformation.ProductDisplay
             });
 
             product.Shop.Instagram = "www.www.sdbdgsnh";
-            product.Shop.Facebook = "www.www.sdbdgsnh";
+            product.Shop.Facebook = "www.www.sdbdgsnh";*/
 
             this.Product = product;
             this.View = view;
@@ -86,17 +85,28 @@ namespace IceCreamKioskInformation.ProductDisplay
             View.IsVisibleChanged += (sender, args) => { DataRearrangement(); };
         }
 
+        /// <summary>
+        /// Recalculate all data and enter it into the appropriate properties
+        /// </summary>
         private void DataRearrangement()
         {
-            ProductDisplayUserControlM model = new ProductDisplayUserControlM();
-            RatingPercentage = model.GetRatingPercentage(Product);
-            RatingAverage = model.GetAverageRating(Product);
+            if (Product != null)
+            {
+                NothingToShow = false;
+                ProductDisplayUserControlM model = new ProductDisplayUserControlM();
+                RatingPercentage = model.GetRatingPercentage(Product);
+                RatingAverage = model.GetAverageRating(Product);
 
-            object[] popularity = model.GetPopularityValues(Product);
-            PopularityMonthLabels = popularity[0] as string[];
-            PopularityValues = popularity[1] as SeriesCollection;
+                object[] popularity = model.GetPopularityValues(Product);
+                PopularityMonthLabels = popularity[0] as string[];
+                PopularityValues = popularity[1] as SeriesCollection;
 
-            CurrentReview = Product.Reviews[0];
+                CurrentReview = Product.Reviews[0];
+            }
+            else
+            {
+                NothingToShow = true;
+            }
         }
 
         public void InvokeAddReview() { View.InvokeAddReview(Product); }

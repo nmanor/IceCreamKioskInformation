@@ -36,7 +36,7 @@
                     </StackPanel>
                 </Grid>
 
-                <ListBox ItemsSource="{Binding Products}" Grid.Row="1" HorizontalContentAlignment="Stretch" x:Name="ProductsList" AlternationCount="20">
+                <ListBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Grid.Row="1" HorizontalContentAlignment="Stretch" x:Name="ProductsList" AlternationCount="20">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel HorizontalAlignment="Stretch">
