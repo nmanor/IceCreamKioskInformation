@@ -34,6 +34,8 @@ namespace IceCreamKioskInformation
         public void LoadAddProduct() { View.LoadAddProduct(); }
         public void LoadAddShop() { View.LoadAddShop(); }
 
+        public void GoBack() { View.GoBack(); }
+
         public void BindLoadCommand(ICommand command) { View.BindLoadCommand(command); }
         public void OpenLogInArea() { View.OpenLogInArea(); }
         public void CloseLogInArea() { View.CloseLogInArea(); }

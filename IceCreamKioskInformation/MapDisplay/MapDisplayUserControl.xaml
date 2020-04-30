@@ -4,11 +4,17 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
              xmlns:local="clr-namespace:IceCreamKioskInformation.MapDisplay"
              mc:Ignorable="d" >
     
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <materialDesign:Card x:Name="MainCard" UniformCornerRadius="25" materialDesign:ShadowAssist.ShadowDepth="Depth4">
+            <m:Map x:Name="Map" CredentialsProvider="AgvR0LlGp5_DcdRIgD6BpJwIjClspp3-9D9_KRlc8KB3SlTZR5Ak7TF-7hOyaqyd" Mode="Road" Center="{Binding Location}" ZoomLevel="17" >
+                <Canvas x:Name="Pushpin" Height="70" Width="70" m:MapLayer.Position="{Binding Location}" m:MapLayer.PositionOrigin="BottomCenter" Opacity="0.85" >
+                    <materialDesign:PackIcon Kind="LocationOn" Foreground="IndianRed" Height="70" Width="70" />
+                </Canvas>
+            </m:Map>
         </materialDesign:Card>
     </Grid>
 </UserControl>

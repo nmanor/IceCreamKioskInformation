@@ -12,37 +12,41 @@
 
     <UserControl.Resources>
         <convert:Base64ToBitmapImageConvertor x:Key="Base64ToBitmapImageConvertor"/>
+        <local:DateTimeToAgeConvertor x:Key="DateTimeToAgeConvertor"/>
+        <local:AddressToStringConvertor x:Key="AddressToStringConvertor"/>
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <materialDesign:Card x:Name="MainCard" UniformCornerRadius="20" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFEBECF0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1.2*"/>
                 </Grid.RowDefinitions>
 
-
                 <StackPanel Grid.Row="0" Margin="35, 35, 35, 0">
-                    <TextBlock Text="{Binding Product.Name}" FontWeight="Black" FontSize="40" LineHeight="40" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"/>
-                    <TextBlock Text="{Binding Product.Description}" FontWeight="ExtraBold" FontSize="30" LineHeight="30" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"/>
-
+                    <TextBlock Text="{Binding Product.Name}" FontWeight="Black" FontSize="25" LineHeight="25" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Product.Description}" FontWeight="ExtraBold" FontSize="20" LineHeight="20" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding ProductParms}" FontSize="15" TextWrapping="Wrap"/>
                     <Separator Margin="0, 15"/>
+                </StackPanel>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" Margin="35, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <Border x:Name="ShopImage" Grid.Column="0" Grid.RowSpan="3" CornerRadius="17" Height="{Binding ElementName=ShopDetails, Path=Height}" HorizontalAlignment="Stretch" Margin="0, 0, 10, 0" FlowDirection="LeftToRight">
-                            <Border.Background>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Product.Shop.ImageURL, Converter={StaticResource Base64ToBitmapImageConvertor}}"/>
-                            </Border.Background>
-                        </Border>
+                    <Border x:Name="ShopImage" Grid.Column="0" Grid.RowSpan="3" CornerRadius="17" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0, 0, 10, 0" FlowDirection="LeftToRight">
+                        <Border.Background>
+                            <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Product.Shop.ImageURL, Converter={StaticResource Base64ToBitmapImageConvertor}}"/>
+                        </Border.Background>
+                    </Border>
 
-                        <StackPanel Grid.Column="1" Name="ShopDetails">
+                    <ScrollViewer Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <StackPanel Name="ShopDetails">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="CreditCard" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                 <TextBlock VerticalAlignment="Center" FontSize="15">
@@ -62,7 +66,7 @@
                                 <materialDesign:PackIcon Kind="LocationOn" Margin="0 0 3 0" VerticalAlignment="Center"/>
                                 <TextBlock VerticalAlignment="Center" FontSize="15">
                                 <Run Text="כתובת:"/>
-                                <Run Text="בלפור 15, ירושלים" FontWeight="Bold"/>
+                                <Run Text="{Binding Product.Shop.Address, Converter={StaticResource AddressToStringConvertor}}" FontWeight="Bold"/>
                                 </TextBlock>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -72,364 +76,71 @@
                                 <Run Text="{Binding Product.Shop.Phone}" FontWeight="Bold"/>
                                 </TextBlock>
                             </StackPanel>
-                            <Expander Background="#00000000" Template="{DynamicResource ExpanderControlTemplate1}">
-                                <Expander.Resources>
-                                    <Style TargetType="ToggleButton">
-                                        <Setter Property="Background" Value="Black"/>
-                                    </Style>
-                                    <ControlTemplate x:Key="ExpanderControlTemplate1" TargetType="{x:Type Expander}">
-                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="3" SnapsToDevicePixels="True">
-                                            <DockPanel>
-                                                <ToggleButton x:Name="HeaderSite" BorderThickness="0" Cursor="Hand" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" Focusable="False" FontSize="15" IsTabStop="False" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Opacity="0.87">
-                                                    <ToggleButton.Style>
-                                                        <Style TargetType="{x:Type ToggleButton}">
-                                                            <Setter Property="Background" Value="Transparent"/>
-                                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                                            <Setter Property="VerticalAlignment" Value="Center"/>
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                        <Border Background="{TemplateBinding Background}" Padding="{Binding (materialDesign:ExpanderAssist.DownHeaderPadding), RelativeSource={RelativeSource TemplatedParent}}">
-                                                                            <Grid>
-                                                                                <Grid.ColumnDefinitions>
-                                                                                    <ColumnDefinition Width="Auto"/>
-                                                                                    <ColumnDefinition Width="Auto"/>
-                                                                                </Grid.ColumnDefinitions>
-                                                                                <ContentPresenter Grid.Column="1" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}"  VerticalAlignment="Center"/>
-                                                                                <ToggleButton Grid.Column="0" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center">
-                                                                                    <ToggleButton.Style>
-                                                                                        <Style TargetType="{x:Type ToggleButton}">
-                                                                                            <Setter Property="Template">
-                                                                                                <Setter.Value>
-                                                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                                                        <Border Background="Transparent">
-                                                                                                            <VisualStateManager.VisualStateGroups>
-                                                                                                                <VisualStateGroup x:Name="CheckStates">
-                                                                                                                    <VisualStateGroup.Transitions>
-                                                                                                                        <VisualTransition From="Unchecked" GeneratedDuration="0" To="Checked">
-                                                                                                                            <VisualTransition.GeneratedEasingFunction>
-                                                                                                                                <QuarticEase EasingMode="EaseOut"/>
-                                                                                                                            </VisualTransition.GeneratedEasingFunction>
-                                                                                                                            <Storyboard>
-                                                                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-180"/>
-                                                                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                                                                            </Storyboard>
-                                                                                                                        </VisualTransition>
-                                                                                                                        <VisualTransition From="{x:Null}" GeneratedDuration="0" GeneratedEasingFunction="{x:Null}" To="Unchecked">
-                                                                                                                            <Storyboard>
-                                                                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0" Value="-180"/>
-                                                                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                                                                            </Storyboard>
-                                                                                                                        </VisualTransition>
-                                                                                                                        <VisualTransition From="{x:Null}" GeneratedDuration="0" GeneratedEasingFunction="{x:Null}" To="Checked">
-                                                                                                                            <Storyboard>
-                                                                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                                                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                                                                            </Storyboard>
-                                                                                                                        </VisualTransition>
-                                                                                                                        <VisualTransition From="Checked" GeneratedDuration="0" To="Unchecked">
-                                                                                                                            <VisualTransition.GeneratedEasingFunction>
-                                                                                                                                <QuarticEase EasingMode="EaseOut"/>
-                                                                                                                            </VisualTransition.GeneratedEasingFunction>
-                                                                                                                            <Storyboard>
-                                                                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0" Value="-180"/>
-                                                                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                                                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                                                                            </Storyboard>
-                                                                                                                        </VisualTransition>
-                                                                                                                    </VisualStateGroup.Transitions>
-                                                                                                                    <VisualState x:Name="Checked">
-                                                                                                                        <Storyboard>
-                                                                                                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-180"/>
-                                                                                                                            </DoubleAnimationUsingKeyFrames>
-                                                                                                                        </Storyboard>
-                                                                                                                    </VisualState>
-                                                                                                                    <VisualState x:Name="Unchecked">
-                                                                                                                        <Storyboard>
-                                                                                                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="ExpandPath">
-                                                                                                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-                                                                                                                            </DoubleAnimationUsingKeyFrames>
-                                                                                                                        </Storyboard>
-                                                                                                                    </VisualState>
-                                                                                                                </VisualStateGroup>
-                                                                                                            </VisualStateManager.VisualStateGroups>
-                                                                                                            <materialDesign:PackIcon x:Name="ExpandPath" Foreground="{TemplateBinding Foreground}" Height="15" Kind="KeyboardArrowDown" RenderTransformOrigin="0.5,0.5" Width="15">
-                                                                                                                <materialDesign:PackIcon.RenderTransform>
-                                                                                                                    <TransformGroup>
-                                                                                                                        <ScaleTransform/>
-                                                                                                                        <SkewTransform/>
-                                                                                                                        <RotateTransform/>
-                                                                                                                        <TranslateTransform/>
-                                                                                                                    </TransformGroup>
-                                                                                                                </materialDesign:PackIcon.RenderTransform>
-                                                                                                            </materialDesign:PackIcon>
-                                                                                                        </Border>
-                                                                                                    </ControlTemplate>
-                                                                                                </Setter.Value>
-                                                                                            </Setter>
-                                                                                        </Style>
-                                                                                    </ToggleButton.Style>
-                                                                                </ToggleButton>
-                                                                            </Grid>
-                                                                        </Border>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Style>
-                                                    </ToggleButton.Style>
-                                                </ToggleButton>
-                                                <ContentPresenter x:Name="ExpandSite" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" DockPanel.Dock="Bottom" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                            </DockPanel>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsExpanded" Value="True">
-                                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
-                                            </Trigger>
-                                            <Trigger Property="ExpandDirection" Value="Right">
-                                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
-                                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
-                                                <Setter Property="Style" TargetName="HeaderSite">
-                                                    <Setter.Value>
-                                                        <Style TargetType="{x:Type ToggleButton}">
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                        <Border Padding="{TemplateBinding Padding}">
-                                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                                                                <Grid.RowDefinitions>
-                                                                                    <RowDefinition Height="19"/>
-                                                                                    <RowDefinition Height="*"/>
-                                                                                </Grid.RowDefinitions>
-                                                                                <Grid>
-                                                                                    <Grid.LayoutTransform>
-                                                                                        <TransformGroup>
-                                                                                            <RotateTransform Angle="-90"/>
-                                                                                        </TransformGroup>
-                                                                                    </Grid.LayoutTransform>
-                                                                                    <Ellipse x:Name="circle" Fill="White" HorizontalAlignment="Center" Height="19" Stroke="#FF333333" VerticalAlignment="Center" Width="19"/>
-                                                                                    <Path x:Name="arrow" Data="M1,1.5L4.5,5 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="False" Stroke="#FFFFFF" StrokeThickness="2" VerticalAlignment="Center"/>
-                                                                                </Grid>
-                                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
-                                                                            </Grid>
-                                                                        </Border>
-                                                                        <ControlTemplate.Triggers>
-                                                                            <Trigger Property="IsChecked" Value="True">
-                                                                                <Setter Property="Data" TargetName="arrow" Value="M1,4.5L4.5,1 8,4.5"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF5593FF"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFF3F9FF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsPressed" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF3C77DD"/>
-                                                                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFD9ECFF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsEnabled" Value="False">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FFBCBCBC"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFE6E6E6"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="#FF707070"/>
-                                                                            </Trigger>
-                                                                        </ControlTemplate.Triggers>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Style>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="ExpandDirection" Value="Up">
-                                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
-                                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
-                                                <Setter Property="Style" TargetName="HeaderSite">
-                                                    <Setter.Value>
-                                                        <Style TargetType="{x:Type ToggleButton}">
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                        <Border Padding="{TemplateBinding Padding}">
-                                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                                                                <Grid.ColumnDefinitions>
-                                                                                    <ColumnDefinition Width="19"/>
-                                                                                    <ColumnDefinition Width="*"/>
-                                                                                </Grid.ColumnDefinitions>
-                                                                                <Grid>
-                                                                                    <Grid.LayoutTransform>
-                                                                                        <TransformGroup>
-                                                                                            <RotateTransform Angle="180"/>
-                                                                                        </TransformGroup>
-                                                                                    </Grid.LayoutTransform>
-                                                                                    <Ellipse x:Name="circle" Fill="White" HorizontalAlignment="Center" Height="19" Stroke="#FF333333" VerticalAlignment="Center" Width="19"/>
-                                                                                    <Path x:Name="arrow" Data="M1,1.5L4.5,5 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="False" Stroke="#FF333333" StrokeThickness="2" VerticalAlignment="Center"/>
-                                                                                </Grid>
-                                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
-                                                                            </Grid>
-                                                                        </Border>
-                                                                        <ControlTemplate.Triggers>
-                                                                            <Trigger Property="IsChecked" Value="True">
-                                                                                <Setter Property="Data" TargetName="arrow" Value="M1,4.5L4.5,1 8,4.5"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF5593FF"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFF3F9FF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsPressed" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF3C77DD"/>
-                                                                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFD9ECFF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsEnabled" Value="False">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FFBCBCBC"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFE6E6E6"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="#FF707070"/>
-                                                                            </Trigger>
-                                                                        </ControlTemplate.Triggers>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Style>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="ExpandDirection" Value="Left">
-                                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
-                                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
-                                                <Setter Property="Style" TargetName="HeaderSite">
-                                                    <Setter.Value>
-                                                        <Style TargetType="{x:Type ToggleButton}">
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                                                                        <Border Padding="{TemplateBinding Padding}">
-                                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                                                                <Grid.RowDefinitions>
-                                                                                    <RowDefinition Height="19"/>
-                                                                                    <RowDefinition Height="*"/>
-                                                                                </Grid.RowDefinitions>
-                                                                                <Grid>
-                                                                                    <Grid.LayoutTransform>
-                                                                                        <TransformGroup>
-                                                                                            <RotateTransform Angle="90"/>
-                                                                                        </TransformGroup>
-                                                                                    </Grid.LayoutTransform>
-                                                                                    <Ellipse x:Name="circle" Fill="White" HorizontalAlignment="Center" Height="19" Stroke="#FF333333" VerticalAlignment="Center" Width="19"/>
-                                                                                    <Path x:Name="arrow" Data="M1,1.5L4.5,5 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="False" Stroke="#FF333333" StrokeThickness="2" VerticalAlignment="Center"/>
-                                                                                </Grid>
-                                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
-                                                                            </Grid>
-                                                                        </Border>
-                                                                        <ControlTemplate.Triggers>
-                                                                            <Trigger Property="IsChecked" Value="True">
-                                                                                <Setter Property="Data" TargetName="arrow" Value="M1,4.5L4.5,1 8,4.5"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF5593FF"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFF3F9FF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsPressed" Value="True">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FF3C77DD"/>
-                                                                                <Setter Property="StrokeThickness" TargetName="circle" Value="1.5"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFD9ECFF"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="Black"/>
-                                                                            </Trigger>
-                                                                            <Trigger Property="IsEnabled" Value="False">
-                                                                                <Setter Property="Stroke" TargetName="circle" Value="#FFBCBCBC"/>
-                                                                                <Setter Property="Fill" TargetName="circle" Value="#FFE6E6E6"/>
-                                                                                <Setter Property="Stroke" TargetName="arrow" Value="#FF707070"/>
-                                                                            </Trigger>
-                                                                        </ControlTemplate.Triggers>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </Style>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                            <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Expander.Resources>
-                                <Expander.Header>
-                                    <TextBlock Text="מידע נוסף" FontSize="15"/>
-                                </Expander.Header>
-                                <Expander.Style>
-                                    <Style/>
-                                </Expander.Style>
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="Web" Margin="0 0 3 0" VerticalAlignment="Center"/>
-                                        <TextBlock VerticalAlignment="Center" FontSize="15">
+
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Web" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="15">
                                 <Run Text="אתר:"/>
                                 <Hyperlink NavigateUri="{Binding Product.Shop.Website}" FontWeight="Bold" Command="{Binding OpenURLCMD}" CommandParameter="{Binding Product.Shop.Website}">
                                     <Run Text="{Binding Product.Shop.Website}" FontWeight="Bold"/>
                                 </Hyperlink>
-                                        </TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel.Style>
-                                            <Style TargetType="StackPanel">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Product.Shop.Facebook.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </StackPanel.Style>
-                                        <materialDesign:PackIcon Kind="FacebookBox" Margin="0 0 3 0" VerticalAlignment="Center"/>
-                                        <TextBlock VerticalAlignment="Center" FontSize="15">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Product.Shop.Facebook.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <materialDesign:PackIcon Kind="FacebookBox" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="15">
                                 <Run Text="פייסבוק:"/>
                                 <Hyperlink NavigateUri="{Binding Product.Shop.Facebook}" FontWeight="Bold" Command="{Binding OpenURLCMD}" CommandParameter="{Binding Product.Shop.Facebook}">
                                     <Run Text="{Binding Product.Shop.Facebook}" FontWeight="Bold"/>
                                 </Hyperlink>
-                                        </TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel.Style>
-                                            <Style TargetType="StackPanel">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Product.Shop.Instagram.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </StackPanel.Style>
-                                        <materialDesign:PackIcon Kind="Instagram" Margin="0 0 3 0" VerticalAlignment="Center"/>
-                                        <TextBlock VerticalAlignment="Center" FontSize="15">
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Product.Shop.Instagram.Length, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <materialDesign:PackIcon Kind="Instagram" Margin="0 0 3 0" VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" FontSize="15">
                                 <Run Text="אינסטגרם:"/>
                                 <Hyperlink NavigateUri="{Binding Product.Shop.Instagram}" FontWeight="Bold" Command="{Binding OpenURLCMD}" CommandParameter="{Binding Product.Shop.Instagram}">
                                     <Run Text="{Binding Product.Shop.Instagram}" FontWeight="Bold"/>
                                 </Hyperlink>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Expander>
+                                </TextBlock>
+                            </StackPanel>
                         </StackPanel>
-                    </Grid>
+                    </ScrollViewer>
+                </Grid>
 
-                    <Separator Margin="0, 15"/>
-                </StackPanel>
-
-                <Grid Grid.Row="1" Margin="20, 0">
+                <Grid Grid.Row="2" Margin="20, 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="2*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="10" x:Name="RatingAvgStackPanel">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Separator Margin="0, 15" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+                    <Grid Grid.Column="0" Grid.Row="1" Margin="10" x:Name="RatingAvgStackPanel">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -482,7 +193,7 @@
                         </Grid>
                     </Grid>
 
-                    <DockPanel Grid.Column="2" Margin="10">
+                    <DockPanel Grid.Column="2" Grid.Row="1" Margin="10">
                         <TextBlock DockPanel.Dock="Top" VerticalAlignment="Center" HorizontalAlignment="Stretch" FontSize="15" Text="פופולריות בשנה האחרונה:" LineHeight="15" LineStackingStrategy="BlockLineHeight"/>
                         <Grid>
                             <Grid.Resources>
@@ -513,9 +224,71 @@
                     </DockPanel>
                 </Grid>
 
-                <Border x:Name="BigImageView" Grid.RowSpan="3" CornerRadius="17" materialDesign:ShadowAssist.ShadowDepth="Depth4" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" HorizontalAlignment="Stretch" Margin="30" FlowDirection="LeftToRight">
-                    <Border.Style>
-                        <Style TargetType="Border">
+                <Grid Grid.Row="3" Margin="20, 0, 20, 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Separator Margin="0, 15" Grid.ColumnSpan="2" Grid.Row="0"/>
+                    
+                    <DockPanel Grid.Row="1">
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" FontSize="15" Text="ביקורות:" LineHeight="15" LineStackingStrategy="BlockLineHeight"/>
+                        <Button DockPanel.Dock="Right" VerticalAlignment="Center" Command="{Binding AddReviewCMD}" Background="#FFDDDEE2" HorizontalAlignment="Right" Content="הוסף ביקורת" materialDesign:ButtonAssist.CornerRadius="15" BorderBrush="{x:Null}" Foreground="#DD000000"/>
+                    </DockPanel>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="ReviewImage" Grid.Column="0" CornerRadius="17" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0, 0, 10, 0" FlowDirection="LeftToRight">
+                            <Border.Background>
+                                <ImageBrush Stretch="UniformToFill" ImageSource="{Binding CurrentReview.Image, Converter={StaticResource Base64ToBitmapImageConvertor}}"/>
+                            </Border.Background>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock>
+                                <Run Text="{Binding CurrentReview.ReviewerName}"/>
+                                <Run Text="בן/ת"/>
+                                <Run Text="{Binding CurrentReview.ReviwerBirthday, Converter={StaticResource DateTimeToAgeConvertor}}"/>
+                                <Run Text="אומר/ת:"/>
+                            </TextBlock>
+                            <TextBlock Grid.Column="1" FontSize="13" LineHeight="14" LineStackingStrategy="BlockLineHeight" FontWeight="Bold" Text="{Binding CurrentReview.ReviewContent}" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal" Margin="0, 7, 0, 0">
+                                <TextBlock  VerticalAlignment="Center">
+                                    <Run Text="הדירוג של"/>
+                                    <Run Text="{Binding CurrentReview.ReviewerName}"/>
+                                </TextBlock>
+                                <materialDesign:RatingBar Value="{Binding CurrentReview.Rating}" Margin="5, 0" IsEnabled="False" Opacity="1"/>
+                            </StackPanel>
+                            <TextBlock Foreground="Gray" FontSize="10">
+                                <Run Text="הביקרות נכתבה בתאריך"/>
+                                <Run Text="{Binding CurrentReview.PublishDate, StringFormat=d}"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Command="{Binding SwitchReviewCMD}" CommandParameter="Prev" ToolTip="לביקורת הקודמת">
+                                <materialDesign:PackIcon Kind="Play" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignIconForegroundButton}" Command="{Binding SwitchReviewCMD}" CommandParameter="Next" ToolTip="לביקורת הבאה">
+                                <materialDesign:PackIcon Kind="Play" FlowDirection="RightToLeft"/>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <materialDesign:Card x:Name="BigImageView1" Grid.RowSpan="4" UniformCornerRadius="17" materialDesign:ShadowAssist.ShadowDepth="Depth5" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" HorizontalAlignment="Stretch" Margin="30" FlowDirection="LeftToRight">
+                    <materialDesign:Card.Style>
+                        <Style TargetType="materialDesign:Card">
                             <Setter Property="Visibility" Value="Collapsed"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=ShopImage, Path=IsMouseOver}" Value="True">
@@ -526,11 +299,30 @@
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
-                    </Border.Style>
-                    <Border.Background>
+                    </materialDesign:Card.Style>
+                    <materialDesign:Card.Background>
                         <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Product.Shop.ImageURL, Converter={StaticResource Base64ToBitmapImageConvertor}}"/>
-                    </Border.Background>
-                </Border>
+                    </materialDesign:Card.Background>
+                </materialDesign:Card>
+
+                <materialDesign:Card x:Name="BigImageView2" Grid.RowSpan="4" UniformCornerRadius="17" materialDesign:ShadowAssist.ShadowDepth="Depth5" Height="{Binding RelativeSource={RelativeSource Self}, Path=ActualWidth}" HorizontalAlignment="Stretch" Margin="30" FlowDirection="LeftToRight">
+                    <materialDesign:Card.Style>
+                        <Style TargetType="materialDesign:Card">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=ReviewImage, Path=IsMouseOver}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:Card.Style>
+                    <materialDesign:Card.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding CurrentReview.Image, Converter={StaticResource Base64ToBitmapImageConvertor}}"/>
+                    </materialDesign:Card.Background>
+                </materialDesign:Card>
 
             </Grid>
         </materialDesign:Card>

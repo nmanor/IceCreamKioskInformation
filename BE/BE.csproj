@@ -181,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AddReviewEvantArgs.cs" />
     <Compile Include="FlavoredProduct.cs" />
     <Compile Include="FrenchCrape.cs" />
     <Compile Include="FrozenYogurt.cs" />
