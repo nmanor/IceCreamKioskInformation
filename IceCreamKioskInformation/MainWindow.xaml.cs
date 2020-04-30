@@ -38,17 +38,21 @@ namespace IceCreamKioskInformation
                 _currnetUserConrol.VerticalAlignment = VerticalAlignment.Center;
                 Grid.SetColumn(_currnetUserConrol, 1);
                 Grid.SetColumnSpan(_currnetUserConrol, 2);
+                ChangeSearchResultControlsVisibility(Visibility.Collapsed);
                 MainGrid.Children.Insert(0, _currnetUserConrol);
+                this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/background.jpg")));
             }
         }
+
         private UserControl _currnetUserConrol;
+        private UserControl[] SearchResultControls = null;
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowVM(this);
-            LoadSearch();
-            //LoadSearchResult(new List<Product>());
+            //LoadSearch();
+            LoadSearchResult(new List<Product>());
         }
 
         /// <summary>
@@ -85,15 +89,16 @@ namespace IceCreamKioskInformation
                     LoadSearch();
             };
             CurrnetUserConrol = search;
+            this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/background.jpg")));
         }
 
         /// <summary>
         /// Loading the UserControl of the add review to the main screen and logging its events
         /// </summary>
-        internal void LoadAddReview()
+        internal void LoadAddReview(Product product)
         {
             MessageArea.IsOpen = false;
-            AddReviewUserControl addReview = new AddReviewUserControl(new Waffle() { Name = "וופל בלגי TO GO: וופל בלגי עם קצפת + 3 כדורי גלידה" });
+            AddReviewUserControl addReview = new AddReviewUserControl(product);
             addReview.GoBack += (sender, e) =>
             {
                 GoBackEventArgs args = e as GoBackEventArgs;
@@ -103,7 +108,7 @@ namespace IceCreamKioskInformation
                     MessageArea.IsOpen = true;
                 }
                 else
-                    LoadSearch();
+                    LoadSearchResult(null);
             };
             CurrnetUserConrol = addReview;
         }
@@ -129,34 +134,77 @@ namespace IceCreamKioskInformation
             CurrnetUserConrol = addProduct;
         }
 
+        /// <summary>
+        /// Loading the User Controls that showing the search result.
+        /// This function can use the same controls more then one time if needed.
+        /// </summary>
         public void LoadSearchResult(List<Product> results)
         {
             MessageArea.IsOpen = false;
-            
             MainGrid.Children.Remove(CurrnetUserConrol);
 
-            SearchResultsListUserControl searchResults = new SearchResultsListUserControl(results);
-            searchResults.Margin = new Thickness(20);
-            searchResults.HorizontalAlignment = HorizontalAlignment.Stretch;
-            searchResults.VerticalAlignment = VerticalAlignment.Stretch;
-            Grid.SetColumn(searchResults, 2);
-            MainGrid.Children.Insert(0, searchResults);
+            if (SearchResultControls == null)
+            {
+                SearchResultsListUserControl searchResults = new SearchResultsListUserControl(results);
+                searchResults.Margin = new Thickness(20);
+                searchResults.HorizontalAlignment = HorizontalAlignment.Stretch;
+                searchResults.VerticalAlignment = VerticalAlignment.Stretch;
+                Grid.SetColumn(searchResults, 2);
+                MainGrid.Children.Insert(0, searchResults);
 
-            ProductDisplayUserControl productDisplay = new ProductDisplayUserControl();
-            productDisplay.Margin = new Thickness(0, 20, 0, 20);
-            productDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
-            productDisplay.VerticalAlignment = VerticalAlignment.Stretch;
-            Grid.SetColumn(productDisplay, 1);
-            MainGrid.Children.Insert(0, productDisplay);
+                ProductDisplayUserControl productDisplay = new ProductDisplayUserControl();
+                productDisplay.Margin = new Thickness(0, 20, 0, 20);
+                productDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
+                productDisplay.VerticalAlignment = VerticalAlignment.Stretch;
+                Grid.SetColumn(productDisplay, 1);
+                MainGrid.Children.Insert(0, productDisplay);
 
-            MapDisplayUserControl mapDisplay = new MapDisplayUserControl();
-            mapDisplay.Margin = new Thickness(20);
-            mapDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
-            mapDisplay.VerticalAlignment = VerticalAlignment.Stretch;
-            Grid.SetColumn(mapDisplay, 0);
-            MainGrid.Children.Insert(0, mapDisplay);
+                MapDisplayUserControl mapDisplay = new MapDisplayUserControl();
+                mapDisplay.Margin = new Thickness(20);
+                mapDisplay.HorizontalAlignment = HorizontalAlignment.Stretch;
+                mapDisplay.VerticalAlignment = VerticalAlignment.Stretch;
+                Grid.SetColumn(mapDisplay, 0);
+                MainGrid.Children.Insert(0, mapDisplay);
+
+                // Register for go back event through the product list display
+                searchResults.GoBack += (sender, args) =>
+                {
+                    LoadSearch();
+                    SearchResultControls = null;
+                };
+
+                // Register for add review event through the product display
+                productDisplay.AddReviewEvent += (sender, args) =>
+                {
+                    searchResults.Visibility = Visibility.Hidden;
+                    productDisplay.Visibility = Visibility.Hidden;
+                    mapDisplay.Visibility = Visibility.Hidden;
+
+                    LoadAddReview((args as AddReviewEvantArgs).Product);
+                };
+
+                SearchResultControls = new UserControl[3];
+                SearchResultControls[0] = searchResults;
+                SearchResultControls[1] = productDisplay;
+                SearchResultControls[2] = mapDisplay;
+            }
+            else
+            {
+                ChangeSearchResultControlsVisibility(Visibility.Visible);
+            }
 
             this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/background2.jpg")));
+        }
+
+        /// <summary>
+        /// Change the type of visibility to all controls in the search results view
+        /// </summary>
+        /// <param name="visibility">Type of visibility</param>
+        private void ChangeSearchResultControlsVisibility(Visibility visibility)
+        {
+            if (SearchResultControls != null)
+                foreach (var item in SearchResultControls)
+                    item.Visibility = visibility;
         }
 
         /// <summary>
@@ -205,6 +253,17 @@ namespace IceCreamKioskInformation
         {
             Password.Foreground = Brushes.Black;
             LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.LockOpenVariant;
+        }
+
+        /// <summary>
+        /// Selects which screen to return when requesting to go back
+        /// </summary>
+        public void GoBack()
+        {
+            if (SearchResultControls != null)
+                LoadSearchResult(null);
+            else
+                LoadSearch();
         }
     }
 }

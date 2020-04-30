@@ -4,6 +4,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,36 @@ using System.Windows.Media;
 
 namespace IceCreamKioskInformation.ProductDisplay
 {
-    class ProductDisplayUserControlVM
+    class ProductDisplayUserControlVM : INotifyPropertyChanged
     {
+        private ProductDisplayUserControl View;
         public Product _product;
         public Product Product
         {
             get { return _product; }
-            set { _product = value; DataRearrangement(); }
+            set 
+            { 
+                _product = value; 
+                DataRearrangement();
+                OnPropertyChanged("Product");
+                OnPropertyChanged("ProductParms");
+            }
+        }
+        public string ProductParms { get {
+                string x = Product.GetParms();
+                return Product.GetParms(); } }
+        private Review _currentReview;
+        public Review CurrentReview 
+        {
+            get { return _currentReview; }
+            set
+            {
+                _currentReview = value;
+                OnPropertyChanged("CurrentReview");
+            }
         }
         public ChartValues<ObservableValue> RatingPercentage { get; set; }
         public float RatingAverage { get; set; }
-
         public SeriesCollection PopularityValues { get; set; }
         public string[] PopularityMonthLabels { get; set; }
 
@@ -31,33 +51,42 @@ namespace IceCreamKioskInformation.ProductDisplay
         /// </summary>
         public ICommand OpenURLCMD { get { return new OpenURLCMD(); } }
 
-        public ProductDisplayUserControlVM(Product product)
+        /// <summary>
+        /// Move to the next / the previous
+        /// </summary>
+        public ICommand SwitchReviewCMD { get { return new SwitchReviewCMD(this); } }
+
+        /// <summary>
+        /// Move to the next / the previous
+        /// </summary>
+        public ICommand AddReviewCMD { get { return new AddReviewCMD(this); } }
+
+        // INotifyPropertyChanged implementaion
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+
+        public ProductDisplayUserControlVM(Product product, ProductDisplayUserControl view)
         {
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 2, 3) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 1, 3) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 1, 9) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 3, 3) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 8, 3) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2019, 5, 3) });
-            product.AddReview(new Review() { Rating = 4, PublishDate = new DateTime(2019, 12, 3) });
-            product.AddReview(new Review() { Rating = 4, PublishDate = new DateTime(2019, 6, 3) });
-            product.AddReview(new Review() { Rating = 1, PublishDate = new DateTime(2019, 1, 3) });
-            product.AddReview(new Review() { Rating = 3, PublishDate = new DateTime(2020, 1, 7) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2020, 4, 7) });
-            product.AddReview(new Review() { Rating = 3, PublishDate = new DateTime(2020, 4, 7) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2019, 10, 7) });
-            product.AddReview(new Review() { Rating = 2, PublishDate = new DateTime(2019, 12, 7) });
-            product.AddReview(new Review() { Rating = 5, PublishDate = new DateTime(2019, 11, 7) });
-            product.AddReview(new Review() { Rating = 3, PublishDate = new DateTime(2020, 4, 7) });
-            product.AddReview(new Review() { Rating = 3, PublishDate = new DateTime(2020, 4, 7) });
+            product.AddReview(new Review()
+            {
+                Rating = 5,
+                PublishDate = new DateTime(2020, 2, 3),
+                ReviewContent = "טעים ממש, שווה כל שקל",
+                ReviwerBirthday = new DateTime(1995, 5, 3),
+                ReviewerName = "דני בוזגלו",
+                Image = null
+            });
 
             product.Shop.Instagram = "www.www.sdbdgsnh";
             product.Shop.Facebook = "www.www.sdbdgsnh";
 
             this.Product = product;
+            this.View = view;
+
+            View.IsVisibleChanged += (sender, args) => { DataRearrangement(); };
         }
 
-        public void DataRearrangement()
+        private void DataRearrangement()
         {
             ProductDisplayUserControlM model = new ProductDisplayUserControlM();
             RatingPercentage = model.GetRatingPercentage(Product);
@@ -66,6 +95,10 @@ namespace IceCreamKioskInformation.ProductDisplay
             object[] popularity = model.GetPopularityValues(Product);
             PopularityMonthLabels = popularity[0] as string[];
             PopularityValues = popularity[1] as SeriesCollection;
+
+            CurrentReview = Product.Reviews[0];
         }
+
+        public void InvokeAddReview() { View.InvokeAddReview(Product); }
     }
 }
