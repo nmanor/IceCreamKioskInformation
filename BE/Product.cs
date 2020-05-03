@@ -93,7 +93,7 @@ namespace BE
         public virtual ObservableCollection<Review> Reviews
         {
             get { return _reviews; }
-            private set 
+           set 
             {
                 if(_reviews == null)
                     _reviews =  new ObservableCollection<Review>();

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-
+using RestSharp.Extensions;
 
 namespace DAL
 {
@@ -20,6 +20,7 @@ namespace DAL
             using (var context = new ShopReviewsdb())
             {
                 result = context.shops.Include(a => a.Address).Include(p => p.Products).Include(l => l.Products.Select(r => r.Reviews)).ToList<Shop>();
+
             }
             return result;
         }
@@ -45,10 +46,35 @@ namespace DAL
         public List<Product> Get_all_Products()
         {
             List<Product> result = new List<Product>();
+            List<Product> retrn = new List<Product>();
             using (var context = new ShopReviewsdb())
             {
                 result = context.Products.Include(s => s.Shop).Include(r => r.Reviews).Include(a => a.Shop.Address).ToList<Product>();
-                  
+
+            }
+            Dictionary<string, Type> entitys = new Dictionary<string, Type>();
+            entitys.Add("icecream",new IceCream().GetType());
+            foreach (Product p in result)
+            {
+                var field = p.GetType().GetField("_entityWrapper");
+
+                if (field == null)
+                    retrn.Add(p);
+
+                var wrapper = field.GetValue(p);
+                var property = wrapper.GetType().GetProperty("IdentityType").GetValue(wrapper);
+                var name = property.GetType().GetProperty("Name").GetValue(property);
+                
+                if(name.ToString() == "IceCream")
+                    retrn.Add(new IceCream(p));
+                if (name.ToString() == "FrozenYogurt")
+                    retrn.Add(new FrozenYogurt(p));
+                if (name.ToString() == "Waffle")
+                    retrn.Add(new Waffle(p));
+                if (name.ToString() == "FrenchCrape")
+                    retrn.Add(new FrenchCrape(p));
+                if (name.ToString() == "Smoothie")
+                    retrn.Add(new Smoothie(p));
             }
             return result;
         }
