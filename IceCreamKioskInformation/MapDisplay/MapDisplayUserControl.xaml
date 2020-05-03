@@ -9,12 +9,42 @@
              mc:Ignorable="d" >
     
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <materialDesign:Card x:Name="MainCard" UniformCornerRadius="25" materialDesign:ShadowAssist.ShadowDepth="Depth4">
-            <m:Map x:Name="Map" CredentialsProvider="AgvR0LlGp5_DcdRIgD6BpJwIjClspp3-9D9_KRlc8KB3SlTZR5Ak7TF-7hOyaqyd" Mode="Road" Center="{Binding Location}" ZoomLevel="17" >
-                <Canvas x:Name="Pushpin" Height="70" Width="70" m:MapLayer.Position="{Binding Location}" m:MapLayer.PositionOrigin="BottomCenter" Opacity="0.85" >
-                    <materialDesign:PackIcon Kind="LocationOn" Foreground="IndianRed" Height="70" Width="70" />
-                </Canvas>
-            </m:Map>
+        <materialDesign:Card x:Name="MainCard" UniformCornerRadius="25" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFEBECF0">
+            <Grid>
+                <m:Map x:Name="Map" CredentialsProvider="AgvR0LlGp5_DcdRIgD6BpJwIjClspp3-9D9_KRlc8KB3SlTZR5Ak7TF-7hOyaqyd" Mode="Road" ZoomLevel="5" >
+                    <m:Map.Style>
+                        <Style TargetType="m:Map">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Working}" Value="True">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Working}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </m:Map.Style>
+                    <Canvas x:Name="Pushpin" Height="70" Width="70" m:MapLayer.Position="{Binding Location}" m:MapLayer.PositionOrigin="BottomCenter" Opacity="0.85" >
+                        <materialDesign:PackIcon Kind="LocationOn" Foreground="IndianRed" Height="70" Width="70" />
+                    </Canvas>
+                </m:Map>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Working}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Working}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <ProgressBar Foreground="Black" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="45" Width="45"/>
+                    <TextBlock FlowDirection="RightToLeft" Text="טוען מפה..." HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
         </materialDesign:Card>
     </Grid>
 </UserControl>

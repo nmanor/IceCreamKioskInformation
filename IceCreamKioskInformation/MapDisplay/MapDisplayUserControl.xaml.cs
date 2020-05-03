@@ -1,4 +1,5 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using BE;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,9 +26,10 @@ namespace IceCreamKioskInformation.MapDisplay
         public MapDisplayUserControl()
         {
             InitializeComponent();
-            this.DataContext = new MapDisplayUserControlVM(new BE.Address("הועד הלאומי", 21, "ירושלים"), this);
+            ReloadMap(null);
         }
 
-        public void LoadLocationIntoMap(Location location) { Map.Center = location; }
+        public void ReloadMap(Address address) { this.DataContext = new MapDisplayUserControlVM(address, this); }
+        public void LoadLocationIntoMap(Location location) { Map.SetView(location, 17); }
     }
 }

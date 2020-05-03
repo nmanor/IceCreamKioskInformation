@@ -51,8 +51,7 @@ namespace IceCreamKioskInformation
         {
             InitializeComponent();
             DataContext = new MainWindowVM(this);
-            //LoadSearch();
-            LoadSearchResult(new List<Product>());
+            LoadSearch();
         }
 
         /// <summary>
@@ -165,6 +164,14 @@ namespace IceCreamKioskInformation
                 mapDisplay.VerticalAlignment = VerticalAlignment.Stretch;
                 Grid.SetColumn(mapDisplay, 0);
                 MainGrid.Children.Insert(0, mapDisplay);
+
+                // Register for go switch product event through the product list display
+                searchResults.SwitchProduct += (sender, args) =>
+                {
+                    Product product = (args as SwitchProductEventArgs).Product;
+                    productDisplay.LoadProduct(product);
+                    mapDisplay.ReloadMap(product.Shop.Address);
+                };
 
                 // Register for go back event through the product list display
                 searchResults.GoBack += (sender, args) =>

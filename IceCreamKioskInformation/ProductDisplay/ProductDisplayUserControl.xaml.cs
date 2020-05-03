@@ -17,7 +17,7 @@ namespace IceCreamKioskInformation.ProductDisplay
         public ProductDisplayUserControl()
         {
             InitializeComponent();
-            this.DataContext = new ProductDisplayUserControlVM(new BLimp().Get_all_Products()[0], this);
+            LoadProduct(null);
 
             StreamResourceInfo sriCurs = Application.GetResourceStream(new Uri("Images/magnifying-glass.cur", UriKind.Relative));
             BigImageView1.Cursor = new Cursor(sriCurs.Stream);
@@ -26,10 +26,8 @@ namespace IceCreamKioskInformation.ProductDisplay
         }
 
         public event EventHandler AddReviewEvent;
+        public void LoadProduct(Product product) { this.DataContext = new ProductDisplayUserControlVM(product, this); }
+        public void InvokeAddReview(Product product) { AddReviewEvent?.Invoke(this, new AddReviewEvantArgs { Product = product }); }
 
-        public void InvokeAddReview(Product product)
-        {
-            AddReviewEvent?.Invoke(this, new AddReviewEvantArgs { Product = product });
-        }
     }
 }
