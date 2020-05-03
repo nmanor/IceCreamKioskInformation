@@ -18,5 +18,10 @@ namespace DAL
         void add_Product(Product product);
         void add_Review(Review review);
         void add_Address(Address address);
+
+        void update_Shop(Shop shop);
+        void update_Product(Product product);
+        void update_Review(Review review);
+        void update_Address(Address address);
     }
 }

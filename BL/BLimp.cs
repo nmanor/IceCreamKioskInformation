@@ -120,5 +120,10 @@ namespace BL
         
         }
 
+        public void update_Shop(Shop shop) { new Reposetory().update_Shop(shop); }
+        public void update_Product(Product product) { new Reposetory().update_Product(product); }
+        public void update_Review(Review review) { new Reposetory().update_Review(review); }
+        public void update_Address(Address address) { new Reposetory().update_Address(address); }
+
     }
 }
