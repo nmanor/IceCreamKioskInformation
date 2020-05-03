@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BE
 {
@@ -100,6 +101,13 @@ namespace BE
                 foreach (Review r in value)
                     this.AddReview(r);
             }
+        }
+
+        [NotMapped]
+        public Dictionary<string, double> nutritinos
+        {
+            get;
+            set;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

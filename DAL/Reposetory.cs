@@ -62,18 +62,21 @@ namespace DAL
                 var wrapper = field.GetValue(p);
                 var property = wrapper.GetType().GetProperty("IdentityType").GetValue(wrapper);
                 var name = property.GetType().GetProperty("Name").GetValue(property);
-                
+                Product prod = null;
                 if(name.ToString() == "IceCream")
-                    retrn.Add(new IceCream(p));
+                    prod = new IceCream(p);
                 if (name.ToString() == "FrozenYogurt")
-                    retrn.Add(new FrozenYogurt(p));
+                    prod = new FrozenYogurt(p);
                 if (name.ToString() == "Waffle")
-                    retrn.Add(new Waffle(p));
+                    prod = new Waffle(p);
                 if (name.ToString() == "FrenchCrape")
-                    retrn.Add(new FrenchCrape(p));
+                    prod = new FrenchCrape(p);
                 if (name.ToString() == "Smoothie")
-                    retrn.Add(new Smoothie(p));
+                    prod = new Smoothie(p);
+                prod.nutritinos = new GetNutritions().GetProductNutritions(prod.NutritionalValues);
+                retrn.Add(prod);
             }
+
             return retrn;
         }
 
