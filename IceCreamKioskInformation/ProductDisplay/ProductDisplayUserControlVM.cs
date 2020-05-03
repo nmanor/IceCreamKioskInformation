@@ -64,7 +64,7 @@ namespace IceCreamKioskInformation.ProductDisplay
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
-        public ProductDisplayUserControlVM(Product product, ProductDisplayUserControl view)
+        public ProductDisplayUserControlVM(Product p, ProductDisplayUserControl view)
         {
             /*product.AddReview(new Review()
             {
@@ -79,7 +79,27 @@ namespace IceCreamKioskInformation.ProductDisplay
             product.Shop.Instagram = "www.www.sdbdgsnh";
             product.Shop.Facebook = "www.www.sdbdgsnh";*/
 
-            this.Product = product;
+            var field = p.GetType().GetField("_entityWrapper");
+
+            if (field == null)
+                Product = p;
+
+            var wrapper = field.GetValue(p);
+            var property = wrapper.GetType().GetProperty("IdentityType").GetValue(wrapper);
+            var name = property.GetType().GetProperty("Name").GetValue(property);
+
+            if (name.ToString() == "IceCream")
+                this.Product = new BE.IceCream(p);
+            if (name.ToString() == "FrozenYogurt")
+                this.Product = new FrozenYogurt(p);
+            if (name.ToString() == "Waffle")
+                this.Product = new Waffle(p);
+            if (name.ToString() == "FrenchCrape")
+                this.Product = new FrenchCrape(p);
+            if (name.ToString() == "Smoothie")
+                this.Product = new Smoothie(p);
+
+            //this.Product = product;
             this.View = view;
 
             View.IsVisibleChanged += (sender, args) => { DataRearrangement(); };

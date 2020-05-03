@@ -52,8 +52,6 @@ namespace DAL
                 result = context.Products.Include(s => s.Shop).Include(r => r.Reviews).Include(a => a.Shop.Address).ToList<Product>();
 
             }
-            Dictionary<string, Type> entitys = new Dictionary<string, Type>();
-            entitys.Add("icecream",new IceCream().GetType());
             foreach (Product p in result)
             {
                 var field = p.GetType().GetField("_entityWrapper");
