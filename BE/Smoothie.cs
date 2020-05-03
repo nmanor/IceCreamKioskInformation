@@ -28,7 +28,7 @@ namespace BE
             return base.Search(dictionary) ;
         }
 
-        public string GetParms()
+        public override string GetParms()
         {
             string text = "שייק, " + base.GetParms();
 

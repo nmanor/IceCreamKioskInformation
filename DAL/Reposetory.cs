@@ -74,7 +74,7 @@ namespace DAL
                 if (name.ToString() == "Smoothie")
                     retrn.Add(new Smoothie(p));
             }
-            return result;
+            return retrn;
         }
 
         public void add_Shop(Shop shop)

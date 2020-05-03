@@ -50,7 +50,7 @@ namespace BE
             return base.Search(dictionary) && result;
         }
 
-        public string GetParms()
+        public override string GetParms()
         {
             string text ="קרפ צרפתי, "+ base.GetParms();
             if (FreeExtras)

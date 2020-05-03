@@ -71,7 +71,7 @@ namespace BE
             return base.Search(dictionary) && result;
         }
 
-        public string GetParms()
+        public override string GetParms()
         {
             string text = "פרוזן יוגורט, "+ base.GetParms();
             if (MilkType == MILKTYPE.CowMilk)
