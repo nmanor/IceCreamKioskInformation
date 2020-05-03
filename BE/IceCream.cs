@@ -31,7 +31,7 @@ namespace BE
 
         public override string GetParms()
         {
-            string text = "גלידה, " + base.GetParms();
+            string text = "גלידה"  + base.GetParms();
 
             return text;
         }

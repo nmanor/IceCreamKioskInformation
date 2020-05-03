@@ -30,7 +30,7 @@ namespace BE
 
         public override string GetParms()
         {
-            string text = "שייק, " + base.GetParms();
+            string text = "שייק" + base.GetParms();
 
             return text;
         }
