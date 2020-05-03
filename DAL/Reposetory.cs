@@ -103,6 +103,7 @@ namespace DAL
         {
             using (var context = new ShopReviewsdb())
             {
+                review.Product = null;
                 context.Reviews.Add(review);
                 context.SaveChanges();
             }
