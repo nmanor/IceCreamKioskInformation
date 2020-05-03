@@ -16,6 +16,8 @@ namespace BE
                 OnPropertyChanged("FreeExtras");
             }
         }
+
+        public FrenchCrape() : base() { }
         public FrenchCrape(Product p)
         {
             this.Description = p.GetType().GetProperty("Description").GetValue(p).ToString();

@@ -28,6 +28,7 @@ namespace BE
             }
         }
 
+        public FrozenYogurt() : base() { }
         public FrozenYogurt(Product p)
         {
             this.Description = p.GetType().GetProperty("Description").GetValue(p).ToString();

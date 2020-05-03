@@ -6,6 +6,8 @@ namespace BE
 {
     public class Smoothie : FlavoredProduct
     {
+
+        public Smoothie() : base() { }
         public Smoothie(Product p)
         {
             this.Description = p.GetType().GetProperty("Description").GetValue(p).ToString();
