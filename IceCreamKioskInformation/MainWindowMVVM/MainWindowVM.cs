@@ -26,6 +26,11 @@ namespace IceCreamKioskInformation
         public ICommand AddProduct { get { return new LoadAddNewProductCMD(this); } }
 
         /// <summary>
+        /// An command that activates the functions for displaying the shops management screen
+        /// </summary>
+        public ICommand ShopsManagement { get { return new LoadShopsManagementCMD(this); } }
+
+        /// <summary>
         /// An command that activates the functions for displaying a new store screen
         /// </summary>
         public ICommand WaitForGoBackPermission { get { return new GoBackCMD(this); } }
@@ -33,6 +38,7 @@ namespace IceCreamKioskInformation
         public void LoadSearch() { View.LoadSearch(); }
         public void LoadAddProduct() { View.LoadAddProduct(); }
         public void LoadAddShop() { View.LoadAddShop(); }
+        public void LoadShopsManagement() { View.LoadShopsManagement(); }
 
         public void GoBack() { View.GoBack(); }
 

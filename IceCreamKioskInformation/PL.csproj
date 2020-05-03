@@ -245,8 +245,12 @@
     <Compile Include="MainWindowMVVM\GoBackCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewProductCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewShopCMD.cs" />
+    <Compile Include="MainWindowMVVM\LoadShopsManagementCMD.cs" />
     <Compile Include="MainWindowMVVM\MainWindowM.cs" />
     <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
+    <Compile Include="ShopsManagement\ShopsManagementUserControl.xaml.cs">
+      <DependentUpon>ShopsManagementUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MapDisplay\MapDisplayUserControl.xaml.cs">
       <DependentUpon>MapDisplayUserControl.xaml</DependentUpon>
     </Compile>
@@ -275,6 +279,8 @@
       <DependentUpon>SearchUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchUserControlMVVM\Tag.cs" />
+    <Compile Include="ShopsManagement\ShopsManagementUserControlM.cs" />
+    <Compile Include="ShopsManagement\ShopsManagementUserControlVM.cs" />
     <Page Include="AddProduct\AddProductUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,6 +309,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ShopsManagement\ShopsManagementUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MapDisplay\MapDisplayUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

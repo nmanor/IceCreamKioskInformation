@@ -74,6 +74,13 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="ניהול ותצוגה">
+                <MenuItem Header="תצוגת חנויות" Command="{Binding ShopsManagement}">
+                    <MenuItem.Icon>
+                        <materialDesign:PackIcon Kind="ClipboardList" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
         </Menu>
     </Grid>
 </Window>
