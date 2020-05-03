@@ -182,14 +182,14 @@ namespace BE
             // Check whether the price of the product is less than the maximum price requested
             if (dictionary.ContainsKey("MaxPrice"))
             {
-                double maxPrice = (double)dictionary["MaxPrice"][0];
+                double maxPrice = double.Parse(dictionary["MaxPrice"][0].ToString());
                 result = result && Price < maxPrice;
             }
 
             // Check whether the price of the product is more than the minimum price requested
             if (dictionary.ContainsKey("MinPrice"))
             {
-                double minPrice = (double)dictionary["MinPrice"][0];
+                double minPrice = double.Parse(dictionary["MinPrice"][0].ToString());
                 result = result && Price > minPrice;
             }
 

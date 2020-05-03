@@ -35,7 +35,7 @@
                             <Button Grid.Row="0" Style="{DynamicResource MaterialDesignToolButton}">
                                 <materialDesign:PackIcon Kind="Magnify"/>
                             </Button>
-                            <TextBox  Foreground="Black" Grid.Row="0" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="חפש מוצר, טעם או חלק מחוות דעת על מוצר..." materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" VerticalAlignment="Center" FontSize="20"/>
+                            <TextBox Text="{Binding FreeText, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" Grid.Row="0" Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="חפש מוצר, טעם או חלק מחוות דעת על מוצר..." materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" VerticalAlignment="Center" FontSize="20"/>
                         </StackPanel>
 
                         <Expander Header="חיפוש מתקדם" Background="{x:Null}" Grid.Row="2" >

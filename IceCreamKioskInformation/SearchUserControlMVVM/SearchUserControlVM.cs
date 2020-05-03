@@ -1,11 +1,12 @@
 ﻿using BE;
 using IceCreamKioskInformation.SearchUserControlMVVM;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
 {
-    public class SearchUserControlVM
+    public class SearchUserControlVM : INotifyPropertyChanged
     {
         public SearchUserControlVM(SearchUserControl searchUserControl)
         {
@@ -26,6 +27,25 @@ namespace IceCreamKioskInformation
         public SearchUserControl View { get; set; }
 
         public Dictionary<string, List<object>> Dictionary { get; set; }
+
+        private string _freeText;
+        public string FreeText 
+        { 
+            get { return _freeText; }
+            set
+            {
+                _freeText = value;
+                if (Dictionary.ContainsKey("FreeText"))
+                    Dictionary["FreeText"][0] = _freeText;
+                else
+                    Dictionary.Add("FreeText", new List<object> { _freeText });
+                OnPropertyChanged("FreeText");
+            }
+        }
+
+        // INotifyPropertyChanged implementaion
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
         /// <summary>
         /// A function that adds values to the search dictionary
