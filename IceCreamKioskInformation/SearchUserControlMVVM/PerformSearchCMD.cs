@@ -46,7 +46,7 @@ namespace IceCreamKioskInformation.SearchUserControlMVVM
             {
                 e.Result = M.PerformSearch(VM.Dictionary);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 e.Result = null;
             }

@@ -52,9 +52,9 @@ namespace IceCreamKioskInformation
         {
             InitializeComponent();
             DataContext = new MainWindowVM(this);
-            //LoadSearch();
+            LoadSearch();
             //LoadShopsManagement();
-            LoadSearchResult(new BLimp().Get_all_Products());
+            //LoadSearchResult(new BLimp().Get_all_Products());
         }
 
         /// <summary>
