@@ -12,6 +12,7 @@ namespace IceCreamKioskInformation
         {
             this.View = searchUserControl;
             Dictionary = new Dictionary<string, List<object>>();
+            Working = false;
         }
 
         /// <summary>
@@ -26,20 +27,49 @@ namespace IceCreamKioskInformation
 
         public SearchUserControl View { get; set; }
 
-        public Dictionary<string, List<object>> Dictionary { get; set; }
+        private bool _working;
+        public bool Working
+        {
+            get { return _working; }
+            set
+            {
+                _working = value;
+                OnPropertyChanged("Working");
+            }
+        }
+
+        public Dictionary<string, List<object>> _dictionary;
+        public Dictionary<string, List<object>> Dictionary
+        {
+            get { return _dictionary; }
+            set
+            {
+                _dictionary = value;
+                OnPropertyChanged("TagsDictionary");
+            }
+        }
 
         private string _freeText;
-        public string FreeText 
-        { 
+        public string FreeText
+        {
             get { return _freeText; }
             set
             {
                 _freeText = value;
-                if (Dictionary.ContainsKey("FreeText"))
-                    Dictionary["FreeText"][0] = _freeText;
+                if (string.IsNullOrEmpty(_freeText))
+                {
+                    if (Dictionary.ContainsKey("FreeText"))
+                        Dictionary.Remove("FreeText");
+                }
                 else
-                    Dictionary.Add("FreeText", new List<object> { _freeText });
+                {
+                    if (Dictionary.ContainsKey("FreeText"))
+                        Dictionary["FreeText"][0] = _freeText;
+                    else
+                        Dictionary.Add("FreeText", new List<object> { _freeText });
+                }
                 OnPropertyChanged("FreeText");
+                OnPropertyChanged("Dictionary");
             }
         }
 
@@ -58,6 +88,7 @@ namespace IceCreamKioskInformation
                 Dictionary[Category].Add(Data);
             else
                 Dictionary.Add(Category, new List<object> { Data });
+            OnPropertyChanged("Dictionary");
         }
 
         public void removeFromDictionary(string Category, object Data)
@@ -70,6 +101,7 @@ namespace IceCreamKioskInformation
                     Dictionary.Remove(Category);
             }
             catch { }
+            OnPropertyChanged("Dictionary");
         }
 
         public void moveTag(Tag tag, Tag newTag) { View.moveTag(tag, newTag); }

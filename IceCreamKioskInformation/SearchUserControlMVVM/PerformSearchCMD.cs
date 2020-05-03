@@ -32,7 +32,7 @@ namespace IceCreamKioskInformation.SearchUserControlMVVM
 
         public void Execute(object parameter)
         {
-            // VM.CheckingProductData();
+            VM.Working = true;
             PerformSearchBW = new BackgroundWorker();
             PerformSearchBW.DoWork += StartSearch;
             PerformSearchBW.RunWorkerCompleted += SearchDone;
@@ -54,6 +54,7 @@ namespace IceCreamKioskInformation.SearchUserControlMVVM
 
         private void SearchDone(object sender, RunWorkerCompletedEventArgs e)
         {
+            VM.Working = false;
             if (e.Result != null)
                 VM.InvokeSerachDone(e.Result as List<Product>);
         }

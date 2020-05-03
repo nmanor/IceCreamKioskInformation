@@ -37,11 +37,7 @@ namespace BE
         
         public override string GetParms()
         {
-            string text = base.GetParms();
-            text += ", " + _flaver;
-
-            return text;
-            
+            return ", " + _flaver + base.GetParms();
         }
 
     }

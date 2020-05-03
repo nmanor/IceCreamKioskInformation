@@ -24,6 +24,17 @@
 
             <Grid>
                 <materialDesign:ColorZone Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0">
+                    <materialDesign:ColorZone.Style>
+                        <Style TargetType="materialDesign:ColorZone">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Working}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:ColorZone.Style>
+                    
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -174,9 +185,37 @@
                 </materialDesign:ColorZone>
             </Grid>
         </StackPanel>
-        <Button Command="{Binding PerformSearch}" Grid.Column="1" Height="60" Width="60" VerticalAlignment="Bottom" Style="{DynamicResource MaterialDesignFloatingActionMiniButton}" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
+        <Button Command="{Binding PerformSearch}" Grid.Column="1" Height="60" Width="60" VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Dictionary.Count, Converter={StaticResource NotZeroConverter}}" Value="True">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Working}" Value="True">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <materialDesign:PackIcon Kind="Magnify" Height="30" Width="30"/>
         </Button>
+
+        <materialDesign:Card Grid.Column="1" Height="60" Width="60"  VerticalAlignment="Bottom" materialDesign:ShadowAssist.ShadowDepth="Depth4" BorderBrush="{x:Null}" Foreground="#DD000000" Background="LightGray" UniformCornerRadius="50">
+            <materialDesign:Card.Style>
+                <Style TargetType="materialDesign:Card">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Working}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </materialDesign:Card.Style>
+            <ProgressBar Foreground="Black" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="30" Width="30"/>
+        </materialDesign:Card>
 
     </Grid>
     

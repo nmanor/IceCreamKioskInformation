@@ -86,6 +86,18 @@ namespace BE
             }
         }
 
+        private Dictionary<string, double> _nutritinosValuesDictonary;
+        [NotMapped]
+        public Dictionary<string, double> NutritinosValuesDictonary
+        {
+            get { return _nutritinosValuesDictonary; }
+            set
+            {
+                _nutritinosValuesDictonary = value;
+                OnPropertyChanged("NutritinosValuesDictonary");
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary
@@ -103,28 +115,11 @@ namespace BE
             }
         }
 
-        [NotMapped]
-        public Dictionary<string, double> nutritinos
-        {
-            get;
-            set;
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-
-        public string FirstImage
-        {
-            get
-            {
-                try { return Reviews[0].Image; }
-                catch (Exception) { return ""; }
-            }
         }
         
         public string ShopID { get; set; }
@@ -240,9 +235,9 @@ namespace BE
         {
             string text = "";
             if (SugarFree)
-                text += "ללא סוכר, ";
+                text += ", ללא סוכר";
             if (Vegan)
-                text += "טבעוני, ";
+                text += ", טבעוני";
             return text;
         }
     }
