@@ -1,8 +1,6 @@
 ﻿using BE;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,18 +8,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace IceCreamKioskInformation.ShopsManagement
+namespace IceCreamKioskInformation.ProductsManagement
 {
-    class ShopsManagementUserControlVM : INotifyPropertyChanged
+    class ProductsManagementUserControlVM : INotifyPropertyChanged
     {
-        private List<Shop> _shopsList;
-        public List<Shop> ShopsList
+        private List<Product> _productsList;
+        public List<Product> ProductsList
         {
-            get { return _shopsList; }
+            get { return _productsList; }
             set
             {
-                _shopsList = value;
-                OnPropertyChanged("ShopsList");
+                _productsList = value;
+                OnPropertyChanged("ProductsList");
             }
         }
 
@@ -58,37 +56,50 @@ namespace IceCreamKioskInformation.ShopsManagement
             }
         }
 
-        public ShopsManagementUserControlVM()
+        public ProductsManagementUserControlVM(List<Product> products)
         {
-            Message = "לעריכת חנות לחץ פעמיים על המאפיין אותו תרצה לערוך";
-            MessageColor = Brushes.Black;
             new Thread(() =>
             {
                 FetchingFromDB = true;
-                ShopsList = new ShopsManagementUserControlM().GetAllShops();
-                foreach (var item in ShopsList)
-                {
-                    item.PropertyChanged += (x, y) => { SaveChanges(item); };
-                    item.Address.PropertyChanged += (x, y) => { SaveChanges(item); };
-                }
-                FetchingFromDB = false;
+                Initialize(products);
             }).Start();
         }
 
-        private void SaveChanges(Shop shop)
+        public ProductsManagementUserControlVM()
+        {
+            new Thread(() =>
+            {
+                FetchingFromDB = true;
+                Initialize(new ProductsManagementUserControlM().GetProducts());
+            }).Start();
+        }
+
+        private void Initialize(List<Product> products)
+        {
+            Message = "לעריכת מוצר לחץ פעמיים על המאפיין אותו תרצה לערוך";
+            MessageColor = Brushes.Black;
+            ProductsList = products;
+            foreach (var item in ProductsList)
+            {
+                item.PropertyChanged += (x, y) => { SaveChanges(item); };
+            }
+            FetchingFromDB = false;
+        }
+
+        private void SaveChanges(Product product)
         {
             new Thread(() =>
             {
                 Message = "שומר שינויים...";
                 try
                 {
-                    new ShopsManagementUserControlM().SaveChanges(shop);
+                    new ProductsManagementUserControlM().SaveChanges(product);
                     Message = "השינויים נשמרו";
                     MessageColor = Brushes.Black;
                 }
                 catch (Exception ex)
                 {
-                    Message = ex.Message + ", השינויים שבצעת לא נשמרו";
+                    Message = ex.Message + ", השינויים שביצעת לא נשמרו";
                     MessageColor = Brushes.Red;
                 }
             }).Start();

@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="IceCreamKioskInformation.ProductsManagement.ProductsManagementUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             FlowDirection="RightToLeft"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                    <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
+                <TextBlock Text="ניהול מוצרים" FontWeight="Black" TextAlignment="Center" FontSize="50" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
+                <StackPanel.Effect>
+                    <DropShadowEffect Opacity="0.65" Direction="-90" BlurRadius="10"/>
+                </StackPanel.Effect>
+            </StackPanel>
+
+            <materialDesign:ColorZone x:Name="DataView" Mode="Standard" Padding="8 4 8 4" CornerRadius="20" Panel.ZIndex="1" Margin="16 5 16 0" materialDesign:ShadowAssist.ShadowDepth="Depth4" Background="#FFebecf0">
+                <Grid>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FetchingFromDB}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Height="40" Width="40"/>
+                        <TextBlock Text="טוען רשימת מוצרים..." Foreground="#FF9E9E9E" Margin="5" FontSize="20"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FetchingFromDB}" Value="False">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <DockPanel>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" DockPanel.Dock="Left">
+                                <ProgressBar Value="0" IsIndeterminate="True" Foreground="Black" Margin="5">
+                                    <ProgressBar.Style>
+                                        <Style TargetType="ProgressBar" BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Message}" Value="שומר שינויים...">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ProgressBar.Style>
+                                </ProgressBar>
+                                <TextBlock Text="{Binding Message}" Foreground="{Binding MessageColor}" FontSize="15" Margin="5"/>
+                            </StackPanel>
+                            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo" FontWeight="Bold">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedItems.Count, ElementName=MainDataGrid, Mode=OneWay, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                <Hyperlink>צפה במוצרים של החנות המסומנת</Hyperlink>
+                            </TextBlock>
+                        </DockPanel>
+                        <DataGrid x:Name="MainDataGrid" VerticalAlignment="Center" Background="Transparent" AutoGenerateColumns="False" ItemsSource="{Binding ProductsList}" CanUserSortColumns="True" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="שם המוצר" MaxWidth="100">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Price}" Header="מחיר" MaxWidth="100">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Description}" Header="תיאור" MaxWidth="250">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridCheckBoxColumn Binding="{Binding SugarFree}" Header="ללא סוכר" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                                <DataGridCheckBoxColumn Binding="{Binding Vegan}" Header="טבעוני" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:ColorZone>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
+
