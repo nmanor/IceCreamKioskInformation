@@ -2,6 +2,7 @@
 using IceCreamKioskInformation.SearchUserControlMVVM;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
@@ -13,6 +14,12 @@ namespace IceCreamKioskInformation
             this.View = searchUserControl;
             Dictionary = new Dictionary<string, List<object>>();
             Working = false;
+            new Thread(() =>
+            {
+                FetchingFromDB = true;
+                Products = new SearchUserControlM().GetAllProducts();
+                FetchingFromDB = false;
+            }).Start();
         }
 
         /// <summary>
@@ -26,6 +33,9 @@ namespace IceCreamKioskInformation
         public ICommand PerformSearch { get { return new PerformSearchCMD(this); } }
 
         public SearchUserControl View { get; set; }
+
+        public bool FetchingFromDB { get; set; }
+        public List<Product> Products { get; set; }
 
         private bool _working;
         public bool Working

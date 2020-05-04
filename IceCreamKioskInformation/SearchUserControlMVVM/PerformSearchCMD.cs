@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -41,12 +42,14 @@ namespace IceCreamKioskInformation.SearchUserControlMVVM
 
         private void StartSearch(object sender, DoWorkEventArgs e)
         {
+            while (VM.FetchingFromDB)
+                Thread.Yield();
             SearchUserControlM M = new SearchUserControlM();
             try
             {
-                e.Result = M.PerformSearch(VM.Dictionary);
+                e.Result = M.PerformSearch(VM.Dictionary, VM.Products);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 e.Result = null;
             }

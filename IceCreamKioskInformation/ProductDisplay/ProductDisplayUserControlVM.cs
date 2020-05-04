@@ -42,11 +42,61 @@ namespace IceCreamKioskInformation.ProductDisplay
                 OnPropertyChanged("CurrentReview");
             }
         }
-        public ChartValues<ObservableValue> RatingPercentage { get; set; }
-        public float RatingAverage { get; set; }
-        public SeriesCollection PopularityValues { get; set; }
-        public string[] PopularityMonthLabels { get; set; }
-        public bool NothingToShow { get; set; }
+
+        private ChartValues<ObservableValue> _ratingPercentage;
+        public ChartValues<ObservableValue> RatingPercentage
+        {
+            get { return _ratingPercentage; }
+            set
+            {
+                _ratingPercentage = value;
+                OnPropertyChanged("RatingPercentage");
+            }
+        }
+
+        private float _ratingAverage;
+        public float RatingAverage
+        {
+            get { return _ratingAverage; }
+            set
+            {
+                _ratingAverage = value;
+                OnPropertyChanged("RatingAverage");
+            }
+        }
+
+        private SeriesCollection _popularityValues;
+        public SeriesCollection PopularityValues
+        {
+            get { return _popularityValues; }
+            set
+            {
+                _popularityValues = value;
+                OnPropertyChanged("PopularityValues");
+            }
+        }
+
+        private string[] _popularityMonthLabels;
+        public string[] PopularityMonthLabels
+        {
+            get { return _popularityMonthLabels; }
+            set
+            {
+                _popularityMonthLabels = value;
+                OnPropertyChanged("PopularityMonthLabels");
+            }
+        }
+
+        private bool _nothingToShow;
+        public bool NothingToShow
+        {
+            get { return _nothingToShow; }
+            set
+            {
+                _nothingToShow = value;
+                OnPropertyChanged("NothingToShow");
+            }
+        }
 
         /// <summary>
         /// Open URL link
@@ -69,21 +119,6 @@ namespace IceCreamKioskInformation.ProductDisplay
 
         public ProductDisplayUserControlVM(Product p, ProductDisplayUserControl view)
         {
-            /*product.AddReview(new Review()
-            {
-                Rating = 5,
-                PublishDate = new DateTime(2020, 2, 3),
-                ReviewContent = "טעים ממש, שווה כל שקל",
-                ReviwerBirthday = new DateTime(1995, 5, 3),
-                ReviewerName = "דני בוזגלו",
-                Image = null
-            });
-
-            product.Shop.Instagram = "www.www.sdbdgsnh";
-            product.Shop.Facebook = "www.www.sdbdgsnh";*/
-
-
-
             this.Product = p;
             this.View = view;
 

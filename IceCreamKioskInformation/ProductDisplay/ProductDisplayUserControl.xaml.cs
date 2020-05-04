@@ -28,6 +28,5 @@ namespace IceCreamKioskInformation.ProductDisplay
         public event EventHandler AddReviewEvent;
         public void LoadProduct(Product product) { this.DataContext = new ProductDisplayUserControlVM(product, this); }
         public void InvokeAddReview(Product product) { AddReviewEvent?.Invoke(this, new AddReviewEvantArgs { Product = product }); }
-
     }
 }
