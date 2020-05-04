@@ -44,9 +44,9 @@ namespace BE
         /// <param name="_street"></param>
         /// <param name="_building_number"></param>
         /// <param name="_city"></param>
-        public Address( string _street, int _building_number, string _city)
+        public Address(string _street, int _building_number, string _city)
         {
-            AddressID =  DateTime.Now.Ticks.ToString("X");
+            AddressID = DateTime.Now.Ticks.ToString("X");
             Street = _street;
             BuildingNumber = _building_number;
             City = _city;
@@ -61,10 +61,7 @@ namespace BE
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
         /// <summary>
         /// To String function 

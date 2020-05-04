@@ -42,8 +42,8 @@ namespace IceCreamKioskInformation.AddShop
             if (shop.Address.BuildingNumber == 0)
                 throw new Exception("מספר הבית לא יכול להיות 0");
 
-            if (shop.ShopName.Length < 6)
-                throw new Exception("שם החנות חייב להכיל לפחות 5 תווים");
+            if (shop.ShopName.Length < 4)
+                throw new Exception("שם החנות חייב להכיל לפחות 3 תווים");
 
             if (!VerifyStringAs("phone", shop.Phone))
                 throw new Exception("מספר טלפון לא תקין");

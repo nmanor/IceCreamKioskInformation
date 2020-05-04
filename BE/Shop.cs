@@ -51,10 +51,11 @@ namespace BE
         public virtual ObservableCollection<Product> Products
         {
             get { return _products; }
-            private set 
-            { foreach (Product p in value)
+            private set
+            {
+                foreach (Product p in value)
                     this.AddProduct(p);
-            } 
+            }
         }
         public string Phone
         {
@@ -104,14 +105,11 @@ namespace BE
 
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
-        public Shop( string shopName, Address address, string phone, string website, string facebook, string instagram, string imageURL)
+        public Shop(string shopName, Address address, string phone, string website, string facebook, string instagram, string imageURL)
         {
-            ShopID =  DateTime.Now.Ticks.ToString("X");
+            ShopID = DateTime.Now.Ticks.ToString("X");
             ShopName = shopName;
             Address = address;
             Phone = phone;
