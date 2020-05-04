@@ -1,16 +1,28 @@
 ﻿using IceCreamKioskInformation.MainWindowMVVM;
 using System;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace IceCreamKioskInformation
 {
-    class MainWindowVM
+    class MainWindowVM : INotifyPropertyChanged
     {
         private MainWindow View;
 
         public MainWindowVM(MainWindow mainWindow)
         {
             View = mainWindow;
+        }
+
+        private int _timeAsAdmin;
+        public int TimeAsAdmin
+        {
+            get { return _timeAsAdmin; }
+            set
+            {
+                _timeAsAdmin = value;
+                OnPropertyChanged("TimeAsAdmin");
+            }
         }
 
         public string EnterdPassword { get; set; }
@@ -35,6 +47,12 @@ namespace IceCreamKioskInformation
         /// </summary>
         public ICommand WaitForGoBackPermission { get { return new GoBackCMD(this); } }
 
+        public ICommand LogInAsAdmin { get { return new LogInAsAdminCMD(this); } }
+
+        // INotifyPropertyChanged implementaion
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+
         public void LoadSearch() { View.LoadSearch(); }
         public void LoadAddProduct() { View.LoadAddProduct(); }
         public void LoadAddShop() { View.LoadAddShop(); }
@@ -44,7 +62,7 @@ namespace IceCreamKioskInformation
 
         public void BindLoadCommand(ICommand command) { View.BindLoadCommand(command); }
         public void OpenLogInArea() { View.OpenLogInArea(); }
-        public void CloseLogInArea() { View.CloseLogInArea(); }
+        public void CloseLogInArea() { View.CloseLogInArea(); TimeAsAdmin = 0; }
         public void DisplayWorngPassword() { View.DisplayWorngPassword(); }
         public void DisplayRightPassword() { View.DisplayRightPassword(); }
     }

@@ -35,6 +35,7 @@ namespace IceCreamKioskInformation.AddReview
 
             review.PublishDate = DateTime.Now;
 
+            review.ProductID = product.ProductID;
             new BLimp().add_Review(review);
             product.AddReview(review);
         }

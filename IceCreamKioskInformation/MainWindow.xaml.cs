@@ -54,8 +54,6 @@ namespace IceCreamKioskInformation
             InitializeComponent();
             DataContext = new MainWindowVM(this);
             LoadSearch();
-            //LoadShopsManagement();
-            //LoadSearchResult(new BLimp().Get_all_Products());
         }
 
         /// <summary>
@@ -253,6 +251,9 @@ namespace IceCreamKioskInformation
         /// </summary>
         public void CloseLogInArea()
         {
+            PasswordDescription.Text = "פעולה זו דורשת התחברות כמנהל מערכת\nאנא הכנס סיסמת מנהל ולאחר מכן לחץ על המשך";
+            PasswordDescription.Foreground = Brushes.Black;
+            LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.Lock;
             LogInAsAdmin.IsOpen = false;
         }
 
@@ -273,6 +274,8 @@ namespace IceCreamKioskInformation
         public void DisplayRightPassword()
         {
             Password.Foreground = Brushes.Black;
+            PasswordDescription.Text = "פעולה זו דורשת התחברות כמנהל מערכת\nאנא הכנס סיסמת מנהל ולאחר מכן לחץ על המשך";
+            PasswordDescription.Foreground = Brushes.Black;
             LockLogo.Kind = MaterialDesignThemes.Wpf.PackIconKind.LockOpenVariant;
         }
 
