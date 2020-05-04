@@ -51,9 +51,6 @@ namespace IceCreamKioskInformation
 
         public MainWindow()
         {
-            Shop s = new BL.BLimp().Get_all_Shops()[0];
-            s.Phone = "111111111";
-            new Reposetory().update_Shop(s);
             InitializeComponent();
             DataContext = new MainWindowVM(this);
             LoadSearch();
