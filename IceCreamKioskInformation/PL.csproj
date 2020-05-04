@@ -246,6 +246,7 @@
     <Compile Include="MainWindowMVVM\LoadAddNewProductCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadAddNewShopCMD.cs" />
     <Compile Include="MainWindowMVVM\LoadShopsManagementCMD.cs" />
+    <Compile Include="MainWindowMVVM\LogInAsAdminCMD.cs" />
     <Compile Include="MainWindowMVVM\MainWindowM.cs" />
     <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
     <Compile Include="ShopsManagement\ShopsManagementUserControl.xaml.cs">
