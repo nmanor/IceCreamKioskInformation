@@ -217,13 +217,11 @@ namespace BE
 
             // Check if the product meets the required nutritional components
             if (dictionary.ContainsKey("NutritionalValues"))
-            {
                 foreach (KeyValuePair<string, double> values in dictionary["NutritionalValues"])
-                {
-                    // TODO: לסדר את הרכיבים התזונתיים
-                    result = result && false;
-                }
-            }
+                    if (NutritinosValuesDictonary.ContainsKey(values.Key))
+                        result = result && (values.Value <= NutritinosValuesDictonary[values.Key]);
+                
+            
 
             return result;
         }
