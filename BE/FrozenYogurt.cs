@@ -73,7 +73,7 @@ namespace BE
 
         public override string GetParms()
         {
-            string text = "פרוזן יוגורט"+ base.GetParms();
+            string text = "פרוזן יוגורט" + base.GetParms();
             if (MilkType == MILKTYPE.CowMilk)
                 text += ", חלב פרה";
             if (MilkType == MILKTYPE.GoatMilk)

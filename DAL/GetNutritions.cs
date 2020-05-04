@@ -14,9 +14,6 @@ namespace DAL
 {
     public class GetNutritions
     {
-
-
-
         public string GetProductID(string foodParms)
         {
             string KEY = "qdTGw0ZhCUPf9lGWLnF7TLxZIia5qe3hKCPSxpbC";
@@ -53,12 +50,15 @@ namespace DAL
             foreach (var item in contentAsJSON["foodNutrients"].ToList())
             {
                 string name = item["nutrient"]["name"].ToString();
-                double amount = item["amount"].ToObject<double>();
-                nutritions.Add(name, amount);
+                try
+                {
+                    double amount = item["amount"].ToObject<double>();
+                    nutritions.Add(name, amount);
+                }
+                catch (Exception) { }
             }
 
-                //return contentAsJSON["foods"][0]["fdcId"].ToString();
-             return nutritions;
+            return nutritions;
         }
 
 

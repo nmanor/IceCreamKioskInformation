@@ -73,7 +73,7 @@ namespace DAL
                     prod = new FrenchCrape(p);
                 if (name.ToString() == "Smoothie")
                     prod = new Smoothie(p);
-                prod.nutritinos = new GetNutritions().GetProductNutritions(prod.NutritionalValues);
+                prod.NutritinosValuesDictonary = new GetNutritions().GetProductNutritions(prod.NutritionalValues);
                 retrn.Add(prod);
             }
 

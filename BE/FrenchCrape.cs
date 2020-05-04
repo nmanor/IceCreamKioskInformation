@@ -52,9 +52,9 @@ namespace BE
 
         public override string GetParms()
         {
-            string text ="קרפ צרפתי"+ base.GetParms();
+            string text ="קרפ צרפתי, "+ base.GetParms();
             if (FreeExtras)
-                text += ", תוספות";
+                text += "תוספות חינם, ";
             return text;
         }
     }
