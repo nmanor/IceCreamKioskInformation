@@ -79,6 +79,7 @@ namespace IceCreamKioskInformation.ProductsManagement
             Message = "לעריכת מוצר לחץ פעמיים על המאפיין אותו תרצה לערוך";
             MessageColor = Brushes.Black;
             ProductsList = products;
+            ProductsList.Add(new FrozenYogurt() { MilkType = MILKTYPE.GoatMilk, Name= "פרוזן" });
             foreach (var item in ProductsList)
             {
                 item.PropertyChanged += (x, y) => { SaveChanges(item); };

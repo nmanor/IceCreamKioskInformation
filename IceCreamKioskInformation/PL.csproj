@@ -250,6 +250,7 @@
     <Compile Include="MainWindowMVVM\LogInAsAdminCMD.cs" />
     <Compile Include="MainWindowMVVM\MainWindowM.cs" />
     <Compile Include="MainWindowMVVM\MainWindowVM.cs" />
+    <Compile Include="ProductsManagement\MilkTypeToListConvertor.cs" />
     <Compile Include="ProductsManagement\ProductsManagementUserControl.xaml.cs">
       <DependentUpon>ProductsManagementUserControl.xaml</DependentUpon>
     </Compile>

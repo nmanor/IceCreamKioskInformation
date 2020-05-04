@@ -4,9 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:be="clr-namespace:BE;assembly=BE"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+             xmlns:local="clr-namespace:IceCreamKioskInformation.ProductsManagement"
              mc:Ignorable="d" 
              FlowDirection="RightToLeft"
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="myEnum" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="be:MILKTYPE"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <local:MilkTypeToListConvertor x:Key="MilkTypeToListConvertor"/>
+    </UserControl.Resources>
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -68,19 +82,6 @@
                                 </ProgressBar>
                                 <TextBlock Text="{Binding Message}" Foreground="{Binding MessageColor}" FontSize="15" Margin="5"/>
                             </StackPanel>
-                            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="/IceCreamKioskInformation;component/Fonts/#Heebo" FontWeight="Bold">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SelectedItems.Count, ElementName=MainDataGrid, Mode=OneWay, Converter={StaticResource NotZeroConverter}}" Value="True">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                                <Hyperlink>צפה במוצרים של החנות המסומנת</Hyperlink>
-                            </TextBlock>
                         </DockPanel>
                         <DataGrid x:Name="MainDataGrid" VerticalAlignment="Center" Background="Transparent" AutoGenerateColumns="False" ItemsSource="{Binding ProductsList}" CanUserSortColumns="True" CanUserAddRows="False">
                             <DataGrid.Columns>
@@ -92,7 +93,7 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn Binding="{Binding Price}" Header="מחיר" MaxWidth="100">
+                                <DataGridTextColumn Binding="{Binding Price}" Header="מחיר משוער" MaxWidth="100">
                                     <DataGridTextColumn.ElementStyle>
                                         <Style>
                                             <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
@@ -110,6 +111,95 @@
                                 </DataGridTextColumn>
                                 <DataGridCheckBoxColumn Binding="{Binding SugarFree}" Header="ללא סוכר" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
                                 <DataGridCheckBoxColumn Binding="{Binding Vegan}" Header="טבעוני" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"/>
+                                <DataGridCheckBoxColumn Binding="{Binding FreeExtras}" Header="תוספות חינם" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding FreeExtras}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridTextColumn Binding="{Binding Fat}" Header="אחוזי שומן">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Fat}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn>
+                                <materialDesign:DataGridComboBoxColumn Header="סוג חלב" IsEditable="True" SelectedValueBinding="{Binding MilkType, Converter={StaticResource MilkTypeToListConvertor}}" ItemsSource="{Binding Source={StaticResource myEnum}, Converter={StaticResource MilkTypeToListConvertor}}">
+                                    <materialDesign:DataGridComboBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding MilkType}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:DataGridComboBoxColumn.CellStyle>
+                                </materialDesign:DataGridComboBoxColumn>
+                                <DataGridTextColumn Binding="{Binding Flaver}" Header="טעם" MaxWidth="100">
+                                    <DataGridTextColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Flaver}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.CellStyle>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridCheckBoxColumn Binding="{Binding GlutenFree}" Header="ללא גלוטן" ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}" EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding GlutenFree}" Value="{x:Null}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridTextColumn Binding="{Binding Reviews.Count}" Header="מספר ביקורות" MaxWidth="100" IsReadOnly="True">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style>
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTemplateColumn Header="מידע תזונתי" MaxWidth="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock>
+                                                    <Run Text="חלבון:"/>
+                                                    <Run Text="{Binding NutritinosValuesDictonary[Protein]}"/>
+                                                </TextBlock>
+                                                <TextBlock>
+                                                    <Run Text="אנרגיה:"/>
+                                                    <Run Text="{Binding NutritinosValuesDictonary[Energy]}"/>
+                                                </TextBlock>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
