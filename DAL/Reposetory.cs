@@ -89,6 +89,96 @@ namespace DAL
             }
         }
 
+        public void update_Shop(Shop shop)
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                var old = context.shops.Find(shop.ShopID);
+                update_Address(shop.Address);
+                old.Facebook = shop.Facebook;
+                old.ImageURL = shop.ImageURL;
+                old.Instagram = shop.Instagram;
+                old.ShopID = shop.ShopID;
+                old.Website = shop.Website;
+                old.Phone = shop.Phone;
+                context.SaveChanges();
+            }
+        }
+
+        public void update_Product(Product p)
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                var old = context.Products.Find(p.ProductID);
+                old.ProductID = p.ProductID;
+                old.Name = p.Name;
+                old.NutritionalValues = p.NutritionalValues;
+                old.Price = p.Price;
+                old.ShopID = p.ShopID;
+                old.SugarFree = p.SugarFree;
+                old.Vegan = p.Vegan;
+                old.ShopID = p.ShopID;
+                old.Description = p.Description;
+                try
+                {
+                    old.GetType().GetProperty("FreeExtras").SetValue(old, p.GetType().GetProperty("FreeExtras").GetValue(p));
+                }
+                catch (Exception e) { }
+                try
+                {
+                    old.GetType().GetProperty("Fat").SetValue(old, p.GetType().GetProperty("Fat").GetValue(p));
+                }
+                catch (Exception e) { }
+                try
+                {
+                    old.GetType().GetProperty("MilkType").SetValue(old, p.GetType().GetProperty("MilkType").GetValue(p));
+                }
+                catch (Exception e) { }
+                try
+                {
+                    old.GetType().GetProperty("Flaver").SetValue(old, p.GetType().GetProperty("Flaver").GetValue(p));
+                }
+                catch (Exception e) { }
+                try
+                {
+                    old.GetType().GetProperty("GlutenFree").SetValue(old, p.GetType().GetProperty("GlutenFree").GetValue(p));
+                }
+                catch (Exception e) { }
+                context.SaveChanges();
+            }
+        }
+
+        public void update_Review(Review r)
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                var old = context.Reviews.Find(r.ReviewID);
+                old.ProductID = r.ProductID;
+                old.Image = r.Image;
+                old.PublishDate = r.PublishDate;
+                old.Rating = r.Rating;
+                old.ReviewContent = r.ReviewContent;
+                old.ReviewerName = r.ReviewerName;
+                old.ReviewID = r.ReviewID;
+                old.ReviwerBirthday = r.ReviwerBirthday;
+                old.ReviwerEmail = r.ReviwerEmail;
+                context.SaveChanges();
+            }
+        }
+
+        public void update_Address(Address a)
+        {
+            using (var context = new ShopReviewsdb())
+            {
+                var old = context.Addresses.Find(a.AddressID);
+                old.AddressID = a.AddressID;
+                old.BuildingNumber = a.BuildingNumber;
+                old.City = a.City;
+                old.Street = a.Street;
+                context.SaveChanges();
+            }
+        }
+
         public void add_Product(Product product)
         {
             using (var context = new ShopReviewsdb())
@@ -98,6 +188,7 @@ namespace DAL
                 context.SaveChanges();
             }
         }
+
 
         public void add_Review(Review review)
         {
