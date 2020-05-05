@@ -193,7 +193,10 @@ namespace IceCreamKioskInformation
                 {
                     Product product = (args as SwitchProductEventArgs).Product;
                     productDisplay.LoadProduct(product);
-                    mapDisplay.ReloadMap(product.Shop.Address);
+                    if (product == null)
+                        mapDisplay.ReloadMap(null);
+                    else
+                        mapDisplay.ReloadMap(product.Shop.Address);
                 };
 
                 // Register for go back event through the product list display

@@ -256,6 +256,8 @@
     </Compile>
     <Compile Include="ProductsManagement\ProductsManagementUserControlM.cs" />
     <Compile Include="ProductsManagement\ProductsManagementUserControlVM.cs" />
+    <Compile Include="SearchResultsList\IncludeBlanksCMD.cs" />
+    <Compile Include="SearchResultsList\SearchResultsListUserControlM.cs" />
     <Compile Include="ShopsManagement\ShopsManagementUserControl.xaml.cs">
       <DependentUpon>ShopsManagementUserControl.xaml</DependentUpon>
     </Compile>

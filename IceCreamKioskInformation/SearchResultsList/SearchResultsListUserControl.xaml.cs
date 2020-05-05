@@ -15,8 +15,11 @@ namespace IceCreamKioskInformation.SearchResultsList
             InitializeComponent();
             this.DataContext = new SearchResultsListUserControlVM(this, results);
             ProductsList.SelectionChanged += (x, y) => 
-            { 
-                SwitchProduct?.Invoke(this, new SwitchProductEventArgs { Product = (ProductsList.SelectedItem as Tuple<Product, string>).Item1 }); 
+            {
+                Product product;
+                try { product = (ProductsList.SelectedItem as Tuple<Product, string>).Item1; }
+                catch(Exception) { product = null; }
+                SwitchProduct?.Invoke(this, new SwitchProductEventArgs { Product = product }); 
             };
         }
 

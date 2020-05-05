@@ -12,7 +12,23 @@ namespace IceCreamKioskInformation.SearchResultsList
     class SearchResultsListUserControlVM : INotifyPropertyChanged
     {
         private SearchResultsListUserControl View;
-        public List<Tuple<Product, string>> Products { get; set; }
+
+        public List<Tuple<Product, string>> _products;
+        public List<Tuple<Product, string>> Products
+        {
+            get { return _products; }
+            set
+            {
+                _products = value;
+                _products.Sort(delegate(Tuple<Product, string> x, Tuple<Product, string> y)
+                {
+                    return x.Item2.Length.CompareTo(y.Item2.Length);
+                });
+                OnPropertyChanged("Products");
+                try { SelectedProduct = _products[0]; }
+                catch (Exception) { SelectedProduct = null; }
+            }
+        }
 
         private Tuple<Product, string> _product;
         public Tuple<Product, string> SelectedProduct
@@ -41,6 +57,11 @@ namespace IceCreamKioskInformation.SearchResultsList
         /// Action for triggering the backward event
         /// </summary>
         public ICommand GoBackCMD { get { return new GoBackCMD(this); } }
+
+        /// <summary>
+        /// Action for filtering missing properties
+        /// </summary>
+        public ICommand IncludeBlanksCMD { get { return new IncludeBlanksCMD(this); } }
 
         /// <summary>
         /// Activate the backward event from this screen
