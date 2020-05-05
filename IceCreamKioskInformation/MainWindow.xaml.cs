@@ -6,6 +6,7 @@ using IceCreamKioskInformation.AddReview;
 using IceCreamKioskInformation.AddShop;
 using IceCreamKioskInformation.MapDisplay;
 using IceCreamKioskInformation.ProductDisplay;
+using IceCreamKioskInformation.ProductsManagement;
 using IceCreamKioskInformation.SearchResultsList;
 using IceCreamKioskInformation.ShopsManagement;
 using System;
@@ -143,6 +144,16 @@ namespace IceCreamKioskInformation
             MessageArea.IsOpen = false;
             ShopsManagementUserControl shopsManagement = new ShopsManagementUserControl();
             CurrnetUserConrol = shopsManagement;
+        }
+
+        /// <summary>
+        /// Loading the ProductsManagementUserControl 
+        /// </summary>
+        public void LoadProductsManagement()
+        {
+            MessageArea.IsOpen = false;
+            ProductsManagementUserControl productsManagement = new ProductsManagementUserControl();
+            CurrnetUserConrol = productsManagement;
         }
 
         /// <summary>

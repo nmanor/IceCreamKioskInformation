@@ -115,13 +115,18 @@ namespace BE
             }
         }
 
-        
+        private Delegate[] InvocationList;
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        protected void OnPropertyChanged(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+        public void ClearPropertyChanged() { InvocationList = PropertyChanged.GetInvocationList(); PropertyChanged = null; }
+        public void RestorePropertyChanged() 
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            foreach (var item in InvocationList)
+            {
+                PropertyChanged += (PropertyChangedEventHandler)item;
+            }
         }
-        
+
         public string ShopID { get; set; }
 
         private Shop _shop;

@@ -87,7 +87,7 @@
                         <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 5 5 0" Content="מוצר חדש" Foreground="Black" Command="{Binding AddProduct}"/>
                         <Separator Margin="0 5 0 0"/>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 5 5 0" Content="תצוגת חנויות" Foreground="Black" Command="{Binding ShopsManagement}"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 5 5 0" Content="תצוגת מוצרים" Foreground="Black"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" Margin="0 5 5 0" Content="תצוגת מוצרים" Foreground="Black" Command="{Binding ProductsManagement}"/>
                     </StackPanel>
                 </Grid>
             </materialDesign:DialogHost.DialogContent>
