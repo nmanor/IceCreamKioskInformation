@@ -12,8 +12,13 @@ namespace IceCreamKioskInformation
             List<Product> result = new List<Product>();
             foreach(Product product in products)
             {
-                if (product.Search(Dictionary))
-                    result.Add(product);
+                KeyValuePair<bool, Dictionary<string, List<object>>> search = product.Search(Dictionary);
+                if (search.Key)
+                {
+                    if(search.Value.Count == 0)
+                        result.Add(product);
+                }
+                    
             }
             return result;
         }

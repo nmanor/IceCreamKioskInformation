@@ -24,8 +24,8 @@ namespace BE
             this.SugarFree = (bool)p.GetType().GetProperty("SugarFree").GetValue(p);
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
         }
-        public bool Search(Dictionary<string, List<Object>> dictionary)
-        {  
+        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
+        {
             return base.Search(dictionary);
         }
 

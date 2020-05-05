@@ -166,11 +166,15 @@ namespace BE
         /// describes the type of search parameter, and the value is a list of several possible results for 
         /// that search parameter</param>
         /// <returns>Boolean variable: Whether the product stands in the search conditions or not</returns>
-        public virtual bool Search(Dictionary<string, List<object>> dictionary)
+        public virtual KeyValuePair<bool,Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
+            KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
             if (dictionary.Count == 0)
-                return false;
+            {
+                keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(false, dictionary);
+                return keyValue;
+            }
 
             bool result = true;
 
@@ -180,6 +184,7 @@ namespace BE
                 Tools tools = new Tools();
                 string content = (string)dictionary["FreeText"][0];
                 result = result && (tools.Similar(Name, content) || tools.Similar(Description, content));
+                dictionary.Remove("FreeText");
             }
 
             // Check whether the price of the product is less than the maximum price requested
@@ -187,6 +192,7 @@ namespace BE
             {
                 double maxPrice = double.Parse(dictionary["MaxPrice"][0].ToString());
                 result = result && Price < maxPrice;
+                dictionary.Remove("MaxPrice");
             }
 
             // Check whether the price of the product is more than the minimum price requested
@@ -194,6 +200,7 @@ namespace BE
             {
                 double minPrice = double.Parse(dictionary["MinPrice"][0].ToString());
                 result = result && Price > minPrice;
+                dictionary.Remove("MinPrice");
             }
 
             // Check whether the product is vegan or not, as required
@@ -201,6 +208,7 @@ namespace BE
             {
                 bool vegan = (bool)dictionary["Vegan"][0];
                 result = result && Vegan == vegan;
+                dictionary.Remove("Vegan");
             }
 
             // Check whether the product is sugar free or not, as required
@@ -208,17 +216,28 @@ namespace BE
             {
                 bool sugarFree = (bool)dictionary["SugarFree"][0];
                 result = result && SugarFree == sugarFree;
+                dictionary.Remove("SugarFree");
             }
 
             // Check if the product meets the required nutritional components
             if (dictionary.ContainsKey("NutritionalValues"))
+            {
+                List<KeyValuePair<string, double>> keys = new List<KeyValuePair<string, double>>();
                 foreach (KeyValuePair<string, double> values in dictionary["NutritionalValues"])
                     if (NutritinosValuesDictonary.ContainsKey(values.Key))
+                    {
                         result = result && (values.Value <= NutritinosValuesDictonary[values.Key]);
+                        keys.Add(values);
+                    }
+                foreach (KeyValuePair<string, double> s in keys)
+                    dictionary["NutritionalValues"].Remove(s);
+                if (dictionary["NutritionalValues"].Count == 0)
+                    dictionary.Remove("NutritionalValues");
                 
-            
+            }
 
-            return result;
+            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
+            return keyValue;
         }
 
         public void AddReview(Review review)

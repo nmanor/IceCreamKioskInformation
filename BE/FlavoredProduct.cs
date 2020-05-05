@@ -16,22 +16,30 @@ namespace BE
             }
         }
 
-        public bool Search(Dictionary<string, List<object>> dictionary)
+        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
+            KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
             if (dictionary.Count == 0)
-                return false;
+            {
+                keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(false, dictionary);
+                return keyValue;
+            }
 
-            bool result = true;
+            keyValue = base.Search(dictionary);
+            bool result = keyValue.Key;
+            dictionary = keyValue.Value;
 
             if (dictionary.ContainsKey("Flaver"))
             {
                 Tools tools = new Tools();
                 string content = (string)dictionary["Flaver"][0];
                 result = result && tools.Similar(Flaver, content);
+                dictionary.Remove("Flaver");
             }
 
-            return base.Search(dictionary) && result;
+            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
+            return keyValue;
         }
 
         

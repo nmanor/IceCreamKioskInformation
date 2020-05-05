@@ -45,20 +45,26 @@ namespace BE
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
         }
 
-        public bool Search(Dictionary<string, List<object>> dictionary)
+        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
-
+            KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
             if (dictionary.Count == 0)
-                return false;
+            {
+                keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(false, dictionary);
+                return keyValue;
+            }
 
-            bool result = true;
+            keyValue = base.Search(dictionary);
+            bool result = keyValue.Key;
+            dictionary = keyValue.Value;
 
             // Check whether the fat of the product is the fat required
             if (dictionary.ContainsKey("Fat"))
             {
                 double fat = (double)dictionary["Fat"][0];
                 result = result && fat == Fat;
+                dictionary.Remove("Fat");
             }
 
             // Check whether the fat of the product is the fat required
@@ -66,9 +72,11 @@ namespace BE
             {
                 MILKTYPE milk = (MILKTYPE)dictionary["MilkType"][0];
                 result = result && milk == MilkType;
+                dictionary.Remove("MilkType");
             }
 
-            return base.Search(dictionary) && result;
+            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
+            return keyValue;
         }
 
         public override string GetParms()

@@ -32,22 +32,30 @@ namespace BE
             this.SugarFree = (bool)p.GetType().GetProperty("SugarFree").GetValue(p);
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
         }
-        public bool Search(Dictionary<string, List<object>> dictionary)
+        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
+            KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
             if (dictionary.Count == 0)
-                return false;
+            {
+                keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(false, dictionary);
+                return keyValue;
+            }
 
-            bool result = true;
+            keyValue = base.Search(dictionary);
+            bool result = keyValue.Key;
+            dictionary = keyValue.Value;
 
             // Check whether the product is FreeExtras or not, as required
             if (dictionary.ContainsKey("FreeExtras"))
             {
                 bool freeExtras = (bool)dictionary["FreeExtras"][0];
                 result = result && FreeExtras == freeExtras;
+                dictionary.Remove("FreeExtras");
             }
 
-            return base.Search(dictionary) && result;
+            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
+            return keyValue;
         }
 
         public override string GetParms()
