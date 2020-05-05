@@ -8,6 +8,6 @@ namespace BE
 {
     public class SearchResultEventArgs : EventArgs
     {
-        public List<Product> SearchResult { get; set; }
+        public List<Tuple<Product, string>> SearchResult { get; set; }
     }
 }

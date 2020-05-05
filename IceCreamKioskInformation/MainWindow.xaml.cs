@@ -160,7 +160,7 @@ namespace IceCreamKioskInformation
         /// Loading the User Controls that showing the search result.
         /// This function can use the same controls more then one time if needed.
         /// </summary>
-        public void LoadSearchResult(List<Product> results)
+        public void LoadSearchResult(List<Tuple<Product, string>> results)
         {
             MessageArea.IsOpen = false;
             MainGrid.Children.Remove(CurrnetUserConrol);

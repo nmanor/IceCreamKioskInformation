@@ -45,7 +45,7 @@ namespace BE
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
         }
 
-        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
+        public override KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
             KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
@@ -70,8 +70,16 @@ namespace BE
             // Check whether the fat of the product is the fat required
             if (dictionary.ContainsKey("MilkType"))
             {
-                MILKTYPE milk = (MILKTYPE)dictionary["MilkType"][0];
-                result = result && milk == MilkType;
+                bool milkResult = false;
+                foreach (var milk in dictionary["MilkType"])
+                {
+                    if ((MILKTYPE)Enum.Parse(typeof(MILKTYPE), milk.ToString()) == MilkType)
+                    {
+                        milkResult = true;
+                        break;
+                    }
+                }
+                result = result && milkResult;
                 dictionary.Remove("MilkType");
             }
 

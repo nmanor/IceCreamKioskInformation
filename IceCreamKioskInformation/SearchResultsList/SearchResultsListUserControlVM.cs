@@ -12,10 +12,10 @@ namespace IceCreamKioskInformation.SearchResultsList
     class SearchResultsListUserControlVM : INotifyPropertyChanged
     {
         private SearchResultsListUserControl View;
-        public List<Product> Products { get; set; }
+        public List<Tuple<Product, string>> Products { get; set; }
 
-        private Product _product;
-        public Product SelectedProduct
+        private Tuple<Product, string> _product;
+        public Tuple<Product, string> SelectedProduct
         {
             get { return _product; }
             set
@@ -25,7 +25,7 @@ namespace IceCreamKioskInformation.SearchResultsList
             }
         }
 
-        public SearchResultsListUserControlVM(SearchResultsListUserControl searchResultsListUserControl, List<Product> results)
+        public SearchResultsListUserControlVM(SearchResultsListUserControl searchResultsListUserControl, List<Tuple<Product, string>> results)
         {
             this.View = searchResultsListUserControl;
             this.Products = results;

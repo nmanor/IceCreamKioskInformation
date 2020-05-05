@@ -16,9 +16,11 @@ namespace BE
             }
         }
 
-        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
+        public override KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
             KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
+            bool result = false;
+
             // Checking for no properties in the search
             if (dictionary.Count == 0)
             {
@@ -26,19 +28,15 @@ namespace BE
                 return keyValue;
             }
 
-            keyValue = base.Search(dictionary);
-            bool result = keyValue.Key;
-            dictionary = keyValue.Value;
-
-            if (dictionary.ContainsKey("Flaver"))
+            if (dictionary.ContainsKey("FreeText"))
             {
                 Tools tools = new Tools();
-                string content = (string)dictionary["Flaver"][0];
-                result = result && tools.Similar(Flaver, content);
-                dictionary.Remove("Flaver");
+                string content = (string)dictionary["FreeText"][0];
+                result = tools.Similar(Flaver, content);
             }
 
-            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
+            keyValue = base.Search(dictionary);
+            keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result || keyValue.Key, keyValue.Value);
             return keyValue;
         }
 

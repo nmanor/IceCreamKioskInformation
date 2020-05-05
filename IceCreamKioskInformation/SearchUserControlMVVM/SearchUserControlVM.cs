@@ -1,5 +1,6 @@
 ﻿using BE;
 using IceCreamKioskInformation.SearchUserControlMVVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
@@ -117,6 +118,6 @@ namespace IceCreamKioskInformation
         public void moveTag(Tag tag, Tag newTag) { View.moveTag(tag, newTag); }
         public void bringTagBack(Tag tag, Tag originalTag) { View.bringTagBack(tag, originalTag); }
 
-        public void InvokeSerachDone(List<Product> results) { View.InvokeSerachDone(results); }
+        public void InvokeSerachDone(List<Tuple<Product, string>> results) { View.InvokeSerachDone(results); }
     }
 }

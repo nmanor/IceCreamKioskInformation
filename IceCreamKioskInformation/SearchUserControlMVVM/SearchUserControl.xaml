@@ -158,10 +158,10 @@
                                         <TextBlock Text="מאפיינים נוספים" FontSize="14"/>
                                     </StackPanel>
                                     <WrapPanel Orientation="Horizontal">
-                                        <local:Tag Category="Extras" Data="Vegan" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר טבעוני" Margin="0 0 10 10"/>
-                                        <local:Tag Category="Extras" Data="SugarFree" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא סוכר" Margin="0 0 10 10"/>
-                                        <local:Tag Category="Extras" Data="GlutenFree" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא גולטן" Margin="0 0 10 10"/>
-                                        <local:Tag Category="Extras" Data="FreeExtras" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר עם תוספות בחינם" Margin="0 0 10 10"/>
+                                        <local:Tag Category="Vegan" Data="True" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר טבעוני" Margin="0 0 10 10"/>
+                                        <local:Tag Category="SugarFree" Data="True" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא סוכר" Margin="0 0 10 10"/>
+                                        <local:Tag Category="GlutenFree" Data="True" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר ללא גולטן" Margin="0 0 10 10"/>
+                                        <local:Tag Category="FreeExtras" Data="True" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Content="מוצר עם תוספות בחינם" Margin="0 0 10 10"/>
                                     </WrapPanel>
 
                                     <Separator Margin="0 10" Opacity="0.5"/>

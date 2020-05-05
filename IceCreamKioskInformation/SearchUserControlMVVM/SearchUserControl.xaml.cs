@@ -34,7 +34,7 @@ namespace IceCreamKioskInformation
                 TagsDescription.Visibility = Visibility.Visible;
         }
 
-        public void InvokeSerachDone(List<Product> results)
+        public void InvokeSerachDone(List<Tuple<Product, string>> results)
         {
             SerachDone?.Invoke(this, new SearchResultEventArgs { SearchResult = results });
         }

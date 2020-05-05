@@ -174,6 +174,7 @@ namespace BE
         public virtual KeyValuePair<bool,Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
             KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
+
             // Checking for no properties in the search
             if (dictionary.Count == 0)
             {
@@ -196,7 +197,7 @@ namespace BE
             if (dictionary.ContainsKey("MaxPrice"))
             {
                 double maxPrice = double.Parse(dictionary["MaxPrice"][0].ToString());
-                result = result && Price < maxPrice;
+                result = result && Price <= maxPrice;
                 dictionary.Remove("MaxPrice");
             }
 
@@ -204,14 +205,36 @@ namespace BE
             if (dictionary.ContainsKey("MinPrice"))
             {
                 double minPrice = double.Parse(dictionary["MinPrice"][0].ToString());
-                result = result && Price > minPrice;
+                result = result && Price >= minPrice;
                 dictionary.Remove("MinPrice");
+            }
+
+            // Check whether the rating of the product is less than the maximum rating requested
+            if (dictionary.ContainsKey("MaxRating"))
+            {
+                int max = int.MinValue;
+                foreach (Review review in Reviews)
+                    if (review.Rating > max)
+                        max = review.Rating;
+                result = result && max <= int.Parse(dictionary["MaxRating"][0].ToString());
+                dictionary.Remove("MaxRating");
+            }
+
+            // Check whether the rating of the product is more than the minimum rating requested
+            if (dictionary.ContainsKey("MinRating"))
+            {
+                int min = int.MaxValue;
+                foreach (Review review in Reviews)
+                    if (review.Rating < min)
+                        min = review.Rating;
+                result = result && min >= int.Parse(dictionary["MinRating"][0].ToString());
+                dictionary.Remove("MinRating");
             }
 
             // Check whether the product is vegan or not, as required
             if (dictionary.ContainsKey("Vegan"))
             {
-                bool vegan = (bool)dictionary["Vegan"][0];
+                bool vegan = bool.Parse(dictionary["Vegan"][0].ToString());
                 result = result && Vegan == vegan;
                 dictionary.Remove("Vegan");
             }
@@ -219,7 +242,7 @@ namespace BE
             // Check whether the product is sugar free or not, as required
             if (dictionary.ContainsKey("SugarFree"))
             {
-                bool sugarFree = (bool)dictionary["SugarFree"][0];
+                bool sugarFree = bool.Parse(dictionary["SugarFree"][0].ToString());
                 result = result && SugarFree == sugarFree;
                 dictionary.Remove("SugarFree");
             }
