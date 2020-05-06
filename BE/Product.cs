@@ -248,22 +248,22 @@ namespace BE
             }
 
             // Check if the product meets the required nutritional components
-            if (dictionary.ContainsKey("NutritionalValues"))
+            if (dictionary.ContainsKey("MaxEnergy"))
             {
-                List<KeyValuePair<string, double>> keys = new List<KeyValuePair<string, double>>();
-                foreach (KeyValuePair<string, double> values in dictionary["NutritionalValues"])
-                    if (NutritinosValuesDictonary.ContainsKey(values.Key))
-                    {
-                        result = result && (values.Value >= NutritinosValuesDictonary[values.Key]);
-                        keys.Add(values);
-                    }
-                foreach (KeyValuePair<string, double> s in keys)
-                    dictionary["NutritionalValues"].Remove(s);
-                if (dictionary["NutritionalValues"].Count == 0)
-                    dictionary.Remove("NutritionalValues");
-                
+                result = result && ((double)dictionary["MaxEnergy"][0] >= NutritinosValuesDictonary["Energy"]);
+                dictionary.Remove("MaxEnergy");
             }
-
+            if (dictionary.ContainsKey("MaxProtein"))
+            {
+                result = result && ((double)dictionary["MaxProtein"][0] >= NutritinosValuesDictonary["Protein"]);
+                dictionary.Remove("MaxProtein");
+            }
+            if (dictionary.ContainsKey("MaxFat"))
+            {
+                result = result && ((double)dictionary["MaxFat"][0] >= NutritinosValuesDictonary["Total lipid(fat)"]);
+                dictionary.Remove("MaxFat");
+            }
+           
             keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
             return keyValue;
         }
