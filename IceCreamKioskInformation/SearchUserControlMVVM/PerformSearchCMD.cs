@@ -59,7 +59,7 @@ namespace IceCreamKioskInformation.SearchUserControlMVVM
         {
             VM.Working = false;
             if (e.Result != null)
-                VM.InvokeSerachDone(e.Result as List<Product>);
+                VM.InvokeSerachDone(e.Result as List<Tuple<Product, string>>);
         }
     }
 }

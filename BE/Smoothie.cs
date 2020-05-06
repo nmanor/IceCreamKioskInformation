@@ -22,7 +22,8 @@ namespace BE
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
             this.Flaver = p.GetType().GetProperty("Flaver").GetValue(p).ToString();
         }
-        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
+
+        public override KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
             return base.Search(dictionary);
         }

@@ -33,7 +33,8 @@ namespace BE
             this.Vegan = (bool)p.GetType().GetProperty("Vegan").GetValue(p);
             this.GlutenFree = (bool)p.GetType().GetProperty("GlutenFree").GetValue(p);
         }
-        public new KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
+
+        public override KeyValuePair<bool, Dictionary<string, List<object>>> Search(Dictionary<string, List<object>> dictionary)
         {
             KeyValuePair<bool, Dictionary<string, List<object>>> keyValue;
             // Checking for no properties in the search
@@ -50,11 +51,10 @@ namespace BE
             // Check whether the product is GlutenFree or not, as required
             if (dictionary.ContainsKey("GlutenFree"))
             {
-                bool glutenFree = (bool)dictionary["GlutenFree"][0];
+                bool glutenFree = bool.Parse(dictionary["GlutenFree"][0].ToString());
                 result = result && GlutenFree == glutenFree;
                 dictionary.Remove("GlutenFree");
             }
-
 
             keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
             return keyValue;

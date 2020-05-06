@@ -10,13 +10,16 @@ namespace IceCreamKioskInformation.SearchResultsList
     /// </summary>
     public partial class SearchResultsListUserControl : UserControl
     {
-        public SearchResultsListUserControl(List<Product> results)
+        public SearchResultsListUserControl(List<Tuple<Product, string>> results)
         {
             InitializeComponent();
             this.DataContext = new SearchResultsListUserControlVM(this, results);
             ProductsList.SelectionChanged += (x, y) => 
-            { 
-                SwitchProduct?.Invoke(this, new SwitchProductEventArgs { Product = ProductsList.SelectedItem as Product }); 
+            {
+                Product product;
+                try { product = (ProductsList.SelectedItem as Tuple<Product, string>).Item1; }
+                catch(Exception) { product = null; }
+                SwitchProduct?.Invoke(this, new SwitchProductEventArgs { Product = product }); 
             };
         }
 

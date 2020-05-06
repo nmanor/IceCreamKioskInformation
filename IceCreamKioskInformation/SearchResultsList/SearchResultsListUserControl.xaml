@@ -41,8 +41,34 @@
                         <DataTemplate>
                             <DockPanel HorizontalAlignment="Stretch">
                                 <StackPanel DockPanel.Dock="Left">
-                                    <TextBlock Text="{Binding Name}" FontWeight="DemiBold"/>
-                                    <TextBlock Text="{Binding Shop.ShopName}"/>
+                                    <TextBlock Text="{Binding Item1.Name}" FontWeight="DemiBold"/>
+                                    <TextBlock Text="{Binding Item1.Shop.ShopName}"/>
+                                    <TextBlock Foreground="Gray" TextWrapping="Wrap">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Setter Property="FontFamily" Value="/IceCreamKioskInformation;component/Fonts/#Heebo"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Item2.Length, Mode=OneWay, Converter={StaticResource NotZeroConverter}}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                        <Run Text="חסר:"/>
+                                        <Run Text="{Binding Item2, Mode=OneWay}">
+                                            <Run.TextDecorations>
+                                                <TextDecoration Location="Strikethrough">
+                                                    <TextDecoration.Pen>
+                                                        <Pen Brush="Gray" />
+                                                    </TextDecoration.Pen>
+                                                </TextDecoration>
+                                            </Run.TextDecorations>
+                                        </Run>
+                                        <Run Text=" | "/>
+                                        <Hyperlink CommandParameter="{Binding Item2, Mode=OneWay}" Command="{Binding DataContext.IncludeBlanksCMD, RelativeSource={RelativeSource AncestorType=ListBox}}">כלול חוסרים
+                                        </Hyperlink>
+                                    </TextBlock>
                                 </StackPanel>
                                 <materialDesign:PackIcon x:Name="test" Kind="KeyboardArrowLeft" DockPanel.Dock="Right" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right">
                                     <materialDesign:PackIcon.Style>
