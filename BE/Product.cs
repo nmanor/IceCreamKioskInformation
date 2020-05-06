@@ -248,22 +248,33 @@ namespace BE
             }
 
             // Check if the product meets the required nutritional components
-            if (dictionary.ContainsKey("MaxEnergy"))
+            if (dictionary.ContainsKey("MaxEnergy") && NutritinosValuesDictonary.ContainsKey("Energy"))
             {
-                result = result && ((double)dictionary["MaxEnergy"][0] >= NutritinosValuesDictonary["Energy"]);
+                result = result && (double.Parse(dictionary["MaxEnergy"][0].ToString()) >= NutritinosValuesDictonary["Energy"]);
                 dictionary.Remove("MaxEnergy");
             }
-            if (dictionary.ContainsKey("MaxProtein"))
+            if (dictionary.ContainsKey("MinProtein") && NutritinosValuesDictonary.ContainsKey("Protein"))
             {
-                result = result && ((double)dictionary["MaxProtein"][0] >= NutritinosValuesDictonary["Protein"]);
-                dictionary.Remove("MaxProtein");
+                result = result && (double.Parse(dictionary["MinProtein"][0].ToString()) <= NutritinosValuesDictonary["Protein"]);
+                dictionary.Remove("MinProtein");
             }
-            if (dictionary.ContainsKey("MaxFat"))
+            if (dictionary.ContainsKey("MaxFats") && NutritinosValuesDictonary.ContainsKey("Total lipid (fat)"))
             {
-                result = result && ((double)dictionary["MaxFat"][0] >= NutritinosValuesDictonary["Total lipid(fat)"]);
-                dictionary.Remove("MaxFat");
+                result = result && (double.Parse(dictionary["MaxFats"][0].ToString()) >= NutritinosValuesDictonary["Total lipid (fat)"]);
+                dictionary.Remove("MaxFats");
             }
-           
+            if (dictionary.ContainsKey("MinFibers") && NutritinosValuesDictonary.ContainsKey("Fiber, total dietary"))
+            {
+                result = result && (double.Parse(dictionary["MinFibers"][0].ToString()) <= NutritinosValuesDictonary["Fiber, total dietary"]);
+                dictionary.Remove("MinFibers");
+            }
+            if (dictionary.ContainsKey("MaxCarbohydrates") && NutritinosValuesDictonary.ContainsKey("Carbohydrate, by difference"))
+            {
+                result = result && (double.Parse(dictionary["MaxCarbohydrates"][0].ToString()) >= NutritinosValuesDictonary["Carbohydrate, by difference"]);
+                dictionary.Remove("MaxCarbohydrates");
+            }
+
+
             keyValue = new KeyValuePair<bool, Dictionary<string, List<object>>>(result, dictionary);
             return keyValue;
         }

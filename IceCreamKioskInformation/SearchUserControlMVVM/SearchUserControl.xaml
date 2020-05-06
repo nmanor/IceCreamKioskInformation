@@ -112,20 +112,32 @@
                                     <WrapPanel Orientation="Horizontal">
                                         <local:Tag Category="MaxEnergy" Data="{Binding Text, ElementName=MaxEnergy}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מקסימום אנרגיה למנה: " VerticalAlignment="Center"/>
+                                                <TextBlock Text="מקסימום קלוריות למנה: " VerticalAlignment="Center"/>
                                                 <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxEnergy"/>
                                             </StackPanel>
                                         </local:Tag>
-                                        <local:Tag Category="MaxProtein" Data="{Binding Text, ElementName=MaxProtein}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
+                                        <local:Tag Category="MinProtein" Data="{Binding Text, ElementName=MinProtein}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="מקסימום חלבון למנה: " VerticalAlignment="Center"/>
-                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxProtein"/>
+                                                <TextBlock Text="מינימום חלבון למנה: " VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MinProtein"/>
                                             </StackPanel>
                                         </local:Tag>
                                         <local:Tag Category="MaxFats" Data="{Binding Text, ElementName=MaxFats}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="מקסימום שומנים למנה: " VerticalAlignment="Center"/>
                                                 <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxFats"/>
+                                            </StackPanel>
+                                        </local:Tag>
+                                        <local:Tag Category="MinFibers" Data="{Binding Text, ElementName=MinFibers}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מינימום סיבים תזונתיים: " VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MinFibers"/>
+                                            </StackPanel>
+                                        </local:Tag>
+                                        <local:Tag Category="MaxCarbohydrates" Data="{Binding Text, ElementName=MaxCarbohydrates}" Command="{Binding AddFilter}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Margin="0 0 10 10">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="מקסימום פחמימות למנה: " VerticalAlignment="Center"/>
+                                                <TextBox TextAlignment="Center" Width="40" HorizontalAlignment="Right" MaxLength="4" Text="100" x:Name="MaxCarbohydrates"/>
                                             </StackPanel>
                                         </local:Tag>
                                     </WrapPanel>

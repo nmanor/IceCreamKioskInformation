@@ -111,8 +111,8 @@ namespace IceCreamKioskInformation.AddProduct
         public void AddReview() { View.AddReview(SelectedProduct); }
 
         public void CheckingProductData() { View.CheckingProductData(); }
-        internal void ProductSaved() { View.ProductSaved(); }
-        internal void ProductNotSaved(string error) { View.ProductNotSaved(error); }
+        public void ProductSaved() { View.ProductSaved(); }
+        public void ProductNotSaved(string error) { View.ProductNotSaved(error); }
 
         public void OnGoBackClicked() { View.OnGoBackClicked(); }
 

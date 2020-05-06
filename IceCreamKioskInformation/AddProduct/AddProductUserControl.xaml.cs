@@ -41,7 +41,7 @@ namespace IceCreamKioskInformation.AddProduct
             var parent = Parent as Grid;
             if(AddReviewUserControl == null)
             {
-                AddReviewUserControl = new AddReviewUserControl(product);
+                AddReviewUserControl = new AddReviewUserControl(product, false);
                 AddReviewUserControl.Margin = Margin;
                 AddReviewUserControl.HorizontalAlignment = HorizontalAlignment;
                 AddReviewUserControl.VerticalAlignment = VerticalAlignment;

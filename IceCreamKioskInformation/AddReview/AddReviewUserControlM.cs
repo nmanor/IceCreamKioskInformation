@@ -18,7 +18,7 @@ namespace IceCreamKioskInformation.AddReview
 
         public bool VerifyImageAsFood(string image) { return BlImp.VerifyImageAsFood(image); }
 
-        public void AddAndSaveReview(Review review, Product product)
+        public void AddAndSaveReview(Review review, Product product, bool saveToDB)
         {
             if (review.Rating < 1 || review.Rating > 5)
                 throw new Exception("הדירוג חייב להיות מספר בין 0 ל5");
@@ -36,7 +36,10 @@ namespace IceCreamKioskInformation.AddReview
             review.PublishDate = DateTime.Now;
 
             review.ProductID = product.ProductID;
-            new BLimp().add_Review(review);
+
+            if (saveToDB)
+                new BLimp().add_Review(review);
+
             product.AddReview(review);
         }
     }

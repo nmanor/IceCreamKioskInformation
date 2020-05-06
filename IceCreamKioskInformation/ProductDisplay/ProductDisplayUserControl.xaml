@@ -234,7 +234,7 @@
                                     <Setter Property="Stroke" Value="Black"></Setter>
                                     <Setter Property="Fill" Value="#4EA5A5A5"></Setter>
                                     <Setter Property="PointGeometrySize" Value="0"></Setter>
-                                    <Setter Property="LineSmoothness" Value="3"></Setter>
+                                    
                                 </Style>
                                 <Style TargetType="lvc:Axis">
                                     <Setter Property="ShowLabels" Value="True"></Setter>

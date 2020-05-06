@@ -8,6 +8,7 @@ namespace IceCreamKioskInformation.AddReview
     class AddReviewUserControlVM: INotifyPropertyChanged
     {
         // Fields and Properties
+        public bool SaveToDB { get; set; }
         public Product Product { get; set; }
         public Review Review { get; set; }
         public int ImageTrys { get; set; }
@@ -23,11 +24,12 @@ namespace IceCreamKioskInformation.AddReview
             }
         }
 
-        public AddReviewUserControlVM(AddReviewUserControl addReviewUserControl, Product product)
+        public AddReviewUserControlVM(AddReviewUserControl addReviewUserControl, Product product, bool saveToDB)
         {
             this.View = addReviewUserControl;
             this.Product = product;
             this.Review = new Review();
+            this.SaveToDB = saveToDB;
             ImageVerify = false;
         }
 

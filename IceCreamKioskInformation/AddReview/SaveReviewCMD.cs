@@ -42,7 +42,7 @@ namespace IceCreamKioskInformation.AddReview
         {
             try
             {
-                new AddReviewUserControlM().AddAndSaveReview(VM.Review, VM.Product);
+                new AddReviewUserControlM().AddAndSaveReview(VM.Review, VM.Product, VM.SaveToDB);
                 e.Result = "";
             }
             catch (Exception ex)

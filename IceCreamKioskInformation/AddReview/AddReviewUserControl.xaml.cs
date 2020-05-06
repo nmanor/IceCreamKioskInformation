@@ -12,10 +12,10 @@ namespace IceCreamKioskInformation.AddReview
     /// </summary>
     public partial class AddReviewUserControl : UserControl
     {
-        public AddReviewUserControl(Product product)
+        public AddReviewUserControl(Product product, bool saveToDB = true)
         {
             InitializeComponent();
-            DataContext = new AddReviewUserControlVM(this, product);
+            DataContext = new AddReviewUserControlVM(this, product, saveToDB);
             IsWorkDone = false;
         }
 
