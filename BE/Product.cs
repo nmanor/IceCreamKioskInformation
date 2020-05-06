@@ -231,7 +231,7 @@ namespace BE
                 foreach (KeyValuePair<string, double> values in dictionary["NutritionalValues"])
                     if (NutritinosValuesDictonary.ContainsKey(values.Key))
                     {
-                        result = result && (values.Value <= NutritinosValuesDictonary[values.Key]);
+                        result = result && (values.Value >= NutritinosValuesDictonary[values.Key]);
                         keys.Add(values);
                     }
                 foreach (KeyValuePair<string, double> s in keys)
