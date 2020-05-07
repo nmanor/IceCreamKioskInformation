@@ -33,7 +33,7 @@ namespace BE
         {
             this.Description = p.GetType().GetProperty("Description").GetValue(p).ToString();
             this.Fat = (double)p.GetType().GetProperty("Fat").GetValue(p);
-            this.MilkType = (MILKTYPE)p.GetType().GetProperty("Fat").GetValue(p);
+            this.MilkType = (MILKTYPE)p.GetType().GetProperty("MilkType").GetValue(p);
             this.Name = p.GetType().GetProperty("Name").GetValue(p).ToString();
             this.NutritionalValues = p.GetType().GetProperty("NutritionalValues").GetValue(p).ToString();
             this.Price = (double)p.GetType().GetProperty("Price").GetValue(p);

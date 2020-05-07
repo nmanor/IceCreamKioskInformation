@@ -66,8 +66,7 @@
                                             </Run.TextDecorations>
                                         </Run>
                                         <Run Text=" | "/>
-                                        <Hyperlink CommandParameter="{Binding Item2, Mode=OneWay}" Command="{Binding DataContext.IncludeBlanksCMD, RelativeSource={RelativeSource AncestorType=ListBox}}">כלול חוסרים
-                                        </Hyperlink>
+                                        <Hyperlink CommandParameter="{Binding Item2, Mode=OneWay}" Command="{Binding DataContext.IncludeBlanksCMD, RelativeSource={RelativeSource AncestorType=ListBox}}">הסר תוצאות כאלו</Hyperlink>
                                     </TextBlock>
                                 </StackPanel>
                                 <materialDesign:PackIcon x:Name="test" Kind="KeyboardArrowLeft" DockPanel.Dock="Right" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right">
