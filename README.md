@@ -14,6 +14,7 @@ The search allows you to find an ice cream type based on parameters:
 - The highest score obtained
 - Nutritional properties: energy, calories, fats, proteins, etc.
 - And more...
+
 The result is a list of ice creams that meet the parameters, including the ice cream shop details and an arrival map. 
 Product selection focuses the view on the store and displays its details including a map, as well as a list of all recommendations. 
 In addition, the user can select a product and fill in reviews about it.
