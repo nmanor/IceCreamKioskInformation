@@ -44,6 +44,7 @@ namespace IceCreamKioskInformation
                 ChangeSearchResultControlsVisibility(Visibility.Collapsed);
                 MainGrid.Children.Insert(0, _currnetUserConrol);
                 this.Background = new ImageBrush(new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "Images/background.jpg")));
+                AdminButton.Visibility = Visibility.Visible;
             }
         }
 
@@ -143,16 +144,46 @@ namespace IceCreamKioskInformation
         {
             MessageArea.IsOpen = false;
             ShopsManagementUserControl shopsManagement = new ShopsManagementUserControl();
+            shopsManagement.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };
+            shopsManagement.LoadProducts+= (sender, args) =>
+            {
+                LoadProductsManagement((args as ListTransferEventArgs).Products);
+            };
             CurrnetUserConrol = shopsManagement;
         }
 
         /// <summary>
         /// Loading the ProductsManagementUserControl 
         /// </summary>
-        public void LoadProductsManagement()
+        public void LoadProductsManagement(List<Product> products = null)
         {
             MessageArea.IsOpen = false;
-            ProductsManagementUserControl productsManagement = new ProductsManagementUserControl();
+            ProductsManagementUserControl productsManagement;
+            if (products == null)
+                productsManagement = new ProductsManagementUserControl();
+            else
+                productsManagement = new ProductsManagementUserControl(products);
+            productsManagement.GoBack += (sender, e) =>
+            {
+                GoBackEventArgs args = e as GoBackEventArgs;
+                if (!args.IsWorkDone)
+                {
+                    MessageAreaText.Text = args.Message;
+                    MessageArea.IsOpen = true;
+                }
+                else
+                    LoadSearch();
+            };
             CurrnetUserConrol = productsManagement;
         }
 
@@ -163,6 +194,7 @@ namespace IceCreamKioskInformation
         public void LoadSearchResult(List<Tuple<Product, string>> results)
         {
             MessageArea.IsOpen = false;
+            AdminButton.Visibility = Visibility.Hidden;
             MainGrid.Children.Remove(CurrnetUserConrol);
 
             if (SearchResultControls == null)
@@ -238,15 +270,6 @@ namespace IceCreamKioskInformation
             if (SearchResultControls != null)
                 foreach (var item in SearchResultControls)
                     item.Visibility = visibility;
-        }
-
-        /// <summary>
-        /// A function that binds to commands on the admin password confirmation button
-        /// </summary>
-        /// <param name="command">The command she needs to bind</param>
-        public void BindLoadCommand(ICommand command)
-        {
-            CheckPassowrd.Command = command;
         }
 
         /// <summary>

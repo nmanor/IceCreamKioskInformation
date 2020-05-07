@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace IceCreamKioskInformation.ShopsManagement
@@ -22,6 +23,17 @@ namespace IceCreamKioskInformation.ShopsManagement
             {
                 _shopsList = value;
                 OnPropertyChanged("ShopsList");
+            }
+        }
+
+        private Shop _selectedShop;
+        public Shop SelectedShop
+        {
+            get { return _selectedShop; }
+            set
+            {
+                _selectedShop = value;
+                OnPropertyChanged("SelectedShop");
             }
         }
 
@@ -58,8 +70,11 @@ namespace IceCreamKioskInformation.ShopsManagement
             }
         }
 
-        public ShopsManagementUserControlVM()
+        private ShopsManagementUserControl View;
+
+        public ShopsManagementUserControlVM(ShopsManagementUserControl view)
         {
+            this.View = view;
             Message = "לעריכת חנות לחץ פעמיים על המאפיין אותו תרצה לערוך";
             MessageColor = Brushes.Black;
             new Thread(() =>
@@ -93,6 +108,20 @@ namespace IceCreamKioskInformation.ShopsManagement
                 }
             }).Start();
         }
+
+        /// <summary>
+        /// Action for triggering the backward event
+        /// </summary>
+        public ICommand GoBackCMD { get { return new GoBackCMD(this); } }
+
+        /// <summary>
+        /// Action for triggering the LoadProducts event
+        /// </summary>
+        public ICommand LoadProductsManagementCMD { get { return new LoadProductsManagementCMD(this); } }
+
+
+        public void OnGoBackClicked() { View.OnGoBackClicked(); }
+        public void LoadProductsManagement() { View.LoadProductsManagement(SelectedShop.Products.ToList()); }
 
         // INotifyPropertyChanged implementaion
         public event PropertyChangedEventHandler PropertyChanged;

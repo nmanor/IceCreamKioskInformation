@@ -16,7 +16,7 @@
 
         <StackPanel Grid.Column="0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Button Command="{Binding GoBack}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
+                <Button Command="{Binding GoBackCMD}" Background="{x:Null}" ToolTip="חזור למסך החיפוש" Margin="16, 0, 20, 0" Width="70" Height="70" Foreground="{x:Null}" BorderBrush="{x:Null}">
                     <materialDesign:PackIcon Kind="ArrowRightThick" Foreground="#FFEBECF0" Width="55" Height="55" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
                 <TextBlock Text="ניהול חנויות" FontWeight="Black" TextAlignment="Center" FontSize="50" Foreground="#FFEBECF0" DockPanel.Dock="Bottom"/>
@@ -79,12 +79,12 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-                                <Hyperlink>צפה במוצרים של החנות המסומנת</Hyperlink>
+                                <Hyperlink Command="{Binding LoadProductsManagementCMD}">צפה במוצרים של החנות המסומנת</Hyperlink>
                             </TextBlock>
                         </DockPanel>
-                        <DataGrid x:Name="MainDataGrid" VerticalAlignment="Center" Background="Transparent" AutoGenerateColumns="False" ItemsSource="{Binding ShopsList}" CanUserSortColumns="True" CanUserAddRows="False">
+                        <DataGrid x:Name="MainDataGrid" VerticalAlignment="Center" Background="Transparent" AutoGenerateColumns="False" ItemsSource="{Binding ShopsList}" SelectedItem="{Binding SelectedShop}" CanUserSortColumns="True" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding ShopName}" Header="שם החנות"/>
+                                <DataGridTextColumn Binding="{Binding ShopName, UpdateSourceTrigger=LostFocus}" Header="שם החנות"/>
                                 <DataGridTemplateColumn Header="כתובת">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -97,10 +97,10 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTextColumn Binding="{Binding Products.Count}" IsReadOnly="True" Header="מס' מוצרים"/>
-                                <DataGridTextColumn Binding="{Binding Phone}" Header="טלפון"/>
-                                <DataGridTextColumn Binding="{Binding Website}" Header="אתר"/>
-                                <DataGridTextColumn Binding="{Binding Facebook}" Header="פייסבוק"/>
-                                <DataGridTextColumn Binding="{Binding Instagram}" Header="אינסטגרם"/>
+                                <DataGridTextColumn Binding="{Binding Phone, UpdateSourceTrigger=LostFocus}" Header="טלפון"/>
+                                <DataGridTextColumn Binding="{Binding Website, UpdateSourceTrigger=LostFocus}" Header="אתר"/>
+                                <DataGridTextColumn Binding="{Binding Facebook, UpdateSourceTrigger=LostFocus}" Header="פייסבוק"/>
+                                <DataGridTextColumn Binding="{Binding Instagram, UpdateSourceTrigger=LostFocus}" Header="אינסטגרם"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>

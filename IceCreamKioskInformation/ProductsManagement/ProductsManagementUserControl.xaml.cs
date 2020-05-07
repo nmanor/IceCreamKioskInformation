@@ -24,13 +24,25 @@ namespace IceCreamKioskInformation.ProductsManagement
         public ProductsManagementUserControl()
         {
             InitializeComponent();
-            DataContext = new ProductsManagementUserControlVM();
+            DataContext = new ProductsManagementUserControlVM(this);
         }
 
         public ProductsManagementUserControl(List<Product> products)
         {
             InitializeComponent();
-            DataContext = new ProductsManagementUserControlVM(products);
+            DataContext = new ProductsManagementUserControlVM(this, products);
+        }
+
+        public event EventHandler GoBack;
+        /// <summary>
+        /// A function that triggers the event of a backward move
+        /// </summary>
+        public void OnGoBackClicked()
+        {
+            GoBackEventArgs args;
+            string message = "האם אתה בטוח שאתה רוצה לחזור?\nאם לא השינויים האחרונים לא נשמרו הם יאבדו";
+            args = new GoBackEventArgs() { IsWorkDone = false, Message = message };
+            GoBack?.Invoke(this, args);
         }
     }
 }

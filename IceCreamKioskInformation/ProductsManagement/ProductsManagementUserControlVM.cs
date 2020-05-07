@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace IceCreamKioskInformation.ProductsManagement
@@ -56,8 +57,11 @@ namespace IceCreamKioskInformation.ProductsManagement
             }
         }
 
-        public ProductsManagementUserControlVM(List<Product> products)
+        public ProductsManagementUserControl View;
+
+        public ProductsManagementUserControlVM(ProductsManagementUserControl view, List<Product> products)
         {
+            this.View = view;
             new Thread(() =>
             {
                 FetchingFromDB = true;
@@ -65,8 +69,9 @@ namespace IceCreamKioskInformation.ProductsManagement
             }).Start();
         }
 
-        public ProductsManagementUserControlVM()
+        public ProductsManagementUserControlVM(ProductsManagementUserControl view)
         {
+            this.View = view;
             new Thread(() =>
             {
                 FetchingFromDB = true;
@@ -79,7 +84,6 @@ namespace IceCreamKioskInformation.ProductsManagement
             Message = "לעריכת מוצר לחץ פעמיים על המאפיין אותו תרצה לערוך";
             MessageColor = Brushes.Black;
             ProductsList = products;
-            ProductsList.Add(new FrozenYogurt() { MilkType = MILKTYPE.GoatMilk, Name= "פרוזן" });
             foreach (var item in ProductsList)
             {
                 item.PropertyChanged += (x, y) => { SaveChanges(item); };
@@ -105,6 +109,13 @@ namespace IceCreamKioskInformation.ProductsManagement
                 }
             }).Start();
         }
+
+        /// <summary>
+        /// Action for triggering the backward event
+        /// </summary>
+        public ICommand GoBackCMD { get { return new GoBackCMD(this); } }
+
+        public void OnGoBackClicked() { View.OnGoBackClicked(); }
 
         // INotifyPropertyChanged implementaion
         public event PropertyChangedEventHandler PropertyChanged;

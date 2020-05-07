@@ -206,6 +206,7 @@
     <Compile Include="FrozenYogurt.cs" />
     <Compile Include="GoBackEventArgs.cs" />
     <Compile Include="IceCream.cs" />
+    <Compile Include="ListTransferEventArgs.cs" />
     <Compile Include="MILKTYPE.cs" />
     <Compile Include="SearchResultEventArgs.cs" />
     <Compile Include="Smoothie.cs" />

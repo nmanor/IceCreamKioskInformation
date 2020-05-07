@@ -84,6 +84,8 @@ namespace IceCreamKioskInformation.AddProduct
         /// </summary>
         public void ProductSaved()
         {
+            CheckingDataPB.Visibility = Visibility.Collapsed;
+            Save.Visibility = Visibility.Hidden;
             Expenders.Visibility = Visibility.Hidden;
             SuccessfullySavedMessage.Visibility = Visibility.Visible;
             IsWorkDone = true;

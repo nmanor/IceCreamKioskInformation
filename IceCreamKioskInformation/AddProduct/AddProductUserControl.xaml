@@ -157,7 +157,7 @@
                                 <TextBlock Grid.Row="1" FontSize="15" Text="אנא מלא את הפרטים הדרושים להמשך התהליך "/>
 
                                 <ScrollViewer Grid.Row="2">
-                                    <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" >
+                                    <StackPanel Orientation="Vertical" MaxWidth="350" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" >
                                         <TextBox x:Name="ProductName" Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="שם המוצר" Text="{Binding SelectedProduct.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
                                         <TextBox Margin="20, 5" Style="{StaticResource RedForegroundOnErrorStyle}" materialDesign:HintAssist.Hint="מחיר משוער בשקלים" Text="{Binding SelectedProduct.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" Validation.ErrorTemplate="{x:Null}" />
                                         <TextBox Margin="20, 5" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" materialDesign:HintAssist.Hint="תיאור המוצר" Text="{Binding SelectedProduct.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="15" TextWrapping="Wrap" AcceptsReturn="True"/>
