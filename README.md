@@ -1,5 +1,5 @@
 # Ice Cream Information Kiosk
-**Developed by Michael Goldmeier (315132027) and Natan Manor (207676511)**
+**Developed by Michael Goldmeier and Natan Manor**
 
 **At Jerusalem Collage of Technolegy, Campus Lev**
 
